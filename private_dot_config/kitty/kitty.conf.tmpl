@@ -1,0 +1,94 @@
+# =========== Appearance ===========
+scrollback_lines 16384
+allow_remote_control yes
+resize_in_steps yes
+window_padding_width 1
+
+background #001c24
+
+tab_bar_edge top
+tab_bar_style separator
+# tab_powerline_style slanted
+tab_separator " █ "
+# tab_separator "╞╡"
+# tab_separator "║"
+
+# ========= Font ==========
+
+{{- if eq .chezmoi.os "darwin" }}
+  font_size 18.0
+  font_family      Iosevka Term
+  bold_font        auto
+  italic_font      auto
+  bold_italic_font auto
+{{- else }}
+  font_size        16.5
+  font_family      Iosevka NFM
+  bold_font        Iosevka NFM Bold
+  italic_font      Iosevka NFM Italic
+  bold_italic_font Iosevka NFM Bold Italic
+{{- end }}
+
+disable_ligatures cursor
+
+# ========= Clipboard ==========
+
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+v paste_from_clipboard
+
+{{- if eq .chezmoi.os "darwin" }}
+  map cmd+c        copy_to_clipboard
+  map cmd+v        paste_from_clipboard
+{{- else }}
+  map XF86Copy     copy_to_clipboard
+  map XF86Paste    paste_from_clipboard
+{{- end }}
+
+# OSC 52
+# clipboard_control write-primary write-clipboard no-append
+clipboard_control write-primary write-clipboard no-append read-primary-ask read-clipboard-ask
+
+# ========== Misc =============
+
+# Open new tab for MC
+map shift+enter send_text application kitty @ launch --type=tab --cwd=current\x20
+
+# Interaction
+# env TERM_PROGRAM=KovIdTTY
+env TERM_PROGRAM=Kitty
+
+# xclip https://github.com/ohmyzsh/ohmyzsh/pull/10953#issuecomment-1153220721 -> https://github.com/kovidgoyal/kitty/issues/828
+close_on_child_death yes
+
+# ========= PC ==========
+{{- if eq .chezmoi.os "darwin" }}
+  # ========= OS X ==========
+  # OS X Specific
+
+  macos_titlebar_color dark
+  macos_option_as_alt yes
+  macos_custom_beam_cursor no
+  macos_thicken_font 0.25
+
+  # Poor Macs...
+  # Insert key missing on Mac, make F12 act like it
+  map                f12 send_text application \x1b[2~
+  map          shift+f12 send_text application \x1b[2;2~
+  map            alt+f12 send_text application \x1b[2;3~
+  map      alt+shift+f12 send_text application \x1b[2;4~
+  map           ctrl+f12 send_text application \x1b[2;5~
+  map     ctrl+shift+f12 send_text application \x1b[2;6~
+  map       ctrl+alt+f12 send_text application \x1b[2;7~
+  map ctrl+alt+shift+f12 send_text application \x1b[2;8~
+
+  # macos_option_as_alt right
+  map ctrl+alt+, send_text application «
+  map ctrl+alt+. send_text application »
+  map ctrl+alt+- send_text application –
+  map ctrl+alt+shift+- send_text application —
+
+  map ctrl+shift+x kitty_shell window
+{{- else }}
+  map shift+insert no_op
+{{- end }}
+
