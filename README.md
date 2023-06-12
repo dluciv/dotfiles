@@ -1,3 +1,3 @@
 # dotfiles
 
-My pretty garbaged `.files`. In no way an example of what normal people settings should look like, rather and example of how things should not be done. 
+My pretty garbaged `.files`. By no means an example of how the settings of a normal man should look, rather an example of how they should not.
