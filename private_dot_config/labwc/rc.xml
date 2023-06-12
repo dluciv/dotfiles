@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<!--
+  This is a very simple config file with many options missing. For a complete
+  set of options with comments, see docs/rc.xml.all
+-->
+
+<labwc_config>
+
+  <core>
+    <gap>10</gap>
+  </core>
+
+  <theme>
+    <name></name>
+    <cornerRadius>8</cornerRadius>
+    <font name="sans" size="10" />
+  </theme>
+
+  <keyboard>
+    <default />
+    <!-- Use a different terminal emulator -->
+    <keybind key="W-Return">
+      <action name="Execute" command="kitty" />
+    </keybind>
+    <keybind key="W-d">
+      <action name="Execute" command="wofi --show=drun,run" />
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute" command="swaylock -f" />
+    </keybind>
+    <keybind key="W-f">
+      <action name="ToggleFullscreen" />
+    </keybind>
+    <!-- keybind key="W-S-d">
+      <action name="ToggleDecorations" />
+    </keybind -->
+
+    <!-- Specials -->
+    <keybind key="XF86_MonBrightnessUp">
+      <action name="Execute" command="brightnessctl set +2%" />
+    </keybind>
+    <keybind key="XF86_MonBrightnessDown">
+      <action name="Execute" command="brightnessctl set 2%-" />
+    </keybind>
+
+    <keybind key="W-t">
+      <action name="Execute" command="cccp t" />
+    </keybind>
+    <keybind key="Print">
+      <action name="Execute" command="sh -c 'XDG_CURRENT_DESKTOP=sway flameshot gui'" />
+    </keybind>
+    <keybind key="XF86Calculator">
+      <action name="Execute" command="rofi -show calc -modi calc -no-show-match -no-sort" />
+    </keybind>
+
+    <!-- Workspaces -->
+    <keybind key="W-Prior">
+      <action name="GoToDesktop" to="left" />
+    </keybind>
+    <keybind key="W-S-Prior">
+      <action name="SendToDesktop" to="left" />
+      <action name="GoToDesktop" to="left" />
+    </keybind>
+    <keybind key="W-Next">
+      <action name="GoToDesktop" to="right" />
+    </keybind>
+    <keybind key="W-S-Next">
+      <action name="SendToDesktop" to="right" />
+      <action name="GoToDesktop" to="right" />
+    </keybind>
+  </keyboard>
+
+  <mouse>
+    <default />
+    <!-- Show a custom menu on desktop right click -->
+    <context name="Root">
+      <mousebind button="Right" action="Press">
+        <action name="ShowMenu" menu="some-custom-menu" />
+      </mousebind>
+    </context>
+  </mouse>
+
+  <desktops>
+    <popupTime>1000</popupTime>
+    <names>
+      <name>A</name>
+      <name>B</name>
+      <name>C</name>
+      <name>D</name>
+      <name>E</name>
+      <name>F</name>
+    </names>
+  </desktops>
+
+</labwc_config>
