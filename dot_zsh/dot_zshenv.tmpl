@@ -6,7 +6,7 @@ set -o allexport
 
 typeset -U path
 
-path=(
+path_prepend=(
   ~/.local/bin
   /usr/local/bin
   /usr/local/sbin
@@ -16,13 +16,22 @@ path=(
   $path
 )
 
+# F***ING OS X breaks things, adding its garbage to PATH beginning
+# This is only load script executed when Automator loads,
+# so we need path setup here.
+path=($path_prepend $path)
+# And then... see .zprofile =)
+
 # LANGUAGE='ru:en'
 # LC_ALL=$LANG
 
 XDG_CACHE_HOME=~/.cache
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.data
-# XDG_RUNTIME_DIR=$XDG_CACHE_HOME
+
+{{ if eq .chezmoi.os "darwin" -}}
+  XDG_RUNTIME_DIR=$XDG_CACHE_HOME
+{{- end }}
 
 typeset -TU XDG_DATA_DIRS xdg_data_dirs :
 xdg_data_dirs=($XDG_DATA_HOME ~/.local/share $xdg_data_dirs)

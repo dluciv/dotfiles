@@ -92,11 +92,14 @@ zstyle :omz:plugins:ssh-agent lifetime 30m
 
 plugins=(
   git archlinux screen tmux  magic-enter
-  dluciv-archlinux dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
+  {{ if ne .chezmoi.os "darwin" }}
+    dluciv-archlinux
+  {{ end }}
+  dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
   {{ if not (or .server .termux) }}
     battery
   {{ end }}
-  {{ if not .server }}
+  {{ if not (or .server (eq .chezmoi.os "darwin")) }}
     dluciv-open
   {{ end }}
 )

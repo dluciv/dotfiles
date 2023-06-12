@@ -35,11 +35,17 @@ set +o allexport
 # ==== completion & highlighting =======
 
 {{- if not .termux }}
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+{{- $zppref := "/usr/share/zsh/plugins" -}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- $zppref = "/usr/local/share" -}}
+{{- end }}
+
+source {{ $zppref -}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if ! $undermc
 then
-  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 {{- end }}
 

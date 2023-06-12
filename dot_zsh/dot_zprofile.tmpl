@@ -10,6 +10,12 @@ LC_ALL=ru_RU.UTF-8
   [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
 {{- end }}
 
+{{- if eq .chezmoi.os "darwin" }}
+# =================== This is executed later than .zshenv
+# F***ING OS X breaks things, adding its garbage to PATH beginning
+# moving ~/.. pathes to beginning, see $ZDOTDIR/.zshenv
+path=($path_prepend $path)
+{{- end }}
 
 set +o allexport
 
