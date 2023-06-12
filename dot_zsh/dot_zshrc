@@ -1,0 +1,67 @@
+# === Interactive shell configuration ===
+# echo Interactive привет!
+
+# =============== MC & TERM fixes ==============
+(ps -p $PPID | grep mc >/dev/null) && undermc=true || undermc=false
+[[ $TERM =~ ^(xterm(-.+)?)\|(wezterm)$ ]] && powerterm=true || powerterm=false
+
+# =============== History ===============
+setopt HIST_IGNORE_SPACE
+setopt appendhistory notify
+
+HISTFILE=$ZDOTDIR/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+# ============= Locale & editors ===============
+
+set -o allexport
+
+EDITOR=$(which nvim)
+VISUAL=$EDITOR
+SUDO_EDITOR=$EDITOR
+PAGER=most
+
+set +o allexport
+
+# ==== completion & highlighting =======
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if ! $undermc
+then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' group-name ''
+zstyle :compinstall filename $ZDOTDIR/.zshrc
+
+autoload -Uz compinit
+compinit
+
+# ------ zoxide ------
+# after compinit!
+
+eval "$(zoxide init zsh)"
+
+# ============== Oh my ZSH =============
+
+. $ZDOTDIR/.oh-my-zshrc
+
+# ============== Interactive aliases ===========
+
+alias lynx='lynx -assume_charset=utf-8  -assume_local_charset=utf-8'
+# alias edit=$VISUAL
+alias icat='kitty +kitten icat'
+alias arialt=' aria2c -V --seed-time=0'
+alias nb='PAGER=less nb'
+alias termvars='env | grep '"'"'TERM.*='"'"''
+alias cfms='cat $CLIFM_SELFILE'
+
+# ============= Interactive vars ===============
+
+CLICOLOR=1
+LS_OPTIONS='--color=auto'
+
+profiles+=$ZDOTDIR/.zshrc

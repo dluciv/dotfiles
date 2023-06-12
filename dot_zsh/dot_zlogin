@@ -1,0 +1,15 @@
+if [[ -o interactive ]] # https://unix.stackexchange.com/a/600541/190164
+then
+  # interactive
+  greeting="Привет!\nХорошо помни, зачем ты здесь!"
+
+  if [[ -x $(which lolcat) ]]
+  then
+    echo "${greeting}" | lolcat -r
+  else
+    echo "${greeting}"
+  fi
+
+fi
+
+profiles+=$ZDOTDIR/.zlogin
