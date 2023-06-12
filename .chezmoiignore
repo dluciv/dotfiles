@@ -1,5 +1,5 @@
 {{ if or .server .termux -}}
-private_dot_config/kitty/
-private_dot_config/wezterm/
-private_dot_config/labwc/
+.config/kitty/
+.config/wezterm/
+.config/labwc/
 {{- end }}
