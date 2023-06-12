@@ -21,7 +21,7 @@ if $undermc; then
 elif ! $powerterm; then
   ZSH_THEME="jcuken"
 else
-  {{ if eq .chezmoi.hostname "buratino" }}
+  {{ if .server }}
     ZSH_THEME="af-magic"
   {{ else }}
     ZSH_THEME="agnoster"
@@ -42,7 +42,7 @@ fi
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-{{ if eq .chezmoi.hostname "buratino" }}
+{{ if .server }}
   DISABLE_AUTO_UPDATE="true"
 {{ end }}
 
@@ -93,8 +93,11 @@ zstyle :omz:plugins:ssh-agent lifetime 30m
 plugins=(
   git archlinux screen tmux  magic-enter
   dluciv-archlinux dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
-  {{ if ne .chezmoi.hostname "buratino" }}
-    dluciv-open battery
+  {{ if not (or .server .mobile) }}
+    battery
+  {{ end }}
+  {{ if not .server }}
+    dluciv-open
   {{ end }}
 )
 
