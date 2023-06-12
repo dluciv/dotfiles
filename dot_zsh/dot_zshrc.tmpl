@@ -1,11 +1,14 @@
 # === Interactive shell configuration ===
+
 # echo Interactive привет!
 
 # =============== MC & TERM fixes ==============
+
 (ps -p $PPID | grep mc >/dev/null) && undermc=true || undermc=false
 [[ $TERM =~ ^(xterm(-.+)?)\|(wezterm)$ ]] && powerterm=true || powerterm=false
 
 # =============== History ===============
+
 setopt HIST_IGNORE_SPACE
 setopt appendhistory notify
 
@@ -23,6 +26,8 @@ SUDO_EDITOR=$EDITOR
 PAGER=most
 {{- if .termux }}
   BROWSER=termux-open-url
+{{- else }}
+  BROWSER=firefox
 {{- end }}
 
 set +o allexport
@@ -57,7 +62,7 @@ eval "$(zoxide init zsh)"
 # ============== Interactive aliases ===========
 
 alias lynx='lynx -assume_charset=utf-8  -assume_local_charset=utf-8'
-# alias edit=$VISUAL
+alias edit=$VISUAL
 alias icat='kitty +kitten icat'
 alias arialt=' aria2c -V --seed-time=0'
 alias nb='PAGER=less nb'
