@@ -3,7 +3,7 @@ then
   # interactive
   greeting="Привет!\nХорошо помни, зачем ты здесь!"
 
-  if [[ -x $(which lolcat) ]]
+  if false && [[ -x $(which lolcat) ]]
   then
     echo "${greeting}" | lolcat -r
   else

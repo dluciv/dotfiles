@@ -4,12 +4,7 @@ LANGUAGE=ru:en
 LANG=ru_RU.UTF-8
 LC_ALL=ru_RU.UTF-8
 
-{{- if .termux -}}
-  PAGER=less
-  EDITOR=nvim
-  VISUAL=$EDITOR
-  BROWSER=termux-open-url
-{{- else -}}
+{{- if not .termux }}
   eval $(locale)
 
   [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1

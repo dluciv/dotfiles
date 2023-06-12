@@ -21,19 +21,22 @@ EDITOR=$(which nvim)
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 PAGER=most
+{{- if .termux }}
+  BROWSER=termux-open-url
+{{- end }}
 
 set +o allexport
 
 # ==== completion & highlighting =======
 
-{{- if not .termux -}}
+{{- if not .termux }}
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if ! $undermc
 then
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
-{{- end -}}
+{{- end }}
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' group-name ''

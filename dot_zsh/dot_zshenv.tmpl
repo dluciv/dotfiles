@@ -30,9 +30,9 @@ xdg_data_dirs=($XDG_DATA_HOME ~/.local/share $xdg_data_dirs)
 typeset -TU XDG_CONFIG_DIRS xdg_config_dirs :
 xdg_config_dirs=($XDG_CONFIG_HOME $xdg_config_dirs)
 
-{{- if not .termux -}}
+{{- if not .termux }}
   TMPDIR=/tmp
-{{- end -}}
+{{- end }}
 
 set +o allexport
 
