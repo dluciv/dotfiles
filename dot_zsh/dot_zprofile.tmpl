@@ -1,0 +1,21 @@
+set -o allexport
+
+LANGUAGE=ru:en
+LANG=ru_RU.UTF-8
+LC_ALL=ru_RU.UTF-8
+
+{{- if .termux -}}
+  PAGER=less
+  EDITOR=nvim
+  VISUAL=$EDITOR
+  BROWSER=termux-open-url
+{{- else -}}
+  eval $(locale)
+
+  [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
+{{- end }}
+
+
+set +o allexport
+
+profiles+=$ZDOTDIR/.zprofile
