@@ -22,13 +22,13 @@ if $undermc; then
 elif ! $powerterm; then
   ZSH_THEME="jcuken"
 else
-  {{ if .server }}
-    ZSH_THEME="af-magic"
-  {{ else if .cygwin }}
-    ZSH_THEME="jcuken"
-  {{ else }}
-    ZSH_THEME="agnoster"
-  {{ end }}
+{{- if .server }}
+  ZSH_THEME="af-magic"
+{{- else if .cygwin }}
+  ZSH_THEME="jcuken"
+{{- else }}
+  ZSH_THEME="agnoster"
+{{- end }}
 fi
 
 # Set list of themes to pick from when loading at random
@@ -45,9 +45,9 @@ fi
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-{{ if .server }}
-  DISABLE_AUTO_UPDATE="true"
-{{ end }}
+{{- if .server }}
+DISABLE_AUTO_UPDATE="true"
+{{- end }}
 
 # Uncomment the following line to automatically update without prompting.
 # DISABLE_UPDATE_PROMPT="true"
@@ -95,17 +95,17 @@ zstyle :omz:plugins:ssh-agent lifetime 30m
 
 plugins=(
   git screen tmux  magic-enter
-  {{ if and (ne .chezmoi.os "darwin") (not .windows) (not .termux) }}
-    archlinux
-    dluciv-archlinux
-  {{ end }}
+{{- if and (ne .chezmoi.os "darwin") (not .windows) (not .termux) }}
+  archlinux
+  dluciv-archlinux
+{{- end }}
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
-  {{ if not (or .server .termux) }}
-    battery
-  {{ end }}
-  {{ if not (or .server (eq .chezmoi.os "darwin")) }}
-    dluciv-open
-  {{ end }}
+{{- if not (or .server .termux) }}
+  battery
+{{- end }}
+{{- if not (or .server (eq .chezmoi.os "darwin")) }}
+  dluciv-open
+{{- end }}
 )
 
 # User configuration

@@ -6,10 +6,10 @@ LANG=ru_RU.UTF-8
 LC_ALL=ru_RU.UTF-8
 
 {{- if not .termux }}
-  eval $(locale)
-
-  [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
+eval $(locale)
 {{- end }}
+
+[[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
 
 # --- $PATH workaround ---
 # See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv

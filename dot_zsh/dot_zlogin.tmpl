@@ -4,9 +4,8 @@ then
   # interactive
   greeting="Привет!\nХорошо помни, зачем ты здесь!"
 
-  if false && [[ -x $(which lolcat) ]]
-  then
-    echo "${greeting}" | lolcat -r
+  if [[ -x $(which lolcat) ]]; then
+    echo "${greeting}" | lolcat
   else
     echo "${greeting}"
   fi

@@ -10,7 +10,6 @@ path_prefix=(
   ~/.dotnet/tools
   ~/go/bin
   ~/.gem/ruby/3.0.0/bin
-  $path
 )
 
 path_suffix=()
@@ -27,15 +26,12 @@ typeset -U path
 
 path=($path_prefix $path $path_suffix)
 
-# LANGUAGE='ru:en'
-# LC_ALL=$LANG
-
 XDG_CACHE_HOME=~/.cache
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.data
 
-{{ if eq .chezmoi.os "darwin" -}}
-  XDG_RUNTIME_DIR=$XDG_CACHE_HOME
+{{- if eq .chezmoi.os "darwin" }}
+XDG_RUNTIME_DIR=$XDG_CACHE_HOME
 {{- end }}
 
 typeset -TU XDG_DATA_DIRS xdg_data_dirs :
@@ -45,9 +41,9 @@ typeset -TU XDG_CONFIG_DIRS xdg_config_dirs :
 xdg_config_dirs=($XDG_CONFIG_HOME $xdg_config_dirs)
 
 {{- if .termux }}
-  TMPDIR=$PREFIX/tmp
+TMPDIR=$PREFIX/tmp
 {{- else }}
-  TMPDIR=/tmp
+TMPDIR=/tmp
 {{- end }}
 
 set +o allexport

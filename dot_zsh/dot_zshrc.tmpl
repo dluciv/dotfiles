@@ -26,9 +26,9 @@ VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 PAGER=most
 {{- if .termux }}
-  BROWSER=termux-open-url
+BROWSER=termux-open-url
 {{- else }}
-  BROWSER=firefox
+BROWSER=firefox
 {{- end }}
 
 set +o allexport
@@ -37,17 +37,13 @@ set +o allexport
 
 {{- if not (or .termux .cygwin) }}
 
-{{- $zppref := "/usr/share/zsh/plugins" -}}
-{{- if eq .chezmoi.os "darwin" -}}
-  {{- $zppref = "/usr/local/share" -}}
-{{- end }}
+{{-   $zppref := "/usr/share/zsh/plugins" -}}
+{{-   if eq .chezmoi.os "darwin" -}}
+{{-     $zppref = "/usr/local/share" -}}
+{{-   end }}
 
 source {{ $zppref -}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-if ! $undermc
-then
-  source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+[[ ! $undermc ]] && source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 {{- end }}
 
