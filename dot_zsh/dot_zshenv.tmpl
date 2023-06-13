@@ -2,11 +2,7 @@ export ZDOTDIR=~/.zsh
 
 # Sequence: https://zsh.sourceforge.io/Doc/Release/Files.html#Startup_002fShutdown-Files
 
-set -o allexport
-
-typeset -U path
-
-path_prepend=(
+path_prefix=(
   ~/.local/bin
   /usr/local/bin
   /usr/local/sbin
@@ -16,11 +12,19 @@ path_prepend=(
   $path
 )
 
-# F***ING OS X breaks things, adding its garbage to PATH beginning
-# This is only load script executed when Automator loads,
-# so we need path setup here.
-path=($path_prepend $path)
-# And then... see .zprofile =)
+path_suffix=()
+
+
+set -o allexport
+
+typeset -U path
+
+# --- $PATH workaround ---
+# OSes break things, in system zprofile, so we remember what we need
+# in $PATH and then repeat it in user .zprofile
+# See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zprofile
+
+path=($path_prefix $path $path_suffix)
 
 # LANGUAGE='ru:en'
 # LC_ALL=$LANG
