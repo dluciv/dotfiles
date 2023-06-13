@@ -1,3 +1,4 @@
+# chezmoi:template:line-endings=lf
 # === Interactive shell configuration ===
 
 # echo Interactive привет!
@@ -34,7 +35,7 @@ set +o allexport
 
 # ==== completion & highlighting =======
 
-{{- if not .termux }}
+{{- if not (or .termux .cygwin) }}
 
 {{- $zppref := "/usr/share/zsh/plugins" -}}
 {{- if eq .chezmoi.os "darwin" -}}
@@ -47,6 +48,7 @@ if ! $undermc
 then
   source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
+
 {{- end }}
 
 zstyle ':completion:*' completer _complete _ignored _approximate
@@ -56,10 +58,12 @@ zstyle :compinstall filename $ZDOTDIR/.zshrc
 autoload -Uz compinit
 compinit
 
+{{- if not .cygwin }}
 # ------ zoxide ------
 # after compinit!
 
 eval "$(zoxide init zsh)"
+{{- end }}
 
 # ============== Oh my ZSH =============
 

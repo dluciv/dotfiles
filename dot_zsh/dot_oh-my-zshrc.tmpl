@@ -1,3 +1,4 @@
+# chezmoi:template:line-endings=lf
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -23,6 +24,8 @@ elif ! $powerterm; then
 else
   {{ if .server }}
     ZSH_THEME="af-magic"
+  {{ else if .cygwin }}
+    ZSH_THEME="jcuken"
   {{ else }}
     ZSH_THEME="agnoster"
   {{ end }}
@@ -91,8 +94,9 @@ zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:plugins:ssh-agent lifetime 30m
 
 plugins=(
-  git archlinux screen tmux  magic-enter
-  {{ if ne .chezmoi.os "darwin" }}
+  git screen tmux  magic-enter
+  {{ if and (ne .chezmoi.os "darwin") (not .windows) (not .termux) }}
+    archlinux
     dluciv-archlinux
   {{ end }}
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
