@@ -46,22 +46,29 @@ cf.colors['background'] = '#080808'
 -- Горячие клавиши
 cf.disable_default_key_bindings = true
 -- чтобы увидеть умолчания, закомментировать выше и запустить wezterm show-keys --lua
+
+if osname == "Darwin" then
+  ctcm = 'CMD'
+else
+  ctcm = 'CTRL'
+end
+
 cf.keys = {
   -- Зум
-  { key = '-', mods = 'CTRL', action = act.DecreaseFontSize },
-  { key = '=', mods = 'CTRL', action = act.IncreaseFontSize },
+  { key = '-', mods = ctcm, action = act.DecreaseFontSize },
+  { key = '=', mods = ctcm, action = act.IncreaseFontSize },
   -- вкладки из умолчательных
-  { key = 'Tab', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-  { key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
-  { key = 'T', mods = 'SHIFT|CTRL', action = act.SpawnTab 'CurrentPaneDomain' },
+  { key = 'Tab', mods = ctcm, action = act.ActivateTabRelative(1) },
+  { key = 'Tab', mods = 'SHIFT|' .. ctcm, action = act.ActivateTabRelative(-1) },
+  { key = 'T', mods = 'SHIFT|' .. ctcm, action = act.SpawnTab 'CurrentPaneDomain' },
   -- copy to the clipboard
-  { key = 'C', mods = 'SHIFT | CTRL', action = act.CopyTo 'Clipboard' },
+  { key = 'C', mods = 'SHIFT|' .. ctcm, action = act.CopyTo 'Clipboard' },
   { key = 'Copy', action = act.CopyTo 'Clipboard' },
   -- paste from the clipboard
-  { key = 'V', mods = 'SHIFT | CTRL', action = act.PasteFrom 'Clipboard' },
+  { key = 'V', mods = 'SHIFT|' .. ctcm, action = act.PasteFrom 'Clipboard' },
   { key = 'Paste', action = act.PasteFrom 'Clipboard' },
   -- search
-  { key = 'H', mods = 'SHIFT | CTRL', action = act.Search 'CurrentSelectionOrEmptyString' },
+  { key = 'H', mods = 'SHIFT|' .. ctcm, action = act.Search 'CurrentSelectionOrEmptyString' },
   -- highter finctionals
   --[[ as in Kitty
   { key = 'raw:191', action = act.SendString '\x1b[57376u' }, -- F13
