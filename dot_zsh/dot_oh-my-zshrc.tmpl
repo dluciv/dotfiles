@@ -93,11 +93,18 @@ HIST_STAMPS="yyyy-mm-dd"
 zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:plugins:ssh-agent lifetime 30m
 
+{{- if .termux }}
+zstyle :omz:themes:dluciv showbattery 0
+{{- end }}
+
 plugins=(
   git screen tmux  magic-enter
 {{- if and (ne .chezmoi.os "darwin") (not .windows) (not .termux) }}
   archlinux
   dluciv-archlinux
+{{- end }}
+{{- if eq .chezmoi.os "darwin" }}
+  dluciv-darwin
 {{- end }}
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
 {{- if not (or .server .termux) }}
