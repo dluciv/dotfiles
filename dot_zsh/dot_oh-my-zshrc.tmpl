@@ -106,6 +106,9 @@ plugins=(
 {{- if eq .chezmoi.os "darwin" }}
   dluciv-darwin
 {{- end }}
+{{- if .termux }}
+  dluciv-termux
+{{- end }}
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
 {{- if not (or .server .termux) }}
   battery
