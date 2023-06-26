@@ -26,3 +26,9 @@
     termux   = {{ $termux }}
     windows  = {{ $windows }}
     cygwin   = {{ $windows }}
+
+{{- if not $headless }}
+[diff]
+    command = "meld"
+    args = ["--diff", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+{{- end }}
