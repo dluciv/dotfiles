@@ -11,6 +11,10 @@ eval $(locale)
 
 [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
 
+{{- if not .headless }}
+GCM_CREDENTIAL_STORE=secretservice
+{{- end }}
+
 # --- $PATH workaround ---
 # See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv
 path=($path_prefix $path $path_suffix)
