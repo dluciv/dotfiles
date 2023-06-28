@@ -20,23 +20,27 @@
 {{/* На GitHub удобно аутентифицироваться его собственной тулзой. */ -}}
 [credential "https://github.com"]
 	helper =
-	helper = !/data/data/com.termux/files/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	helper = !/data/data/com.termux/files/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
 
 {{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
 [credential]
+{{- if not .windows }}
 	helper = cache --timeout 7200
+{{- end }}
 	helper = store
 
 {{/*
 Нужно установить https://github.com/hickford/git-credential-oauth,
 но пусть будет последний, ибо неудобен.
 */ -}}
+{{- if not .windows }}
 [credential]
 	helper = cache --timeout 7200
 	helper = oauth
+{{- end }}
 
 {{- if .termux }}
 [safe]
