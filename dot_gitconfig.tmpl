@@ -32,3 +32,8 @@
 [credential]
 	helper = cache --timeout 7200
 	helper = oauth
+
+{{- if .termux }}
+[safe]
+	directory = /storage/emulated/0/_/safe_wf/personal/sensetive-syncs
+{{- end }}
