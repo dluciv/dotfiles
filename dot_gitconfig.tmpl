@@ -11,7 +11,7 @@
 
 [core]
 	editor = nvim
-	autocrlf = true
+	autocrlf = {{if .windows }}true{{else}}input{{end}}
 
 {{/* Windows =) */ -}}
 [gui]
