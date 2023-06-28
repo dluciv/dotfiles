@@ -1,0 +1,34 @@
+[user]
+	email = dluciv@dluciv.name
+	name = Dmitry V. Luciv
+
+{{/* Всякий раз 50 раз подумать, нужен ли нам LFS, прежде чем связываться. */ -}}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	editor = nvim
+
+{{/* На GitHub удобно аутентифицироваться его собственной тулзой. */ -}}
+[credential "https://github.com"]
+	helper =
+	helper = !/data/data/com.termux/files/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/data/data/com.termux/files/usr/bin/gh auth git-credential
+
+{{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
+[credential]
+	helper = cache --timeout 7200
+	helper = store
+
+{{/*
+Нужно установить https://github.com/hickford/git-credential-oauth,
+но пусть будет последний, ибо неудобен.
+*/ -}}
+[credential]
+	helper = cache --timeout 7200
+	helper = oauth
