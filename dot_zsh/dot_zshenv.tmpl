@@ -30,7 +30,7 @@ XDG_CACHE_HOME=~/.cache
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.data
 
-{{- if eq .chezmoi.os "darwin" }}
+{{- if .darwin }}
 XDG_RUNTIME_DIR=$XDG_CACHE_HOME
 {{- end }}
 

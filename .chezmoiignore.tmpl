@@ -1,9 +1,9 @@
-{{ if or .server .termux -}}
+{{ if or .headless .termux -}}
 .config/kitty/
 .config/wezterm/
 {{- end }}
 
-{{ if or .server .termux (eq .chezmoi.os "darwin") -}}
+{{ if or .headless .termux .darwin -}}
 .config/labwc/
 {{- end }}
 

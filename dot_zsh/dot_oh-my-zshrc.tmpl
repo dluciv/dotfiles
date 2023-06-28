@@ -99,11 +99,11 @@ zstyle :omz:themes:dluciv showbattery 0
 
 plugins=(
   git screen tmux  magic-enter
-{{- if and (ne .chezmoi.os "darwin") (not .windows) (not .termux) }}
+{{- if not (or .darwin  .windows .termux) }}
   archlinux
   dluciv-archlinux
 {{- end }}
-{{- if eq .chezmoi.os "darwin" }}
+{{- if .darwin }}
   dluciv-darwin
 {{- end }}
 {{- if .termux }}
@@ -113,7 +113,7 @@ plugins=(
 {{- if not (or .server .termux) }}
   battery
 {{- end }}
-{{- if not (or .server (eq .chezmoi.os "darwin")) }}
+{{- if not (or .server .darwin) }}
   dluciv-open
 {{- end }}
 )

@@ -38,7 +38,7 @@ set +o allexport
 {{- if not (or .termux .cygwin) }}
 
 {{-   $zppref := "/usr/share/zsh/plugins" -}}
-{{-   if eq .chezmoi.os "darwin" -}}
+{{-   if .darwin -}}
 {{-     $zppref = "/usr/local/share" -}}
 {{-   end }}
 
