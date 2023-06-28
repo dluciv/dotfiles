@@ -27,8 +27,11 @@
     windows  = {{ $windows }}
     cygwin   = {{ $windows }}
 
-{{- if not $headless }}
 [diff]
+{{- if or $headless $termux }}
+    command = "nvim"
+    args = ["-d", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+{{- else }}
     command = "meld"
     args = ["--diff", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 {{- end }}
