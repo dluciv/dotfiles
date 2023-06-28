@@ -2,11 +2,14 @@
 set -o allexport
 
 LANGUAGE=ru:en
-LANG=ru_RU.UTF-8
-LC_ALL=ru_RU.UTF-8
-
 {{- if not .termux }}
+LANG=ru_RU.UTF-8
+LC_ALL=$LANG
+
 eval $(locale)
+{{- else }}
+LANG=en_US.UTF-8
+LC_ALL=$LANG
 {{- end }}
 
 [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
