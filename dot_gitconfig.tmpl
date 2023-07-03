@@ -25,14 +25,12 @@
 	helper =
 	helper = !gh auth git-credential
 
-{{/*
-Просто текстовый файл с паролями. Лучше использоавть пароли приложений.
-И под Виндами лучше, когда работает git-credential-manager-core конечно...
-*/ -}}
+{{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
 [credential]
 {{- if not .windows }}
 	helper = cache --timeout 7200
-{{- else }}
+{{- else if eq .chezmoi.hostname "lucent" }}
+	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
 	helper =
 {{- end }}
 	helper = store
