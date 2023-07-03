@@ -14,16 +14,19 @@ end
 -- mc не умеет!!!
 -- cf.term = 'wezterm'
 
--- Не надо -l ...
-
+{{- if .windows }}
+osname = "Windows"
+{{- else }}
 local fh,err = assert(io.popen("uname 2>/dev/null","r"))
 if fh then
   osname = fh:read()
 end
 
 if osname == "Linux" then
+  -- Не надо -l ...
   cf.default_prog = { os.getenv('SHELL') }
 end
+{{- end }}
 
 -- Общий вид
 cf.hide_tab_bar_if_only_one_tab = true
@@ -105,7 +108,8 @@ cf.font = wezterm.font_with_fallback {
   {family = 'Iosevka NF', weight = 'Medium'},
   'JetBrains Mono'
 }
-cf.font_size = 16.5
+
+cf.font_size = {{ if .windows }}14{{ else }}16.5{{ end }}
 cf.freetype_render_target = 'HorizontalLcd'
 
 return cf
