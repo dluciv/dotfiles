@@ -1,7 +1,11 @@
-{{ if or .headless .termux -}}
+{{ if or .headless .termux .windows -}}
 .config/kitty/
 .config/wezterm/
 {{- end }}
+
+{{ if not .windows -}}
+.wezterm.lua
+{{- end}}
 
 {{ if or .headless .termux .darwin -}}
 .config/labwc/

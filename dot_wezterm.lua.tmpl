@@ -1,0 +1,16 @@
+local wezterm = require 'wezterm'
+local act = wezterm.action
+
+return {
+  -- term = 'wezterm',
+  enable_csi_u_key_encoding = true,
+  enable_kitty_keyboard = true,
+  keys = {
+    -- paste from the clipboard
+    { key = 'V', mods = 'SHIFT | CTRL', action = act.PasteFrom 'Clipboard' }
+  },
+  font = wezterm.font_with_fallback {
+    {family = 'Iosevka NF', weight = 'Medium'},
+    'JetBrains Mono'
+  }
+}
