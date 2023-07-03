@@ -25,10 +25,15 @@
 	helper =
 	helper = !gh auth git-credential
 
-{{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
+{{/*
+Просто текстовый файл с паролями. Лучше использоавть пароли приложений.
+И под Виндами лучше, когда работает git-credential-manager-core конечно...
+*/ -}}
 [credential]
 {{- if not .windows }}
 	helper = cache --timeout 7200
+{{- else }}
+	helper =
 {{- end }}
 	helper = store
 
