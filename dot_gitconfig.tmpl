@@ -16,8 +16,8 @@
 {{/* Windows =) */ -}}
 [gui]
 	encoding = utf-8
-	fontui   = -family \"Iosevka NF\"
-	fontdiff = -family \"Iosevka NF\"
+	fontui   = -family \"Iosevka NF\" -size 12
+	fontdiff = -family \"Iosevka NF\" -size 12
 
 {{/* На GitHub удобно аутентифицироваться его собственной тулзой. */ -}}
 [credential "https://github.com"]
@@ -27,27 +27,26 @@
 	helper =
 	helper = !gh auth git-credential
 
-{{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
+[credential]
 {{- if not .windows }}
-[credential]
-	helper = cache --timeout 7200
-{{-   if not .darwin }}{{/* У OSX в /usr/local/etc/gitconfig есть helper = osxkeychain, лучше его */}}
+	helper = cache --timeout 36000
+{{- end }}
+{{- if .darwin }}{{/* У OSX в /usr/local/etc/gitconfig есть helper = osxkeychain, ничего не добавляем */}}
+{{- else if (or .termux (and .linux .headless)) }}
+    {{- /* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */}}
 	helper = store
-{{-   end }}
-{{- else if eq .chezmoi.hostname "lucent" }}
-[credential]
+{{- else if and .linux .headful }}
+    helper = libsecret
+{{- else if and .windows (eq .chezmoi.hostname "lucent") }}
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
 	helper =
 	helper = wincred
+{{- else }}
+# Что ты такое?..
 {{- end }}
 
-{{/*
-Нужно установить https://github.com/hickford/git-credential-oauth,
-но пусть будет последний, ибо неудобен.
-*/ -}}
+{{- /* Нужно установить https://github.com/hickford/git-credential-oauth, но пусть будет последний, ибо неудобен. */}}
 {{- if not .windows }}
-[credential]
-	helper = cache --timeout 7200
 	helper = oauth
 {{- end }}
 
