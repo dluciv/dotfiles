@@ -26,14 +26,16 @@
 	helper = !gh auth git-credential
 
 {{/* Просто текстовый файл с паролями. Лучше использоавть пароли приложений. */ -}}
-[credential]
 {{- if not .windows }}
+[credential]
 	helper = cache --timeout 7200
+	helper = store
 {{- else if eq .chezmoi.hostname "lucent" }}
+[credential]
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
 	helper =
+	helper = wincred
 {{- end }}
-	helper = store
 
 {{/*
 Нужно установить https://github.com/hickford/git-credential-oauth,
@@ -45,7 +47,7 @@
 	helper = oauth
 {{- end }}
 
-{{- if .termux }}
+{{- if .termux }} {{- /* Это конкретный телефон, но как его идентифицироваь?.. */ -}}
 [safe]
 	directory = /storage/emulated/0/_/safe_wf/personal/sensetive-syncs
 {{- end }}
