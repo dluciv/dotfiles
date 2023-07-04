@@ -11,5 +11,9 @@
 .config/labwc/
 {{- end }}
 
+{{ if .windows -}}{{- /* Windows fails to symlink it */ -}}
+.zshenv
+{{- end }}
+
 LICENSE
 README.md
