@@ -16,8 +16,8 @@
 {{/* Windows =) */ -}}
 [gui]
 	encoding = utf-8
-	fontui = -family \"Iosevka NF\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
-	fontdiff = -family \"Iosevka NF\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+	fontui =   -family \"Iosevka NF\" -weight normal -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"Iosevka NF\" -weight normal -slant roman -underline 0 -overstrike 0
 
 {{/* На GitHub удобно аутентифицироваться его собственной тулзой. */ -}}
 [credential "https://github.com"]
@@ -31,7 +31,9 @@
 {{- if not .windows }}
 [credential]
 	helper = cache --timeout 7200
+{{-   if not .darwin }}{{/* У OSX в /usr/local/etc/gitconfig есть helper = osxkeychain, лучше его */}}
 	helper = store
+{{-   end }}
 {{- else if eq .chezmoi.hostname "lucent" }}
 [credential]
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
