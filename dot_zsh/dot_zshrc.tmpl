@@ -42,8 +42,10 @@ set +o allexport
 {{-     $zppref = "/usr/local/share" -}}
 {{-   end }}
 
-source {{ $zppref -}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-[[ ! $undermc ]] && source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ -d "{{- $zppref -}}" ]]; then
+  source {{ $zppref -}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  [[ ! $undermc ]] && source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 {{- end }}
 
@@ -58,12 +60,18 @@ compinit
 # ------ zoxide ------
 # after compinit!
 
-eval "$(zoxide init zsh)"
+if which zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 {{- end }}
 
 # ============== Oh my ZSH =============
 
-. $ZDOTDIR/.oh-my-zshrc
+if [[ -d $ZDOTDIR/.oh-my-zsh ]]; then
+  . $ZDOTDIR/.oh-my-zshrc
+else
+  echo No OMZ. Sad...
+fi
 
 # ============== Interactive aliases ===========
 
