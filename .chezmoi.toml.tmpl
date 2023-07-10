@@ -11,7 +11,7 @@
 
 {{- if eq .chezmoi.os "linux" -}}
 {{-   $linux = true -}}
-{{-   if eq (env "XDG_SESSION_TYPE") "tty" -}}
+{{-   if or (eq (env "XDG_SESSION_TYPE") "tty" "") (ne (env "SSH_TTY") "") -}}
 {{-     $server = true   -}}
 {{-     $headless = true -}}
 {{-   end -}}
