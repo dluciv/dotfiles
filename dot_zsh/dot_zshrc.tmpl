@@ -21,7 +21,11 @@ SAVEHIST=1000
 
 set -o allexport
 
-EDITOR=$(which nvim)
+if which nvim &>/dev/null; then
+  EDITOR=$(which nvim)
+else
+  EDITOR=$(which vim)
+fi
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 PAGER=most
