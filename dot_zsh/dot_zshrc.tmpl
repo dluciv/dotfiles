@@ -70,7 +70,14 @@ fi
 if [[ -d $ZDOTDIR/.oh-my-zsh ]]; then
   . $ZDOTDIR/.oh-my-zshrc
 else
-  echo No OMZ. Sad...
+  setopt PROMPT_SUBST
+  PROMPT='${(%):-%~} %# '
+
+  if $undermc; then
+    unset RPROMPT
+  else
+    RPROMPT=$'%{\e[2m%}%n@%m $(date +%T)%{\e[0m%}'
+  fi
 fi
 
 # ============== Interactive aliases ===========
