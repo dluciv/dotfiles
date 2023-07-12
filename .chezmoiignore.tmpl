@@ -7,8 +7,10 @@
 .wezterm.lua
 {{- end}}
 
-{{ if or .headless .termux .darwin -}}
+{{ if or .headless .termux .darwin .windows -}}
 .config/labwc/
+.config/sway/
+.config/waybar/
 {{- end }}
 
 {{ if .windows -}}{{- /* Windows fails to symlink it */ -}}

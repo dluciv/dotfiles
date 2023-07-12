@@ -1,0 +1,18 @@
+input "1:1:AT_Translated_Set_2_keyboard" {
+{{- if eq .chezmoi.hostname "clover" }}
+  xkb_model thinkpad
+{{- else if eq .chezmoi.hostname "esperanto" }}
+  xkb_model acer_laptop
+{{- else }}
+  xkb_model evdev
+{{- end }}
+  xkb_options "grp:caps_toggle,grp_led:caps,lv3:ralt_switch,misc:typo,compose:rctrl"
+  xkb_layout "us,ru"
+}
+
+input "1072:162:Sun_USB_Keyboard" {
+  xkb_model   "sun(t7unix)"
+  xkb_variant "winkeys"
+  xkb_options "grp:menu_toggle,grp_led:scroll,lv3:ralt_switch,misc:typo,compose:sclk,compose_led:compose"
+  xkb_layout  "us,ru"
+}
