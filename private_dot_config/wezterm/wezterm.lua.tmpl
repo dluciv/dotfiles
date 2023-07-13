@@ -10,4 +10,4 @@ if osname == "Linux" then
   cf.default_prog = { os.getenv('SHELL') }
 end
 
-{{ template "wezterm" dict "windows" .windows -}}
+{{ template "wezterm" dict "windows" .windows  "linux" .linux -}}

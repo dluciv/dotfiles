@@ -78,7 +78,7 @@ function merge(...)
 end
 
 -- Сперва эти настройки, ...
-cf.keys = merge(cf.keys, {
+cf.keys = merge({
   -- Зум
   { key = '-', mods = ctcm, action = act.DecreaseFontSize },
   { key = '=', mods = ctcm, action = act.IncreaseFontSize },
@@ -94,6 +94,10 @@ cf.keys = merge(cf.keys, {
   { key = 'Paste', action = act.PasteFrom 'Clipboard' },
   -- search
   { key = 'H', mods = 'SHIFT|' .. ctcm, action = act.Search 'CurrentSelectionOrEmptyString' },
+  },
+  -- ... потом стандартные
+  cf.keys {{- if .linux }},
+  { -- , а потом для Линукса
   -- highter finctionals
   --[[ as in Kitty
   { key = 'raw:191', action = act.SendString '\x1b[57376u' }, -- F13
@@ -118,7 +122,7 @@ cf.keys = merge(cf.keys, {
   { key = 'raw:196', action = act.SendString '\x1b[32~' },
   { key = 'raw:197', action = act.SendString '\x1b[33~' },
   { key = 'raw:198', action = act.SendString '\x1b[34~' }, -- F20
-})
+}{{- end -}})
 
 -- Клавиатура
 cf.enable_csi_u_key_encoding = true
