@@ -1,1 +1,4 @@
-{{- template "wezterm" dict "windows" .windows -}}
+local os = require 'os'
+osname = "Windows"
+
+{{ template "wezterm" dict "windows" .windows -}}
