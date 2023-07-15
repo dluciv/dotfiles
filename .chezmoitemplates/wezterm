@@ -7,6 +7,11 @@ if wezterm.config_builder then
   cf = wezterm.config_builder()
 end
 
+{{- if .linux }}
+-- Не надо -l ...
+cf.default_prog = { os.getenv('SHELL') }
+{{- end }}
+
 -- $TERM
 -- Install terminfo:
 -- https://wezfurlong.org/wezterm/faq.html#how-do-i-enable-undercurl-curly-underlines

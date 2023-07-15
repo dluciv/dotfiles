@@ -5,9 +5,4 @@ if fh then
   osname = fh:read()
 end
 
-if osname == "Linux" then
-  -- Не надо -l ...
-  cf.default_prog = { os.getenv('SHELL') }
-end
-
 {{ template "wezterm" dict "windows" .windows  "linux" .linux -}}
