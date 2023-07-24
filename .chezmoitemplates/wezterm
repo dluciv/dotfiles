@@ -100,8 +100,22 @@ cf.keys = merge({
   -- search
   { key = 'H', mods = 'SHIFT|' .. ctcm, action = act.Search 'CurrentSelectionOrEmptyString' },
   },
+  {{- if .darwin }}
+  {
+  -- Poor Macs...
+  -- Insert key missing on Mac, make F12 act like it
+  { key = 'F12',                          action = act.SendString '\x1b[2~'   },
+  { key = 'F12', mods = 'SHIFT',          action = act.SendString '\x1b[2;2~' },
+  { key = 'F12', mods = 'ALT',            action = act.SendString '\x1b[2;3~' },
+  { key = 'F12', mods = 'ALT|SHIFT',      action = act.SendString '\x1b[2;4~' },
+  { key = 'F12', mods = 'CTRL',           action = act.SendString '\x1b[2;5~' },
+  { key = 'F12', mods = 'CTRL|SHIFT',     action = act.SendString '\x1b[2;6~' },
+  { key = 'F12', mods = 'CTRL|ALT',       action = act.SendString '\x1b[2;7~' },
+  { key = 'F12', mods = 'CTRL|ALT|SHIFT', action = act.SendString '\x1b[2;8~' }
+  },
+  {{- end }}
   -- ... потом стандартные
-  cf.keys {{- if .linux }},
+  cf.keys, {{- if .linux }}
   { -- , а потом для Линукса
   -- highter finctionals
   --[[ as in Kitty
@@ -127,7 +141,7 @@ cf.keys = merge({
   { key = 'raw:196', action = act.SendString '\x1b[32~' },
   { key = 'raw:197', action = act.SendString '\x1b[33~' },
   { key = 'raw:198', action = act.SendString '\x1b[34~' }, -- F20
-}{{- end -}})
+}, {{- end -}} {})
 
 -- Клавиатура
 cf.enable_csi_u_key_encoding = true
