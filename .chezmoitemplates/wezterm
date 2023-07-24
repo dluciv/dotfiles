@@ -34,7 +34,7 @@ cf.initial_cols = 132
 
 -- Цвета
 cf.colors = wezterm.color.get_default_colors()
-cf.colors['background'] = '#080808'
+cf.colors.background = '#201000'
 
 -- Горячие клавиши
 cf.disable_default_key_bindings = true
