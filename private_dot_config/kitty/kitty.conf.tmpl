@@ -31,6 +31,11 @@ tab_separator " █ "
 
 disable_ligatures cursor
 
+# Font of 0.28+ is too bold IMHO
+# https://www.reddit.com/r/KittyTerminal/comments/12pfzkt/comment/jglyfmh
+# https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.text_composition_strategy
+text_composition_strategy 1.0 0
+
 # ========= Clipboard ==========
 
 map ctrl+shift+c copy_to_clipboard
