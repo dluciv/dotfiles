@@ -1,0 +1,33 @@
+// zellij setup --dump-config > ~/.config/zellij/config.kdl
+
+// If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
+keybinds {
+    // unbind "Ctrl g" // unbind in all modes
+    locked {
+        unbind "Ctrl g"
+        // unbind "Alt n"
+        bind "Alt n" { SwitchToMode "Normal"; }
+    }
+    shared_except "locked" {
+        unbind "Ctrl g"
+        // unbind "Alt l"
+        bind "Alt l" { SwitchToMode "Locked"; }
+    }
+}
+
+theme "dracula"
+
+// The name of the default layout to load on startup
+// Default: "default"
+//
+// default_layout "compact"
+
+// Choose the mode that zellij uses when starting up.
+// Default: normal
+//
+default_mode "locked"
+
+// copy_command "xclip -selection clipboard" // x11
+// copy_command "wl-copy"                    // wayland
+// copy_command "pbcopy"                     // osx
+copy_command "cccp"
