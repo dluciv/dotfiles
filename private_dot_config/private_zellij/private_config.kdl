@@ -2,14 +2,12 @@
 
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
-    // unbind "Ctrl g" // unbind in all modes
+    unbind "Ctrl g" // unbind in all modes
     locked {
-        unbind "Ctrl g"
         // unbind "Alt n"
         bind "Alt n" { SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        unbind "Ctrl g"
         // unbind "Alt l"
         bind "Alt l" { SwitchToMode "Locked"; }
     }
