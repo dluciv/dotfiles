@@ -5,11 +5,11 @@ keybinds {
     unbind "Ctrl g" // unbind in all modes
     locked {
         // unbind "Alt n"
-        bind "Alt n" { SwitchToMode "Normal"; }
+        bind "Alt N" { SwitchToMode "Normal"; }
     }
     shared_except "locked" {
         // unbind "Alt l"
-        bind "Alt l" { SwitchToMode "Locked"; }
+        bind "Alt L" { SwitchToMode "Locked"; }
     }
 }
 
