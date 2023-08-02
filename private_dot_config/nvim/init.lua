@@ -26,6 +26,11 @@ opt.expandtab=true
 opt.autoindent=true
 opt.cindent=true
 
+-- Neovide
+if vim.g.neovide then
+    vim.o.guifont = "Iosevka NF:h12"
+end
+
 -- Пакеты
 
 require 'plugins'
