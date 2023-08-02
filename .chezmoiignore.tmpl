@@ -1,4 +1,4 @@
-{{ if or .headless .termux .windows -}}
+{{ if or .termux .windows -}}
 .config/kitty/
 .config/wezterm/
 {{- end }}
