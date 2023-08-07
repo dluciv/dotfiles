@@ -12,6 +12,9 @@ set $term kitty -1 --instance-group sway
 # set $menu 'rofi -modi run,drun,window -show drun -show-icons'
 set $menu 'rofi -show drun'
 
+# Deep color -- do we support it or not?..
+output eDP-1 render_bit_depth 10
+
 # Look
 
 # output * bg '/home/d/DropST/Desktop_Backgrounds/Forest_2022-12-03.jpg' fill
