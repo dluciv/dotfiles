@@ -13,7 +13,7 @@ set $term kitty -1 --instance-group sway
 set $menu 'rofi -show drun'
 
 # Deep color -- do we support it or not?..
-output eDP-1 render_bit_depth 10
+output eDP-1 render_bit_depth 8
 
 # Look
 

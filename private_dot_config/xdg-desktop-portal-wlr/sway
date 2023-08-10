@@ -1,0 +1,6 @@
+[screencast]
+max_fps=30
+exec_before=echo "$(date): WLR sway screencast start" >>/tmp/_.wlr.log
+exec_after=echo "$(date): WLR sway screencast stop" >>/tmp/_.wlr.log
+chooser_type=default
+chooser_cmd=slurp -f %o -or
