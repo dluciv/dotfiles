@@ -103,13 +103,17 @@ plugins=(
   archlinux
   dluciv-archlinux
 {{- end }}
+
 {{- if .darwin }}
   dluciv-darwin
-{{- end }}
-{{- if .termux }}
+{{- else if .termux }}
   dluciv-termux
+{{- else if .cygwin }}
+  dluciv-cygwin
 {{- end }}
+
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control
+
 {{- if not (or .server .termux) }}
   battery
 {{- end }}
