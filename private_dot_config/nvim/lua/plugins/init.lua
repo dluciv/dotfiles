@@ -73,8 +73,27 @@ lldb = {
 	runInTerminal = false,
 }
 
+python = {
+	name = "Launch Python",
+	type = "python", -- matches the adapter
+	request = "launch", -- could also attach to a currently running process
+	program = function()
+		return vim.fn.input(
+			"Path to executable: ",
+			vim.fn.getcwd() .. "/",
+			"file"
+		)
+	end,
+	cwd = "${workspaceFolder}",
+	stopOnEntry = false,
+	args = {},
+	runInTerminal = false,
+}
+
 dap.configurations.c = { lldb }
 
 dap.configurations.cpp = { lldb }
+
+dap.configurations.python = { python }
 
 return packer_startup
