@@ -19,7 +19,8 @@ output eDP-1 render_bit_depth 8
 # Look
 
 # output * bg '/home/d/DropST/Desktop_Backgrounds/Forest_2022-12-03.jpg' fill
-output * bg '/home/d/DropST/Desktop_Backgrounds/cosmos.jpg' fill
+# output * bg '/home/d/DropST/Desktop_Backgrounds/cosmos.jpg' fill
+# better to use wpaperd
 
 # gaps inner 2
 # smart_gaps on
