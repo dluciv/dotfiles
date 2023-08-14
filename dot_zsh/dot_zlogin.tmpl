@@ -1,4 +1,12 @@
 # chezmoi:template:line-endings=lf
+{{- if .headful }}
+if command -v sshagnt &>/dev/null; then
+  if ! sshagnt status; then
+    sshagnt start
+  fi
+fi
+{{- end }}
+
 if [[ -o interactive ]] # https://unix.stackexchange.com/a/600541/190164
 then
   # interactive
@@ -11,5 +19,6 @@ then
   fi
 
 fi
+
 
 profiles+=$ZDOTDIR/.zlogin
