@@ -42,9 +42,47 @@ cf.freetype_render_target = 'HorizontalLcd'
 cf.initial_rows = 30
 cf.initial_cols = 132
 
+{{- if .windows }}
 -- Цвета
 cf.colors = wezterm.color.get_default_colors()
 cf.colors.background = 'hsl(45deg, 100%, 7%)'
+{{- else }}
+-- Вкладочки
+cf.color_scheme = "Catppuccin Mocha"
+
+wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(cf, {
+  position = "top",
+  max_width = 32,
+  dividers = "slant_right", -- or "slant_left", "arrows", "rounded", false
+  indicator = {
+    leader = {
+      enabled = true,
+      off = " ",
+      on = " ",
+    },
+    mode = {
+      enabled = true,
+      names = {
+        resize_mode = "RESIZE",
+        copy_mode = "VISUAL",
+        search_mode = "SEARCH",
+      },
+    },
+  },
+  tabs = {
+    numerals = "arabic", -- or "roman"
+    pane_count = "superscript", -- or "subscript", false
+    brackets = {
+      active = { "", ":" },
+      inactive = { "", ":" },
+    },
+  },
+  clock = { -- note that this overrides the whole set_right_status
+    enabled = false,
+    format = "%H:%M", -- use https://wezfurlong.org/wezterm/config/lua/wezterm.time/Time/format.html
+  },
+})
+{{- end }}
 
 -- Горячие клавиши
 cf.disable_default_key_bindings = true
@@ -124,6 +162,7 @@ cf.keys = merge({
   { key = 'F12', mods = 'CTRL|ALT|SHIFT', action = act.SendString '\x1b[2;8~' }
   },
   {{- end }}
+  {  { key="L", mods="SHIFT|ALT|" .. ctcm, action = act.ShowDebugOverlay } },
   -- ... потом стандартные
   cf.keys, {{- if .linux }}
   { -- , а потом для Линукса
