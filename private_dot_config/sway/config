@@ -224,6 +224,15 @@ for_window [app_id="telegramdesktop"] border pixel 2
 # Teams Brave
 for_window [app_id="brave-"] border pixel 2
 
+# Browser popups
+# https://gist.github.com/b0o/f00de53aa44ff53b39f997d83b7b5585
+# Chenge JS to ``` ... document.title = `♂ ${document.title}` ... ```
+for_window {
+  [title="^♂ "] {
+    floating enable
+  }
+}
+
 
 #
 # Status Bar:
