@@ -28,6 +28,16 @@ cf.window_padding = {
   bottom = '2px',
 }
 
+-- Шревты
+cf.custom_block_glyphs = false -- с Iosevka как минимум лучше
+cf.font = wezterm.font_with_fallback {
+  {family = 'Iosevka NF', weight = 'Medium'},
+  'JetBrains Mono'
+}
+
+cf.font_size = {{ if .windows }}14{{ else if .darwin }}18{{else}}16.5{{ end }}
+cf.freetype_render_target = 'HorizontalLcd'
+
 -- Размер
 cf.initial_rows = 30
 cf.initial_cols = 132
@@ -146,15 +156,5 @@ cf.keys = merge({
 -- Клавиатура
 cf.enable_csi_u_key_encoding = true
 cf.enable_kitty_keyboard = true
-
--- Шревты
-cf.custom_block_glyphs = false -- с Iosevka как минимум лучше
-cf.font = wezterm.font_with_fallback {
-  {family = 'Iosevka NF', weight = 'Medium'},
-  'JetBrains Mono'
-}
-
-cf.font_size = {{ if .windows }}14{{ else if .darwin }}18{{else}}16.5{{ end }}
-cf.freetype_render_target = 'HorizontalLcd'
 
 return cf
