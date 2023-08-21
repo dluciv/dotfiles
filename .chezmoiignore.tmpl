@@ -3,6 +3,15 @@
 .config/wezterm/
 {{- end }}
 
+{{ if or .termux (not .linux) -}}
+.config/foot/
+{{- end }}
+
+{{ if or .headless .termux -}}
+.config/contour/
+{{- end }}
+
+
 {{ if not .windows -}}
 .wezterm.lua
 {{- end}}
