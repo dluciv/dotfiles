@@ -7,10 +7,9 @@
 .config/foot/
 {{- end }}
 
-{{ if or .headless .termux -}}
+{{ if or .headless .termux .windows -}}
 .config/contour/
 {{- end }}
-
 
 {{ if not .windows -}}
 .wezterm.lua
@@ -26,6 +25,8 @@
 
 {{ if .windows -}}{{- /* Windows fails to symlink it */ -}}
 .zshenv
+{{- else }}
+AppData/Local/
 {{- end }}
 
 LICENSE
