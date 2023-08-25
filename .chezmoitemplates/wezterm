@@ -35,7 +35,7 @@ cf.font = wezterm.font_with_fallback {
   'JetBrains Mono'
 }
 
-cf.font_size = {{ if .windows }}14{{ else if .darwin }}18{{else}}16.5{{ end }}
+cf.font_size = {{ if eq .dpi.level .dpi.normal }}14{{ else if eq .dpi.level .dpi.retina }}18{{else}}16.5{{ end }}
 cf.freetype_render_target = 'HorizontalLcd'
 
 -- Размер

@@ -38,6 +38,13 @@
     darwin   = {{ $darwin }}
     cygwin   = {{ $windows }}
 
+{{- /* Максимально непортабельно -- исключительно под мои личные компьютеры */}}
+[data.dpi]
+    normal = "normal"
+    high   = "high"
+    retina = "retina"
+    level = {{ if $darwin }}"retina"{{ else if $windows }}"normal"{{ else }}"high"{{ end }}
+
 [diff]
 {{- if or $headless $termux }}
     command = "nvim"

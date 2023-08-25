@@ -259,7 +259,7 @@ profiles:
         # Font related configuration (font face, styles, size, rendering mode).
         font:
             # Initial font size in pixels.
-            size: {{if .windows}}14{{else}}16.5{{end}}
+            size: {{ if eq .dpi.level .dpi.normal }}14{{else}}16.5{{ end }}
 
             # DPI scaling factor applied on top of the system configured on (default: 1.0).
             dpi_scale: 1.0
