@@ -96,6 +96,9 @@ alias cfms='cat $CLIFM_SELFILE'
 alias cal='cal -m'
 alias neovide='WINIT_UNIX_BACKEND=x11 neovide'
 
+alias czm=chezmoi
+czmcd () { cd $(chezmoi source-path) }
+
 # ============= Interactive vars ===============
 
 CLICOLOR=1
