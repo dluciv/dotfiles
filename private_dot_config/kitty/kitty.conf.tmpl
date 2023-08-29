@@ -16,19 +16,22 @@ tab_separator " █ "
 # ========= Font ==========
 
 {{- if eq .chezmoi.os "darwin" }}
-  font_family      Iosevka Term
-  bold_font        auto
-  italic_font      auto
-  bold_italic_font auto
+font_family      Iosevka Term
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
 {{- else }}
-  font_family      Iosevka NFM
-  bold_font        Iosevka NFM Bold
-  italic_font      Iosevka NFM Italic
-  bold_italic_font Iosevka NFM Bold Italic
+{{- $font_features := "+ss14" }}
+font_family      Iosevka NF
+font_features    IosevkaNF            {{ $font_features }}
+bold_font        Iosevka NF Bold
+font_features    IosevkaNF-Bold       {{ $font_features }}
+italic_font      Iosevka NF Italic
+font_features    IosevkaNF-Italic     {{ $font_features }}
+bold_italic_font Iosevka NF Bold Italic
+font_features    IosevkaNF-BoldItalic {{ $font_features }}
 {{- end }}
-  font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
-
-
+font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
 disable_ligatures cursor
 
 # Font of 0.28+ is too bold IMHO
