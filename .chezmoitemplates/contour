@@ -328,7 +328,7 @@ profiles:
                 # supports.
                 #
                 # Default: []
-                features: [ "ss14" ]  # No effect...
+                features: [ "ss14" ]  # No effect under Windows =(...
 
             # If bold/italic/bold_italic are not explicitly specified, the regular font with
             # the respective weight and slant will be used.
