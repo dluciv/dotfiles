@@ -14,14 +14,19 @@ tab_separator " █ "
 # tab_separator "║"
 
 # ========= Font ==========
+{{- $font_features := "+ss14" -}}
 
 {{- if eq .chezmoi.os "darwin" }}
-font_family      Iosevka Term
-bold_font        auto
-italic_font      auto
-bold_italic_font auto
+# brew tap homebrew/cask-fonts; brew install font-iosevka-term-nerd-font
+font_family      IosevkaTermNFM
+font_features    IosevkaTermNFM            +ss14
+bold_font        IosevkaTermNFM-Bold
+font_features    IosevkaTermNFM-Bold       +ss14
+italic_font      IosevkaTermNFM-Italic
+font_features    IosevkaTermNFM-Italic     +ss14
+bold_italic_font IosevkaTermNFM-BoldItalic
+font_features    IosevkaTermNFM-BoldItalic +ss14
 {{- else }}
-{{- $font_features := "+ss14" }}
 font_family      Iosevka NF
 font_features    IosevkaNF            {{ $font_features }}
 bold_font        Iosevka NF Bold
