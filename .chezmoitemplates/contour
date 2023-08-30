@@ -311,7 +311,7 @@ profiles:
             regular:
                 # Font family defines the font family name, such as:
                 # Fira Code", "Courier New", or "monospace" (default).
-                family: {{if .windows}}"Iosevka Nerd Font"{{else}}"Iosevka NF"{{end}}
+                family: {{if .windows}}"Iosevka Nerd Font"{{else}}"IosevkaTerm Nerd Font Mono"{{end}}
 
                 # Font weight can be one of:
                 #   thin, extra_light, light, demilight, book, normal,
