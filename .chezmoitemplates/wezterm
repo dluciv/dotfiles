@@ -31,7 +31,7 @@ cf.window_padding = {
 -- Шревты
 cf.custom_block_glyphs = false -- с Iosevka как минимум лучше
 cf.font = wezterm.font_with_fallback {
-  {family = 'Iosevka NF', weight = 'Medium', harfbuzz_features = { 'ss14' } },
+  {family = 'IosevkaTerm Nerd Font Mono', weight = 'Medium', harfbuzz_features = { 'ss14' } },
   'JetBrains Mono'
 }
 
