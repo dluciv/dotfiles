@@ -17,7 +17,6 @@ tab_separator " █ "
 {{- $font_features := "+ss14" -}}
 
 {{- if eq .chezmoi.os "darwin" }}
-# brew tap homebrew/cask-fonts; brew install font-iosevka-term-nerd-font
 font_family      IosevkaTerm Nerd Font Mono
 font_features    IosevkaTermNFM            +ss14
 font_features    IosevkaTermNFM-Bold       +ss14
@@ -26,7 +25,6 @@ font_features    IosevkaTermNFM-BoldItalic +ss14
 modify_font      baseline 4
 modify_font      cell_height -8px
 {{- else }}
-# Arch: https://archlinux.org/packages/extra/any/ttf-iosevkaterm-nerd/ pacman -S ttf-iosevkaterm-nerd
 font_family      Iosevka NF
 font_features    IosevkaNF            {{ $font_features }}
 bold_font        Iosevka NF Bold
