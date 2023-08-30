@@ -15,8 +15,11 @@ tab_separator " █ "
 
 # ========= Font ==========
 {{- $font_features := "+ss14" }}
-{{- $font_family := "IosevkaTerm Nerd Font Mono" }}
-{{- $font_psname := "IosevkaTermNFM" }}
+{{- /* $font_family := "IosevkaTerm Nerd Font Mono" */}}
+{{- /* $font_psname := "IosevkaTermNFM" */}}
+
+{{- $font_family := "Iosevka Nerd Font" }}
+{{- $font_psname := "IosevkaNF" }}
 
 {{- if eq .chezmoi.os "darwin" }}
   {{- /* Term NFM is buggy under OS X?.. */}}
