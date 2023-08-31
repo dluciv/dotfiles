@@ -18,8 +18,8 @@ tab_separator " █ "
 {{- /* $font_family := "IosevkaTerm Nerd Font Mono" */}}
 {{- /* $font_psname := "IosevkaTermNFM" */}}
 
-{{- $font_family := "Iosevka Nerd Font" }}
-{{- $font_psname := "IosevkaNF" }}
+{{- $font_family := "IosevkaTerm Nerd Font" }}
+{{- $font_psname := "IosevkaTermNF" }}
 
 {{- if eq .chezmoi.os "darwin" }}
   {{- /* Term NFM is buggy under OS X?.. */}}
@@ -29,7 +29,13 @@ modify_font      cell_height -8px
 
 font_family      {{ $font_family }}
 
-{{- range (list "" "-Bold" "-Italic" "-BoldItalic") }}
+{{- $font_modes := (list "" "-Bold" "-Italic" "-BoldItalic") -}}
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- /* May be Linux too?.. */ -}}
+  {{- $font_modes = (list "" "-SemiBold" "-Oblique" "-SemiBoldItalic") }}
+{{- end }}
+
+{{- range  $font_modes }}
 font_features    {{ $font_psname }}{{ . }} {{ $font_features }}
 {{- end }}
 
