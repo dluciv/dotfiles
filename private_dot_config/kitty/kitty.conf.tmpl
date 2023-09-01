@@ -17,23 +17,28 @@ tab_separator " █ "
 {{- $font_features := "+ss14" }}
 
 {{- $font_family := "IosevkaTerm Nerd Font" }}
-{{- $font_psname := "IosevkaTermNF" }}
-
-
-font_family      {{ $font_family }}
-font_features    {{ $font_psname }}                {{ $font_features }}
-bold_font        {{ $font_family }} SemiBold
-font_features    {{ $font_psname }}-SemiBold       {{ $font_features }}
-italic_font      {{ $font_family }} Italic
-font_features    {{ $font_psname }}-Italic         {{ $font_features }}
-bold_italic_font {{ $font_family }} SemiBold Italic
-font_features    {{ $font_psname }}-SemiBoldItalic {{ $font_features }}
-
+{{- $font_bold   := "SemiBold" }}
 {{- if eq .chezmoi.os "darwin" }}
   {{- /* Term NFM is buggy under OS X?.. */}}
 modify_font      baseline 4
 modify_font      cell_height -8px
+{{- else }}
+  {{- $font_family = "IosevkaTerm NF" }}
+  {{- $font_bold   = "Bold" }}
 {{- end }}
+
+{{- $font_psname := "IosevkaTermNF" }}
+
+
+font_family      {{ $font_family }}
+font_features    {{ $font_psname }}                        {{ $font_features }}
+bold_font        {{ $font_family }} {{ $font_bold }}
+font_features    {{ $font_psname }}-{{ $font_bold }}       {{ $font_features }}
+italic_font      {{ $font_family }} Italic
+font_features    {{ $font_psname }}-Italic                 {{ $font_features }}
+bold_italic_font {{ $font_family }} {{ $font_bold }} Italic
+font_features    {{ $font_psname }}-{{ $font_bold }}Italic {{ $font_features }}
+
 font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
 disable_ligatures cursor
 
