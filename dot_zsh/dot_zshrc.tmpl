@@ -8,10 +8,9 @@
 (ps -p $PPID | grep mc >/dev/null) && undermc=true || undermc=false
 [[ $TERM =~ ^(xterm(-.+)?)\|(wezterm)$ ]] && powerterm=true || powerterm=false
 
-# =============== History ===============
+# ============== History and jobs ==============
 
-setopt HIST_IGNORE_SPACE
-setopt INC_APPEND_HISTORY EXTENDED_HISTORY SHARE_HISTORY NOTIFY
+setopt HIST_IGNORE_SPACE EXTENDED_HISTORY SHARE_HISTORY NOTIFY
 
 HISTFILE=$ZDOTDIR/.histfile
 HISTSIZE=1000

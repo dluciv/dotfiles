@@ -97,6 +97,10 @@ zstyle :omz:plugins:ssh-agent lifetime 30m
 zstyle :omz:themes:dluciv showbattery 0
 {{- end }}
 
+# Do not garbage history
+MAGIC_ENTER_GIT_COMMAND=' git status -u .'
+MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
+
 plugins=(
   git screen tmux  magic-enter
 {{- if not (or .darwin  .windows .termux) }}
