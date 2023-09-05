@@ -1,0 +1,13 @@
+Font=IosevkaTerm NFM
+FontHeight=14
+BoldAsFont=yes
+BoldAsColour=yes
+AllowBlinking=yes
+Locale=ru_RU
+Charset=UTF-8
+Columns=132
+Rows=30
+Language=ru
+Term=xterm-256color
+CursorType=block
+ThemeFile=mintty
