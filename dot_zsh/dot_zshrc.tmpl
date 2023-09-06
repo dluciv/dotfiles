@@ -6,7 +6,7 @@
 # =============== MC & TERM fixes ==============
 
 (ps -p $PPID | grep mc >/dev/null) && undermc=true || undermc=false
-[[ $TERM =~ ^(xterm(-.+)?)\|(wezterm)$ ]] && powerterm=true || powerterm=false
+[[ $TERM =~ ^(xterm(-.+)?)\|(wezterm)\|(foot)\|(contour)$ ]] && powerterm=true || powerterm=false
 
 # ============== History and jobs ==============
 
