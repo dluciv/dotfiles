@@ -3,6 +3,10 @@
 .config/wezterm/
 {{- end }}
 
+{{ if or .headless .termux (not .linux) -}}
+.XCompose
+{{- end }}
+
 {{ if or .termux (not .linux) -}}
 .config/foot/
 {{- end }}
