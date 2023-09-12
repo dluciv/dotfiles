@@ -1,0 +1,21 @@
+# https://wiki.debian.org/XCompose
+# https://unix.stackexchange.com/q/690805
+
+include "%L"
+
+# https://gist.github.com/5310/9b98f8591f404b21d8c7e52739961070
+<Multi_key> <equal> <less>		: "⇐"	U21D0		# LEFTWARDS DOUBLE ARROW
+
+# My composes
+
+#  old Cyrillic
+<Multi_key> <c> <B> <minus>		: "Ѣ"	U0462
+<Multi_key> <c> <b> <minus>		: "ѣ"	U0463
+<Multi_key> <c> <I> <minus>		: "І"	U0406
+<Multi_key> <c> <i> <minus>		: "і"	U0456
+<Multi_key> <c> <Q> <minus>		: "Ї"	U0407
+<Multi_key> <c> <q> <minus>		: "ї"	U0457
+<Multi_key> <c> <O> <minus>		: "Ѳ"	U0472
+<Multi_key> <c> <o> <minus>		: "ѳ"	U0473
+<Multi_key> <c> <V> <minus>		: "Ѵ"	U0474
+<Multi_key> <c> <v> <minus>		: "ѵ"	U0475
