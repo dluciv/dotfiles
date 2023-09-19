@@ -97,6 +97,7 @@ alias neovide='WINIT_UNIX_BACKEND=x11 neovide'
 
 alias czm=chezmoi
 czmcd () { cd $(chezmoi source-path) }
+czmpull () { chezmoi update; chezmoi init --apply }
 
 alias efish="SHELL=$(which fish) fish"
 
