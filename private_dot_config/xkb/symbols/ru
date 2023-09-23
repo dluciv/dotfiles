@@ -1,0 +1,8 @@
+// «Ярила» — задел под нормальный набор на клавиатуре Sun Type 7 в русской раскладке
+
+partial alphanumeric_keys
+xkb_symbols "Yarila" {
+    // include "ru(legacy)"
+    include "ru(winkeys)"
+    key <BKSL> { [  period, comma ] };
+};
