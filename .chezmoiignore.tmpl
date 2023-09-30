@@ -33,8 +33,10 @@ AppData/
 .config/xkb/
 {{- end }}
 
-{{ if .windows -}}{{- /* Windows fails to symlink it */ -}}
+{{ if .windows -}}
+{{- /* Windows fails to symlink .zshenv */ -}}
 .zshenv
+.config/lf/
 {{- end }}
 
 LICENSE
