@@ -1,10 +1,14 @@
 set drawbox true
 
-set previewer ctpv
-set cleaner ctpvclear
+# set previewer ctpv
+# set cleaner ctpvclear
+# &ctpv -s $id
+# &ctpvquit $id
 
-&ctpv -s $id
-&ctpvquit $id
+set previewer stpv
+set cleaner stpvimgclr
+&stpvimg --listen $id
+cmd on-quit $stpvimg --end $id
 
 set shell zsh
 
