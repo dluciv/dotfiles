@@ -90,7 +90,7 @@ alias edit=$VISUAL
 alias icat='kitty +kitten icat'
 alias arialt=' aria2c -V --seed-time=0'
 alias nb='PAGER=less nb'
-alias termvars='env | grep '"'"'TERM.*='"'"''
+alias termvars='env | grep '"'"'TERM.*='"'"'; echo "${COLUMNS}x${LINES}"'
 alias cfms='cat $CLIFM_SELFILE'
 alias cal='cal -m'
 alias neovide='WINIT_UNIX_BACKEND=x11 neovide'
