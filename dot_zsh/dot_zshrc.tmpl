@@ -20,6 +20,11 @@ SAVEHIST=1000
 
 set -o allexport
 
+if ! tput cols &>/dev/null; then
+  # terminal not supported by curses
+  TERM=xterm-256color
+fi
+
 if which nvim &>/dev/null; then
   EDITOR=$(which nvim)
 else

@@ -16,7 +16,7 @@ cf.default_prog = { os.getenv('SHELL') }
 -- Install terminfo:
 -- https://wezfurlong.org/wezterm/faq.html#how-do-i-enable-undercurl-curly-underlines
 -- mc не умеет!!!
--- cf.term = 'wezterm'
+cf.term = 'wezterm'
 
 -- Общий вид
 cf.hide_tab_bar_if_only_one_tab = true
