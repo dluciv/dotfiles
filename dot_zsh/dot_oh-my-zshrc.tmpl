@@ -24,7 +24,7 @@ elif ! $powerterm; then
 else
 {{- if .server }}
   ZSH_THEME="af-magic"
-{{- else if .cygwin }}
+{{- else if .windows }}
   ZSH_THEME="jcuken"
 {{- else }}
   ZSH_THEME="agnoster"
@@ -101,6 +101,15 @@ zstyle :omz:themes:dluciv showbattery 0
 MAGIC_ENTER_GIT_COMMAND=' git status -u .'
 MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
 
+case "$OSTYPE" in
+  cygwin*)
+    CYGWIN_MSYS=cygwin
+  ;;
+  msys*)
+    CYGWIN_MSYS=msys
+  ;;
+esac
+
 plugins=(
   git screen tmux  magic-enter
 {{- if not (or .darwin  .windows .termux) }}
@@ -112,8 +121,8 @@ plugins=(
   dluciv-darwin
 {{- else if .termux }}
   dluciv-termux
-{{- else if .cygwin }}
-  dluciv-cygwin
+{{- else if .windows }}
+  dluciv-$CYGWIN_MSYS
 {{- end }}
 
   dluciv-upgrade  dluciv-edit dluciv-ssh-agent-control

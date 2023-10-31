@@ -43,7 +43,7 @@ set +o allexport
 
 # ==== completion & highlighting =======
 
-{{- if not (or .termux .cygwin) }}
+{{- if not (or .termux .windows) }}
 
 {{-   $zppref := "/usr/share/zsh/plugins" -}}
 {{-   if .darwin -}}
