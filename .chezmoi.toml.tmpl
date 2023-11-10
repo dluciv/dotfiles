@@ -44,6 +44,9 @@
     retina = "retina"
     level = {{ if $darwin }}"retina"{{ else if $windows }}"normal"{{ else }}"high"{{ end }}
 
+[data.style]
+    fav_font_variant = "ss16"
+
 [diff]
 {{- if or $headless $termux }}
     command = "nvim"
