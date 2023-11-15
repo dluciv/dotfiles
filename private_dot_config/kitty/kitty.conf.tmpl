@@ -14,7 +14,6 @@ tab_separator " █ "
 # tab_separator "║"
 
 # ========= Font ==========
-{{- $font_features := (printf "+%v" .style.fav_font_variant) }}
 
 {{- $font_family := "IosevkaTerm Nerd Font" }}
 {{- $font_bold   := "SemiBold" }}
@@ -31,13 +30,13 @@ modify_font      cell_height -8px
 
 
 font_family      {{ $font_family }}
-font_features    {{ $font_psname }}                        {{ $font_features }}
+font_features    {{ $font_psname }}                        {{- range .style.fav_font_variants }} +{{ . }}{{ end }}
 bold_font        {{ $font_family }} {{ $font_bold }}
-font_features    {{ $font_psname }}-{{ $font_bold }}       {{ $font_features }}
+font_features    {{ $font_psname }}-{{ $font_bold }}       {{- range .style.fav_font_variants }} +{{ . }}{{ end }}
 italic_font      {{ $font_family }} Italic
-font_features    {{ $font_psname }}-Italic                 {{ $font_features }}
+font_features    {{ $font_psname }}-Italic                 {{- range .style.fav_font_variants }} +{{ . }}{{ end }}
 bold_italic_font {{ $font_family }} {{ $font_bold }} Italic
-font_features    {{ $font_psname }}-{{ $font_bold }}Italic {{ $font_features }}
+font_features    {{ $font_psname }}-{{ $font_bold }}Italic {{- range .style.fav_font_variants }} +{{ . }}{{ end }}
 
 font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
 disable_ligatures cursor

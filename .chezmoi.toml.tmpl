@@ -45,7 +45,7 @@
     level = {{ if $darwin }}"retina"{{ else if $windows }}"normal"{{ else }}"high"{{ end }}
 
 [data.style]
-    fav_font_variant = "ss16"
+    fav_font_variants = [] {{- /* [ "ss16" ] -- стиль PT Mono */}}
 
 [diff]
 {{- if or $headless $termux }}
