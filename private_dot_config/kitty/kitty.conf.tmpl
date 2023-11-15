@@ -15,18 +15,18 @@ tab_separator " █ "
 
 # ========= Font ==========
 
-{{- $font_family := "IosevkaTerm Nerd Font" }}
+{{- $font_family := "Iosevka Term" }}
 {{- $font_bold   := "SemiBold" }}
 {{- if eq .chezmoi.os "darwin" }}
   {{- /* Term NFM is buggy under OS X?.. */}}
 modify_font      baseline 4.5
 modify_font      cell_height -8px
 {{- else }}
-  {{- $font_family = "IosevkaTerm NF" }}
+  {{- /* $font_family = "Iosevka Term NF" */}}
   {{- $font_bold   = "Bold" }}
 {{- end }}
 
-{{- $font_psname := "IosevkaTermNF" }}
+{{- $font_psname := "Iosevka-Term" }}
 
 
 font_family      {{ $font_family }}
