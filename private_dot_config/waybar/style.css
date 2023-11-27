@@ -3,7 +3,7 @@
     border-radius: 4px;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "Iosevka Term", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 window#waybar {
