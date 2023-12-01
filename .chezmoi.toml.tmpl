@@ -45,6 +45,19 @@
     level = {{ if $darwin }}"retina"{{ else if $windows }}"normal"{{ else }}"high"{{ end }}
 
 [data.style]
+    {{- if not $windows }}
+    fav_font_name = "IosevkaTerm"
+    fav_font_name_mono = "IosevkaTerm"
+    fav_font_name_nf = "IosevkaTerm NF"
+    fav_font_name_nf_mono = "IosevkaTerm NFM"
+    fav_font_psname = "Iosevka-Term"
+    {{- else }}
+    fav_font_name = "IosevkaTerm NFM"
+    fav_font_name_mono = "IosevkaTerm NFM"
+    fav_font_name_nf = "IosevkaTerm NFM"
+    fav_font_name_nf_mono = "IosevkaTerm NFM"
+    fav_font_psname = "Iosevka-Term-NFM"
+    {{- end }}
     fav_font_variants = [ "cv86" ] {{- /* [ "ss16" ] -- стиль PT Mono, [ "cv86" ] -- плоская троечка */}}
 
 [diff]

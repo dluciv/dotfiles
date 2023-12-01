@@ -16,8 +16,8 @@
 {{/* Windows =) */ -}}
 [gui]
 	encoding = utf-8
-	fontui   = -family \"IosevkaTerm NFM\" -size 12
-	fontdiff = -family \"IosevkaTerm NFM\" -size 12
+	fontui   = -family \"{{ .style.fav_font_name_nf_mono }}\" -size 12
+	fontdiff = -family \"{{ .style.fav_font_name_nf_mono }}\" -size 12
 
 {{/* На GitHub удобно аутентифицироваться его собственной тулзой. */ -}}
 [credential "https://github.com"]
@@ -37,7 +37,7 @@
 	helper = store
 {{- else if and .linux .headful }}
     helper = libsecret
-{{- else if and .windows (eq .chezmoi.hostname "lucent") }}
+{{- else if and .windows }}
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
 	helper =
 	helper = wincred
