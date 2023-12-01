@@ -18,6 +18,8 @@ LC_ALL=$LANG
 # See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv
 path=($path_prefix $path $path_suffix)
 
+MANPATH=$MANPATH:~/.local/share/man
+
 set +o allexport
 
 unset path_prefix
