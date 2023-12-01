@@ -37,9 +37,9 @@
 	helper = store
 {{- else if and .linux .headful }}
     helper = libsecret
-{{- else if and .windows }}
+{{- else if .windows }}
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
-	helper =
+	# helper =
 	helper = wincred
 {{- else }}
 # Что ты такое?..
