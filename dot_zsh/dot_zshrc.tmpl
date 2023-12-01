@@ -33,6 +33,9 @@ fi
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 PAGER=most
+if ! $PAGER &>/dev/null ; then
+  PAGER=less
+fi
 {{- if .termux }}
 BROWSER=termux-open-url
 {{- else }}
