@@ -15,7 +15,7 @@ tab_separator " █ "
 
 # ========= Font ==========
 
-{{- $font_family := .style.fav_font_name }}
+{{- $font_family := .style.fav_font_full_name }}
 {{- $font_bold   := "SemiBold" }}
 {{- if eq .chezmoi.os "darwin" }}
   {{- /* Term NFM is buggy under OS X?.. But Term is not */}}
