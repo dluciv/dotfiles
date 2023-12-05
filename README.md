@@ -1,14 +1,18 @@
 # dotfiles
 
-My pretty garbaged `.files`. By no means an example of how the settings of a normal man should look, rather an example of how they should not.
+Мои замусоренные до нельзя `.файлыs`. Ни в коем случае не пример того, как должны выглядеть настройки здорового человека.
 
-# Dependencies
+# Зависимости
 
-## Iosevka Term Nerd Font
+## Шрифты Iosevka Term
 
-*Iosevka Term* (correct font variants) *Iosevka Term Nerd Font* (Kitty handles wide icons nicely) and *Iosevka Term Nerd Font Mono*
+*Iosevka Term* (корректные варианты начертания символов) *Iosevka Term Nerd Font* (Kitty хорошо рисует широкие иконки) и *Iosevka Term Nerd Font Mono*
 
-* OS X `brew tap homebrew/cask-fonts; brew install font-iosevka font-iosevka-term-nerd-font`
+* OS X
+  * `brew tap homebrew/cask-fonts; brew install font-iosevka font-iosevka-term-nerd-font`
+  * Вручную поставить [релиз](https://github.com/be5invis/Iosevka/releases) для Term без Nerd Fonts, выбрать `Term Super TTC`
 * Linux
   * Arch: `yay -S ttf-iosevka-term ttf-iosevkaterm-nerd`
-* Windows `scoop bucket add nerd-fonts` then `scoop install IosevkaTerm-NF-Mono` (no Kitty on Windows, mono is enough)
+* Windows:
+  * `scoop bucket add nerd-fonts` then `scoop install IosevkaTerm-NF-Mono` (no Kitty on Windows, mono is enough)
+  * Вручную поставить [релиз](https://github.com/be5invis/Iosevka/releases) для Term без Nerd Fonts, выбрать `Term Super TTC`

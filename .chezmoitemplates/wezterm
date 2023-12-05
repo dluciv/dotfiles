@@ -31,7 +31,7 @@ cf.window_padding = {
 -- Шревты
 cf.custom_block_glyphs = false -- с Io-sevka как минимум лучше
 cf.font = wezterm.font_with_fallback {
-  { family = '{{ .style.fav_font_name }}', weight = 'Medium', harfbuzz_features = {
+  { family = '{{ .style.fav_font_full_name }}', weight = 'Medium', harfbuzz_features = {
     {{- range $index, $element := .style.fav_font_variants }}{{if $index}}, {{end}}"{{ $element }}"{{ end -}}
   } },
   { family = '{{ .style.fav_font_name_nf_mono }}', weight = 'Medium' },
