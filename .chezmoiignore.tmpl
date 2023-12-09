@@ -5,6 +5,7 @@
 
 {{ if or .headless .termux (not .linux) -}}
 .XCompose
+.local/bin/wlrsudo
 {{- end }}
 
 {{ if or .termux (not .linux) -}}
