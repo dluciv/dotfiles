@@ -41,6 +41,8 @@ font_features    {{ $font_psname }}-{{ $font_bold }}Italic {{- range .style.fav_
 font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
 disable_ligatures cursor
 
+symbol_map U+E000–U+F8FF {{ .style.fav_font_psname_nf }}
+
 # Font of 0.28+ is too bold IMHO
 # https://www.reddit.com/r/KittyTerminal/comments/12pfzkt/comment/jglyfmh
 # https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.text_composition_strategy
