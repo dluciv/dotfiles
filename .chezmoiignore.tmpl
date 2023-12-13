@@ -6,6 +6,8 @@
 {{ if or .headless .termux (not .linux) -}}
 .XCompose
 .local/bin/wlrsudo
+.local/bin/swy
+.config/wlogout/
 {{- end }}
 
 {{ if or .termux (not .linux) -}}

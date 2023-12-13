@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+export QT_QPA_PLATFORM=wayland:xcb
+export _JAVA_AWT_WM_NONREPARENTING=1
+export MOZ_ENABLE_WAYLAND=1
+export XDG_CURRENT_DESKTOP=sway
+
+# systemctl --user import-environment XDG_CURRENT_DESKTOP QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND
+dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND
+
+# WLR_RENDERER=gles2 sway
+# WLR_RENDERER=pixman sway
+
+WLR_RENDERER=vulkan sway
