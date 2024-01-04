@@ -72,11 +72,18 @@
     fav_font_variants = [ "cv88" ]
 {{- end }}
 
-[diff]
 {{- if or $headless $termux }}
+[diff]
     command = "nvim"
-    args = ["-d", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+    args = ["-d",     "{{ "{{" }} .Destination {{ "}}" }}",                                  "{{ "{{" }} .Target {{ "}}" }}"]
+[merge]
+    command = "nvim"
+    args = ["-d",     "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 {{- else }}
+[diff]
     command = "meld"
-    args = ["--diff", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+    args = ["--diff", "{{ "{{" }} .Destination {{ "}}" }}",                                  "{{ "{{" }} .Target {{ "}}" }}"]
+[merge]
+    command = "meld"
+    args = [          "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 {{- end }}
