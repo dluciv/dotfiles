@@ -1,4 +1,6 @@
 {
+	"batchinstall": true,
+	"newinstallengine": true,
 	"aururl": "https://aur.archlinux.org",
 	"buildDir": "$HOME/.cache/yay",
 	"absdir": "$HOME/.cache/yay/abs",
@@ -12,7 +14,6 @@
 	"tarbin": "bsdtar",
 	"redownload": "no",
 	"rebuild": "no",
-	"batchinstall": false,
 	"answerclean": "",
 	"answerdiff": "",
 	"answeredit": "",
