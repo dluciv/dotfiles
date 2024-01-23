@@ -41,6 +41,9 @@
 	{{- /* На lucent git-credential-manager-core в системном gitconfig не работает */}}
 	# helper =
 	helper = wincred
+
+[credential "helperselector"]
+	selected = wincred
 {{- else }}
 # Что ты такое?..
 {{- end }}
