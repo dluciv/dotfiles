@@ -9,6 +9,6 @@ export XDG_CURRENT_DESKTOP=sway
 # dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND
 dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND
 
-{{/* Software -- WLR_RENDERER=pixman sway */ -}}
+{{/* Software -- WLR_RENDERER=pixman sway vulkan */ -}}
 
-WLR_RENDERER={{ if eq .chezmoi.hostname "clover" }}vulkan{{ else }}gles2{{ end }} sway
+WLR_RENDERER={{ if eq .chezmoi.hostname "clover" }}{{ else }}gles2{{ end }} sway
