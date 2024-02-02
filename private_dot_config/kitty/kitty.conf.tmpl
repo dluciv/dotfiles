@@ -48,6 +48,19 @@ symbol_map U+E000-U+F8FF,U+F0000-U+FFFFF,U+100000-U+10FFFF {{ .style.fav_font_ps
 # https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.text_composition_strategy
 text_composition_strategy 1.0 0
 
+# ========= Only current window font +/- =======
+{{- $cmdkey := "ctrl" }}
+{{- if eq .chezmoi.os "darwin" }}
+  {{- $cmdkey = "cmd" }}
+{{- end }}
+
+map {{ $cmdkey }}+shift+equal change_font_size current +2.0
+map {{ $cmdkey }}+shift+plus change_font_size current +2.0
+map {{ $cmdkey }}+shift+kp_add change_font_size current +2.0
+map {{ $cmdkey }}+shift+minus change_font_size current -2.0
+map {{ $cmdkey }}+shift+kp_subtract change_font_size current -2.0
+map {{ $cmdkey }}+shift+backspace change_font_size current 0
+
 # ========= Clipboard ==========
 
 map ctrl+shift+c copy_to_clipboard
