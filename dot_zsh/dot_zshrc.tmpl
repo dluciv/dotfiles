@@ -78,7 +78,7 @@ fi
 
 # ============== Oh my ZSH =============
 
-if [[ -d $ZDOTDIR/.oh-my-zsh ]]; then
+if {{ if not (or .linux .termux) }}! $undermc && {{ end }}[[ -d $ZDOTDIR/.oh-my-zsh ]]; then
   . $ZDOTDIR/.oh-my-zshrc
 else
   setopt PROMPT_SUBST
