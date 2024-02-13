@@ -101,17 +101,6 @@ zstyle :omz:themes:dluciv showbattery 0
 MAGIC_ENTER_GIT_COMMAND=' git status -u .'
 MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
 
-{{- if .windows }}
-case "$OSTYPE" in
-  cygwin*)
-    CYGWIN_MSYS=cygwin
-  ;;
-  msys*)
-    CYGWIN_MSYS=msys
-  ;;
-esac
-{{- end }}
-
 plugins=(
   git screen tmux  magic-enter
 {{- if not (or .darwin  .windows .termux) }}

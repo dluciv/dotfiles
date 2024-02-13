@@ -14,6 +14,17 @@ path_prefix=(
 
 path_suffix=()
 
+{{- if .windows }}
+case "$OSTYPE" in
+  cygwin*)
+    CYGWIN_MSYS=cygwin
+  ;;
+  msys*)
+    CYGWIN_MSYS=msys
+    path_suffix+=( /mingw64/bin /mingw32/bin )
+  ;;
+esac
+{{- end }}
 
 set -o allexport
 
