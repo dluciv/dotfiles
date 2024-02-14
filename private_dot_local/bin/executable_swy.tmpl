@@ -11,4 +11,9 @@ dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYL
 
 {{/* Software -- WLR_RENDERER=pixman sway vulkan */ -}}
 
-WLR_RENDERER={{ if eq .chezmoi.hostname "clover" }}{{ else }}gles2{{ end }} sway
+# sway or swayfx?
+if pacman -Qo $(which sway) | grep swayfx &>/dev/null; then
+  CONF_OPT="--config $XDG_CONFIG_HOME/sway/swayfx.conf"
+fi
+
+eval WLR_RENDERER={{ if eq .chezmoi.hostname "clover" }}{{ else }}gles2{{ end }} sway $CONF_OPT
