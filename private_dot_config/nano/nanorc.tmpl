@@ -1,9 +1,9 @@
-include /usr/share/nano/default.nanorc
+include {{ $usr_prefix }}/share/nano/default.nanorc
 
-include /usr/share/nano/sh.nanorc
-include /usr/share/nano/c.nanorc
-include /usr/share/nano/go.nanorc
-include /usr/share/nano/rust.nanorc
+include {{ $usr_prefix }}/share/nano/sh.nanorc
+include {{ $usr_prefix }}/share/nano/c.nanorc
+include {{ $usr_prefix }}/share/nano/go.nanorc
+include {{ $usr_prefix }}/share/nano/rust.nanorc
 
 set linenumbers
 set mouse
