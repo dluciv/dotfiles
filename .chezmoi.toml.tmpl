@@ -40,7 +40,7 @@
     darwin   = {{ $darwin }}
     cygwin   = {{ $windows }}
 
-    usr_prefix = "{{ if $termux }}{{ env "PREFIX" }}{{else}}/usr{{ end }}"
+    usr_prefix = {{ if $termux }}{{ env "PREFIX" | quote }}{{else}}"/usr"{{ end }}
 
 {{- /* Максимально непортабельно -- исключительно под мои личные компьютеры */}}
 [data.dpi]
