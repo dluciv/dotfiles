@@ -43,5 +43,9 @@ AppData/
 .config/lf/
 {{- end }}
 
+{{ if or (not .windows) (not (lookPath "scoop")) -}}
+.zsh/.d/50.scoop-shims.env.d
+{{- end }}
+
 LICENSE
 README.md
