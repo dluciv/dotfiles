@@ -1,0 +1,14 @@
+# Amber
+set {
+  $int00 #000000
+  $int10 #332600
+  $int20 #664d00
+  $int30 #997300
+  $int40 #cd9900
+  $int50 #ffbf00
+  $int60 #ffcc34
+  $int70 #ffd966
+  $int80 #ffe699
+  $int90 #fff2cc
+  $intA0 #ffffff
+}
