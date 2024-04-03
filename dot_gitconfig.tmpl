@@ -9,6 +9,10 @@
 	process = git-lfs filter-process
 	required = true
 
+[http]
+	# https://stackoverflow.com/a/38703069
+	postBuffer = 524288000
+
 [core]
 	editor = nvim
 	autocrlf = {{if .windows }}true{{else}}input{{end}}
