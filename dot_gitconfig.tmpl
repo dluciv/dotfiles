@@ -10,10 +10,14 @@
 	required = true
 
 [http]
-	# https://stackoverflow.com/a/38703069
+{{- /* https://stackoverflow.com/a/38703069 */}}
 	postBuffer = 524288000
 
 [core]
+{{- /* https://stackoverflow.com/a/22575737 */}}
+{{- if .windows }}
+	longpaths = true
+{{- end }}
 	editor = nvim
 	autocrlf = {{if .windows }}true{{else}}input{{end}}
 
