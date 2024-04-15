@@ -41,10 +41,11 @@ AppData/
 {{- /* Windows fails to symlink .zshenv */ -}}
 .zshenv
 .config/lf/
+.zsh/.d/50.cargo-path.profile.d
 {{- end }}
 
 {{ if or (not .windows) (not (lookPath "scoop")) -}}
-.zsh/.d/50.scoop-shims.env.d
+.zsh/.d/75.scoop-shims.profile.d
 {{- end }}
 
 LICENSE
