@@ -1,0 +1,11 @@
+{{- if not .windows }}
+if [[ -d ~/.cargo/bin ]]; then
+  path_suffix+=( ~/.cargo/bin )
+fi
+{{- else }}
+if [[ "$CYGWIN_MSYS" == "msys" ]] && [[ -d /c/Users/$LOGNAME/scoop/apps/rustup/current/.cargo/bin ]]; then
+  path_suffix+=( /c/Users/$LOGNAME/scoop/apps/rustup/current/.cargo/bin )
+else if [[ "$CYGWIN_MSYS" == "cygwin" ]] && [[ -d /cygdrive/c/Users/$LOGNAME/scoop/apps/rustup/current/.cargo/bin ]]; then
+  path_suffix+=( /cygdrive/c/Users/$LOGNAME/scoop/apps/rustup/current/.cargo/bin )
+fi
+{{- end }}
