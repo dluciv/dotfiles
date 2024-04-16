@@ -41,7 +41,6 @@ AppData/
 {{- /* Windows fails to symlink .zshenv */ -}}
 .zshenv
 .config/lf/
-.zsh/.d/50.cargo-path.profile.d
 {{- end }}
 
 {{ if or (not .windows) (not (lookPath "scoop")) -}}
