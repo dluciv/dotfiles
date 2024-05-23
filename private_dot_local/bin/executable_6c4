@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 plain=$(cccp p)
 b64=$( dos2unix <<< $plain | xz -9 -e | base64 )
