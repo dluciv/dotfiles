@@ -1,0 +1,5 @@
+#!/bin/sh
+
+b64=$(cccp p)
+plain=$( base64 -d -i <<< $b64 | xzcat | dos2unix )
+cccp c <<< $plain
