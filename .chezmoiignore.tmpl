@@ -1,6 +1,7 @@
 {{ if or .termux .windows -}}
 .config/kitty/
 .config/wezterm/
+.local/bin/pip3-sys-up
 {{- end }}
 
 {{ if or .headless .termux (not .linux) -}}
