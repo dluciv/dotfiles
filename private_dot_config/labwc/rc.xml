@@ -49,6 +49,9 @@
     <keybind key="W-d">
       <action name="Execute" command="rofi -show drun" />
     </keybind>
+    <keybind key="W-space">
+      <action name="Execute" command="rofi -show drun" />
+    </keybind>
     <keybind key="W-l">
       <action name="Execute" command="swaylock -f" />
     </keybind>
