@@ -8,14 +8,31 @@
 <labwc_config>
 
   <core>
-    <gap>10</gap>
+    <gap>4</gap>
   </core>
 
   <theme>
     <name></name>
-    <cornerRadius>8</cornerRadius>
-    <font name="sans" size="10" />
+    <cornerRadius>4</cornerRadius>
+    <!-- font name="sans" size="10" / -->
+    <font name="Iosevka Nerd Font Propo" size="10" />
   </theme>
+
+  <desktops>
+    <popupTime>1000</popupTime>
+    <names>
+      <name>1</name>
+      <name>2</name>
+      <name>3</name>
+      <name>4</name>
+      <name>5</name>
+      <name>6</name>
+      <name>7</name>
+      <name>8</name>
+      <name>9</name>
+      <name>0</name>
+    </names>
+  </desktops>
 
   <keyboard>
     <default />
@@ -23,8 +40,14 @@
     <keybind key="W-Return">
       <action name="Execute" command="kitty" />
     </keybind>
-    <keybind key="W-d">
+    <keybind key="W-KP_Return">
+      <action name="Execute" command="kitty" />
+    </keybind>
+    <keybind key="W-S-d">
       <action name="Execute" command="wofi --show=drun,run" />
+    </keybind>
+    <keybind key="W-d">
+      <action name="Execute" command="rofi -show drun" />
     </keybind>
     <keybind key="W-l">
       <action name="Execute" command="swaylock -f" />
@@ -69,6 +92,67 @@
       <action name="SendToDesktop" to="right" />
       <action name="GoToDesktop" to="right" />
     </keybind>
+
+    <!-- The only way I found to see current workspace name -->
+    <keybind key="W-KP_Delete">
+      <action name="GoToDesktop" to="left" />
+      <action name="GoToDesktop" to="right" />
+    </keybind>
+    <keybind key="W-KP_Decimal">
+      <action name="GoToDesktop" to="left" />
+      <action name="GoToDesktop" to="right" />
+    </keybind>
+
+    <keybind key="W-KP_0"><action name="GoToDesktop" to="0" /></keybind>
+    <keybind key="W-KP_Insert"><action name="GoToDesktop" to="0" /></keybind>
+    <keybind key="W-S-KP_0"><action name="SendToDesktop" to="0" /><action name="GoToDesktop" to="0" /></keybind>
+    <keybind key="W-S-KP_Insert"><action name="SendToDesktop" to="0" /><action name="GoToDesktop" to="0" /></keybind>
+
+    <keybind key="W-KP_1"><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-KP_End"><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-S-KP_1"><action name="SendToDesktop" to="1" /><action name="GoToDesktop" to="1" /></keybind>
+    <keybind key="W-S-KP_End"><action name="SendToDesktop" to="1" /><action name="GoToDesktop" to="1" /></keybind>
+
+    <keybind key="W-KP_2"><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-KP_Down"><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-S-KP_2"><action name="SendToDesktop" to="2" /><action name="GoToDesktop" to="2" /></keybind>
+    <keybind key="W-S-KP_Down"><action name="SendToDesktop" to="2" /><action name="GoToDesktop" to="2" /></keybind>
+
+    <keybind key="W-KP_3"><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-KP_Next"><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-S-KP_3"><action name="SendToDesktop" to="3" /><action name="GoToDesktop" to="3" /></keybind>
+    <keybind key="W-S-KP_Next"><action name="SendToDesktop" to="3" /><action name="GoToDesktop" to="3" /></keybind>
+
+    <keybind key="W-KP_4"><action name="GoToDesktop" to="4" /></keybind>
+    <keybind key="W-KP_Left"><action name="GoToDesktop" to="4" /></keybind>
+    <keybind key="W-S-KP_4"><action name="SendToDesktop" to="4" /><action name="GoToDesktop" to="4" /></keybind>
+    <keybind key="W-S-KP_Left"><action name="SendToDesktop" to="4" /><action name="GoToDesktop" to="4" /></keybind>
+
+    <keybind key="W-KP_5"><action name="GoToDesktop" to="5" /></keybind>
+    <keybind key="W-KP_Begin"><action name="GoToDesktop" to="5" /></keybind>
+    <keybind key="W-S-KP_5"><action name="SendToDesktop" to="5" /><action name="GoToDesktop" to="5" /></keybind>
+    <keybind key="W-S-KP_Begin"><action name="SendToDesktop" to="5" /><action name="GoToDesktop" to="5" /></keybind>
+
+    <keybind key="W-KP_6"><action name="GoToDesktop" to="6" /></keybind>
+    <keybind key="W-KP_Right"><action name="GoToDesktop" to="6" /></keybind>
+    <keybind key="W-S-KP_6"><action name="SendToDesktop" to="6" /><action name="GoToDesktop" to="6" /></keybind>
+    <keybind key="W-S-KP_Right"><action name="SendToDesktop" to="6" /><action name="GoToDesktop" to="6" /></keybind>
+
+    <keybind key="W-KP_7"><action name="GoToDesktop" to="7" /></keybind>
+    <keybind key="W-KP_Home"><action name="GoToDesktop" to="7" /></keybind>
+    <keybind key="W-S-KP_7"><action name="SendToDesktop" to="7" /><action name="GoToDesktop" to="7" /></keybind>
+    <keybind key="W-S-KP_Home"><action name="SendToDesktop" to="7" /><action name="GoToDesktop" to="7" /></keybind>
+
+    <keybind key="W-KP_8"><action name="GoToDesktop" to="8" /></keybind>
+    <keybind key="W-KP_Up"><action name="GoToDesktop" to="8" /></keybind>
+    <keybind key="W-S-KP_8"><action name="SendToDesktop" to="8" /><action name="GoToDesktop" to="8" /></keybind>
+    <keybind key="W-S-KP_Up"><action name="SendToDesktop" to="8" /><action name="GoToDesktop" to="8" /></keybind>
+
+    <keybind key="W-KP_9"><action name="GoToDesktop" to="9" /></keybind>
+    <keybind key="W-KP_Prior"><action name="GoToDesktop" to="9" /></keybind>
+    <keybind key="W-S-KP_9"><action name="SendToDesktop" to="9" /><action name="GoToDesktop" to="9" /></keybind>
+    <keybind key="W-S-KP_Prior"><action name="SendToDesktop" to="9" /><action name="GoToDesktop" to="9" /></keybind>
+
   </keyboard>
 
   <mouse>
@@ -80,17 +164,5 @@
       </mousebind>
     </context>
   </mouse>
-
-  <desktops>
-    <popupTime>1000</popupTime>
-    <names>
-      <name>A</name>
-      <name>B</name>
-      <name>C</name>
-      <name>D</name>
-      <name>E</name>
-      <name>F</name>
-    </names>
-  </desktops>
 
 </labwc_config>

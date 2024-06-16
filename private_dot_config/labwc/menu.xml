@@ -15,9 +15,13 @@
   <item label="Decorations">
     <action name="ToggleDecorations" />
   </item>
-  <item label="AlwaysOnTop">
+  <item label="Always on Top">
     <action name="ToggleAlwaysOnTop" />
   </item>
+  <item label="On all Workspaces">
+    <action name="ToggleOmnipresent" />
+  </item>
+
   <!--
     Any menu with the id "workspaces" will be hidden
     if there is only a single workspace available.
@@ -56,8 +60,11 @@
   <item label="Exit">
     <action name="Exit" />
   </item>
-  <item label="Poweroff">
+  <!-- item label="Poweroff">
     <action name="Execute" command="systemctl -i poweroff" />
+  </item -->
+  <item label="Suspend">
+    <action name="Execute" command="systemctl -i suspend" />
   </item>
 </menu>
 
