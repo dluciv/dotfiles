@@ -6,7 +6,7 @@ XDG_CURRENT_DESKTOP=wlroots
 # Set keyboard layout
 XKB_DEFAULT_MODEL=thinkpad
 XKB_DEFAULT_LAYOUT=us,ru
-XKB_DEFAULT_OPTIONS=grp:caps_toggle,grp_led:caps,lv3:ralt_switch,misc:typo,compose:rctrl
+XKB_DEFAULT_OPTIONS=grp:caps_toggle,grp_led:caps,lv3:ralt_switch,misc:typo,compose:rctrl-altgr
 
 # Force firefox to use wayland backend
 MOZ_ENABLE_WAYLAND=1
