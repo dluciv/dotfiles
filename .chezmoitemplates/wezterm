@@ -45,13 +45,13 @@ cf.freetype_render_target = 'HorizontalLcd'
 cf.initial_rows = 30
 cf.initial_cols = 132
 
-{{- if .windows }}
 -- Цвета
-cf.colors = wezterm.color.get_default_colors()
-cf.colors.background = 'hsl(45deg, 100%, 7%)'
+cf.color_scheme = "Eighties (base16)"
+{{- if .windows }}
+-- cf.colors = wezterm.color.get_default_colors()
+-- cf.colors.background = 'hsl(45deg, 100%, 7%)'
 {{- else }}
 -- Вкладочки
-cf.color_scheme = "Catppuccin Mocha"
 
 wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(cf, {
   position = "top",
