@@ -7,8 +7,7 @@ bindsym --to-code {
 
   # XF86Macro1 exec 'wtype -k XF86AudioMicMute'
   # XF86Macro2 exec 'wtype -k XF86AudioMute'
-  # XF86ScreenSaver exec 'pkill swaylock; swaylock -f --show-failed-attempts'
-  XF86ScreenSaver exec 'pkill waylock; waylock'
+  XF86ScreenSaver exec '{{ .tools.wlr_lock }}'
   XF86DOS exec dosbox-x
 }
 
@@ -18,8 +17,7 @@ bindsym --to-code {
 }
 
 # Control keys
-# bindsym --to-code $mod+ctrl+l exec 'pkill swaylock; swaylock -f --show-failed-attempts'
-bindsym --to-code $mod+ctrl+l exec 'pkill waylock; waylock'
+bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock }}'
 
 bindsym XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
 bindsym XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
