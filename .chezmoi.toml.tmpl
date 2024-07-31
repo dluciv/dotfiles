@@ -84,6 +84,9 @@
     fav_font_variants = [ "cv88" ]
 {{- end }}
 
+[data.style.colors]
+{{ includeTemplate "color_theme.yml" | fromYaml | toToml }}
+
 {{- if or $headless $termux }}
 [diff]
     command = "nvim"
