@@ -57,7 +57,7 @@
     level = {{ if $darwin }}"retina"{{ else if $windows }}"normal"{{ else }}"high"{{ end }}
 
 [data.style]
-{{- /* [ "ss16" ] -- стиль PT Mono, [ "cv86" ] а где-то [ "cv88" ] -- плоская троечка */}}
+{{- /* [ "ss16" ] -- стиль PT Mono, [ "cv86" ] а где-то [ "cv03" ] -- плоская троечка */}}
 {{- if $windows }}
     fav_font_full_name = "Iosevka Term"
     fav_font_name = "IosevkaTerm NFM"
@@ -65,7 +65,7 @@
     fav_font_name_nf_mono = "IosevkaTerm NFM"
     fav_font_psname = "Iosevka-Term-NFM"
     fav_font_psname_nf = "Iosevka-Term-NFM"
-    fav_font_variants = [ "cv88" ]
+    fav_font_variants = [ "cv03" ]
 {{- else if $darwin }}
     fav_font_full_name = "Iosevka Term"
     fav_font_name = "Iosevka Term"
@@ -73,7 +73,7 @@
     fav_font_name_nf_mono = "IosevkaTerm Nerd Font Mono"
     fav_font_psname = "Iosevka-Term"
     fav_font_psname_nf = "IosevkaTermNF"
-    fav_font_variants = [ "cv88" ]
+    fav_font_variants = [ "cv03" ]
 {{- else }}{{- /* Linux */}}
     fav_font_full_name = "Iosevka Term"
     fav_font_name = "IosevkaTerm"
@@ -81,7 +81,7 @@
     fav_font_name_nf_mono = "IosevkaTerm NFM"
     fav_font_psname = "Iosevka-Term"
     fav_font_psname_nf = "IosevkaTermNF"
-    fav_font_variants = [ "cv88" ]
+    fav_font_variants = [ "cv03" ]
 {{- end }}
 
 [data.style.colors]
