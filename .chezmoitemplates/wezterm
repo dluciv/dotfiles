@@ -46,11 +46,20 @@ cf.initial_rows = 30
 cf.initial_cols = 132
 
 -- Цвета
-cf.color_scheme = "Eighties (base16)"
-{{- if .windows }}
--- cf.colors = wezterm.color.get_default_colors()
--- cf.colors.background = 'hsl(45deg, 100%, 7%)'
-{{- else }}
+
+-- cf.color_scheme = "Eighties (base16)"
+local custom_colors = wezterm.color.get_builtin_schemes()['Eighties (base16)'];
+custom_colors.brights[2] = '#ff0000'
+custom_colors.brights[3] = '#00ff00'
+custom_colors.brights[4] = '#ffff00'
+custom_colors.brights[5] = '#0000ff'
+custom_colors.brights[6] = '#ff00ff'
+custom_colors.brights[7] = '#00ffff'
+
+cf.color_schemes = { ['my_custom'] = custom_colors }
+cf.color_scheme = 'my_custom';
+
+{{- if not .windows }}
 -- Вкладочки
 
 wezterm.plugin.require("https://github.com/nekowinston/wezterm-bar").apply_to_config(cf, {
