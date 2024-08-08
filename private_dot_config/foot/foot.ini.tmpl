@@ -75,28 +75,29 @@ box-drawings-uses-font-glyphs=yes
 
 [colors]
 # alpha=1.0
-# background=242424
-# foreground=ffffff
+background={{ .style.colors.base00 }}
+foreground={{ .style.colors.base05 }}
+
 
 ## Normal/regular colors (color palette 0-7)
-# regular0=242424  # black
-# regular1=f62b5a  # red
-# regular2=47b413  # green
-# regular3=e3c401  # yellow
-# regular4=24acd4  # blue
-# regular5=f2affd  # magenta
-# regular6=13c299  # cyan
-# regular7=e6e6e6  # white
+regular0={{ .style.colors.ansi0 }} # black
+regular1={{ .style.colors.ansi1 }} # red
+regular2={{ .style.colors.ansi2 }} # green
+regular3={{ .style.colors.ansi3 }} # yellow
+regular4={{ .style.colors.ansi4 }} # blue
+regular5={{ .style.colors.ansi5 }} # magenta
+regular6={{ .style.colors.ansi6 }} # cyan
+regular7={{ .style.colors.ansi7 }} # white
 
 ## Bright colors (color palette 8-15)
-# bright0=616161   # bright black
-# bright1=ff4d51   # bright red
-# bright2=35d450   # bright green
-# bright3=e9e836   # bright yellow
-# bright4=5dc5f8   # bright blue
-# bright5=feabf2   # bright magenta
-# bright6=24dfc4   # bright cyan
-# bright7=ffffff   # bright white
+bright0={{ .style.colors.ansi8 }}  # bright black
+bright1={{ .style.colors.ansi9 }}  # bright red
+bright2={{ .style.colors.ansiA }}  # bright green
+bright3={{ .style.colors.ansiB }}  # bright yellow
+bright4={{ .style.colors.ansiC }}  # bright blue
+bright5={{ .style.colors.ansiD }}  # bright magenta
+bright6={{ .style.colors.ansiE }}  # bright cyan
+bright7={{ .style.colors.ansiF }}  # bright white
 
 ## dimmed colors (see foot.ini(5) man page)
 # dim0=<not set>
@@ -116,6 +117,8 @@ box-drawings-uses-font-glyphs=yes
 # search-box-no-match=<regular0> <regular1>  # black-on-red
 # search-box-match=<regular0> <regular3>     # black-on-yellow
 # urls=<regular3>
+urls={{ .style.colors.base04 }}
+
 
 [csd]
 # preferred=server
