@@ -17,3 +17,25 @@ base0C: "66cccc"
 base0D: "6699cc"
 base0E: "cc99cc"
 base0F: "d27b53"
+
+# ANSI terminal colors
+# dim
+ansi0: "2d2d2d"
+ansi1: "c30031"
+ansi2: "288f3a"
+ansi3: "be8600"
+ansi4: "005eb1"
+ansi5: "9d46a1"
+ansi6: "009095"
+ansi7: "d3d0c8"
+
+# bright
+ansi8: "747369"
+ansi9: "ff8590"
+ansiA: "9dffa1"
+ansiB: "fff354"
+ansiC: "49c6ff"
+ansiD: "ffb2ff"
+ansiE: "00ffff"
+ansiF: "f2f0ec"
+
