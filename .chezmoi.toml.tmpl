@@ -45,8 +45,8 @@
 [data.tools]
     # misc tools
 {{- if $linux }}
-    wlr_lock = "pkill waylock; waylock"
-    # wlr_lock = "pkill swaylock; swaylock --show-failed-attempts" # сильнее глючит...
+    # wlr_lock = "waylock"
+    wlr_lock = "swaylock --show-failed-attempts"
 {{- end }}
 
 {{- /* Максимально непортабельно -- исключительно под мои личные компьютеры */}}
