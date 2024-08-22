@@ -25,17 +25,22 @@ if ! tput cols &>/dev/null; then
   TERM=xterm-256color
 fi
 
-if which nvim &>/dev/null; then
+if which mcedit &>/dev/null; then
+  EDITOR=$(which mcedit)
+elif which nvim &>/dev/null; then
   EDITOR=$(which nvim)
 else
   EDITOR=$(which vim)
 fi
+
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
+
 PAGER=most
 if ! $PAGER &>/dev/null ; then
   PAGER=less
 fi
+
 {{- if .termux }}
 BROWSER=termux-open-url
 {{- else }}
