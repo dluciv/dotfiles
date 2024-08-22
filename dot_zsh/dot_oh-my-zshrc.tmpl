@@ -104,8 +104,15 @@ MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
 plugins=(
   git screen tmux  magic-enter
 {{- if not (or .darwin  .windows .termux) }}
-  archlinux
-  dluciv-archlinux
+  {{- if eq .chezmoi.osRelease.id "arch" }}
+    archlinux
+    dluciv-archlinux
+  {{- else if eq .chezmoi.osRelease.id "ubuntu" }}
+    ubuntu
+    dluciv-ubuntu
+  {{- else }}
+    # no plugin for {{ .chezmoi.osRelease.id }}
+  {{- end }}
 {{- end }}
 
 {{- if .darwin }}
