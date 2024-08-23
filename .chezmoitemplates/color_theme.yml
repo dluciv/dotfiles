@@ -38,27 +38,39 @@ base0F: "{{ $base0F }}"
 
 {{- if lookPath "pastel" }}
 
-{{- $damount := "0.25" }}
-{{- $lamount := "0.05" }}
+{{- $damount := "0.3" }}
+{{- $lamount := "0.03" }}
+{{- $samount := "0.25" }}
+
+
+
 # ANSI terminal colors generated for Base16 theme
+{{-     $ansiRed := $base08 }}
+{{-   $ansiGreen := $base0B }}
+{{-  $ansiYellow := $base0A }}
+{{-    $ansiBlue := $base0D }}
+{{- $ansiMagenta := $base0E }}
+{{-    $ansiCyan := $base0C }}
+
+
 # regular
 ansi0: "{{ $base00 }}"
-ansi1: "{{ output "pastel" "darken" $damount $base08 | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansi2: "{{ output "pastel" "darken" $damount $base0B | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansi3: "{{ output "pastel" "darken" $damount $base0A | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansi4: "{{ output "pastel" "darken" $damount $base0D | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansi5: "{{ output "pastel" "darken" $damount $base0E | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansi6: "{{ output "pastel" "darken" $damount $base0C | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi1: "{{ output "pastel" "darken" $damount     $ansiRed | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi2: "{{ output "pastel" "darken" $damount   $ansiGreen | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi3: "{{ output "pastel" "darken" $damount  $ansiYellow | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi4: "{{ output "pastel" "darken" $damount    $ansiBlue | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi5: "{{ output "pastel" "darken" $damount $ansiMagenta | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi6: "{{ output "pastel" "darken" $damount    $ansiCyan | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
 ansi7: "{{ $base05 }}"
 
 # bright
 ansi8: "{{ $base03 }}"
-ansi9: "{{ output "pastel" "lighten" $lamount $base08 | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansiA: "{{ output "pastel" "lighten" $lamount $base0B | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansiB: "{{ output "pastel" "lighten" $lamount $base0A | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansiC: "{{ output "pastel" "lighten" $lamount $base0D | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansiD: "{{ output "pastel" "lighten" $lamount $base0E | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
-ansiE: "{{ output "pastel" "lighten" $lamount $base0C | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi9: "{{ output "pastel" "lighten" $lamount     $ansiRed | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiA: "{{ output "pastel" "lighten" $lamount   $ansiGreen | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiB: "{{ output "pastel" "lighten" $lamount  $ansiYellow | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiC: "{{ output "pastel" "lighten" $lamount    $ansiBlue | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiD: "{{ output "pastel" "lighten" $lamount $ansiMagenta | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiE: "{{ output "pastel" "lighten" $lamount    $ansiCyan | output "pastel" "saturate" $samount | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
 ansiF: "{{ $base07 }}"
 
 {{- else }}
