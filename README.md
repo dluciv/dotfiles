@@ -1,6 +1,6 @@
 # dotfiles
 
-Мои замусоренные до нельзя `.файлыs`. Ни в коем случае не пример того, как должны выглядеть настройки здорового человека.
+Мои замусоренные до нельзя `.файлы`. Ни в коем случае не пример того, как должны выглядеть настройки здорового человека.
 
 # Зависимости
 
@@ -16,3 +16,7 @@
 * Windows:
   * `scoop bucket add nerd-fonts` then `scoop install IosevkaTerm-NF-Mono` (no Kitty on Windows, mono is enough)
   * Вручную поставить [релиз](https://github.com/be5invis/Iosevka/releases) для Term без Nerd Fonts, выбрать `Term Super TTC`
+
+## Инструменты
+
+* [pastel](https://github.com/sharkdp/pastel) — есть в Arch Linux, Ubuntu (snap или deb), Termux, HomeBrew, Scoop — необязательно

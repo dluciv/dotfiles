@@ -1,41 +1,87 @@
 # https://github.com/tinted-theming/base16-schemes/blob/main/eighties.yaml
 # scheme: "Eighties"
 # author: "Chris Kempson (http://chriskempson.com)"
-base00: "2d2d2d"
-base01: "393939"
-base02: "515151"
-base03: "747369"
-base04: "a09f93"
-base05: "d3d0c8"
-base06: "e8e6df"
-base07: "f2f0ec"
-base08: "f2777a"
-base09: "f99157"
-base0A: "ffcc66"
-base0B: "99cc99"
-base0C: "66cccc"
-base0D: "6699cc"
-base0E: "cc99cc"
-base0F: "d27b53"
+{{- $base00 := "2d2d2d" }}
+{{- $base01 := "393939" }}
+{{- $base02 := "515151" }}
+{{- $base03 := "747369" }}
+{{- $base04 := "a09f93" }}
+{{- $base05 := "d3d0c8" }}
+{{- $base06 := "e8e6df" }}
+{{- $base07 := "f2f0ec" }}
+{{- $base08 := "f2777a" }}
+{{- $base09 := "f99157" }}
+{{- $base0A := "ffcc66" }}
+{{- $base0B := "99cc99" }}
+{{- $base0C := "66cccc" }}
+{{- $base0D := "6699cc" }}
+{{- $base0E := "cc99cc" }}
+{{- $base0F := "d27b53" }}
 
-# ANSI terminal colors
-# dim
-ansi0: "2d2d2d"
+base00: "{{ $base00 }}"
+base01: "{{ $base01 }}"
+base02: "{{ $base02 }}"
+base03: "{{ $base03 }}"
+base04: "{{ $base04 }}"
+base05: "{{ $base05 }}"
+base06: "{{ $base06 }}"
+base07: "{{ $base07 }}"
+base08: "{{ $base08 }}"
+base09: "{{ $base09 }}"
+base0A: "{{ $base0A }}"
+base0B: "{{ $base0B }}"
+base0C: "{{ $base0C }}"
+base0D: "{{ $base0D }}"
+base0E: "{{ $base0E }}"
+base0F: "{{ $base0F }}"
+
+
+{{- if lookPath "pastel" }}
+
+{{- $damount := "0.25" }}
+{{- $lamount := "0.05" }}
+# ANSI terminal colors generated for Base16 theme
+# regular
+ansi0: "{{ $base00 }}"
+ansi1: "{{ output "pastel" "darken" $damount $base08 | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi2: "{{ output "pastel" "darken" $damount $base0B | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi3: "{{ output "pastel" "darken" $damount $base0A | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi4: "{{ output "pastel" "darken" $damount $base0D | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi5: "{{ output "pastel" "darken" $damount $base0E | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi6: "{{ output "pastel" "darken" $damount $base0C | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansi7: "{{ $base05 }}"
+
+# bright
+ansi8: "{{ $base03 }}"
+ansi9: "{{ output "pastel" "lighten" $lamount $base08 | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiA: "{{ output "pastel" "lighten" $lamount $base0B | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiB: "{{ output "pastel" "lighten" $lamount $base0A | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiC: "{{ output "pastel" "lighten" $lamount $base0D | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiD: "{{ output "pastel" "lighten" $lamount $base0E | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiE: "{{ output "pastel" "lighten" $lamount $base0C | output "pastel" "format" "hex" | trim | trimPrefix "#" }}"
+ansiF: "{{ $base07 }}"
+
+{{- else }}
+
+# Fallback ANSI terminal colors
+# regular
+ansi0: "{{ $base00 }}"
 ansi1: "c30031"
 ansi2: "288f3a"
 ansi3: "be8600"
 ansi4: "005eb1"
 ansi5: "9d46a1"
 ansi6: "009095"
-ansi7: "d3d0c8"
+ansi7: "{{ $base05 }}"
 
 # bright
-ansi8: "747369"
+ansi8: "{{ $base03 }}"
 ansi9: "ff8590"
 ansiA: "9dffa1"
 ansiB: "fff354"
 ansiC: "49c6ff"
 ansiD: "ffb2ff"
 ansiE: "00ffff"
-ansiF: "f2f0ec"
+ansiF: "{{ $base07 }}"
 
+{{- end }}
