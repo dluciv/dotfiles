@@ -47,6 +47,13 @@
         difftool = true
 {{ end -}}
 
+{{ if (and (not .headless) (lookPath "meld")) -}}
+[merge]
+        tool = meld
+[mergetool "meld"]
+        cmd = meld --diff "$BASE" "$LOCAL" "$REMOTE" --output "$MERGED"
+{{ end -}}
+
 {{/* Windows =) */ -}}
 [gui]
 	encoding = utf-8
