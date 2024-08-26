@@ -18,7 +18,7 @@
 {{- if .windows }}
 	longpaths = true
 {{- end }}
-	editor = nvim
+	editor = {{ if lookPath "mcedit" }}mcedit{{ else if lookPath "nvim" }}nvim{{ else }}vim{{ end }}
 	autocrlf = {{if .windows }}true{{else}}input{{end}}
 
 {{ if lookPath "difft" -}}
@@ -30,6 +30,18 @@
 
 [difftool "difftastic"]
         cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+        difftool = true
+{{ else if lookPath "mcdiff" -}}
+[diff]
+        tool = mcdiff
+
+[difftool]
+        prompt = false
+
+[difftool "mcdiff"]
+        cmd = mcdiff "$LOCAL" "$REMOTE"
 
 [pager]
         difftool = true
