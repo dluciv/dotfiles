@@ -1,0 +1,6 @@
+set mainfont {sans 12}
+set textfont { { {{ .style.fav_font_name_nf_mono }} } 12 }
+set uifont {sans 12 bold}
+{{ if (lookPath "meld") -}}
+set extdifftool meld
+{{ end -}}

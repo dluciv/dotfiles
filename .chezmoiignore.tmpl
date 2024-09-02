@@ -21,6 +21,7 @@
 
 {{ if or .headless .termux .windows -}}
 .config/contour/
+.config/git/gitk
 {{- end }}
 
 {{ if not .windows -}}
