@@ -19,8 +19,9 @@ bindsym --to-code {
 # Control keys
 bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock }}'
 
-bindsym XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
-bindsym XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
+bindsym XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
+bindsym XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
+
 bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +5%'
 bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
 
