@@ -1,0 +1,27 @@
+default-timeout=5000
+{{- /* ignore-timeout=1 */}}
+font={{ .style.fav_font_name }} 14
+border-radius=5
+
+[urgency=low]
+border-color=#{{ .style.colors.base03 }}
+background-color=#{{ .style.colors.base02 }}
+text-color=#{{ .style.colors.base07 }}
+
+[urgency=normal]
+border-color=#{{ .style.colors.base03 }}
+background-color=#{{ .style.colors.base0B }}
+text-color=#{{ .style.colors.base00 }}
+
+[urgency=critical]
+border-color=#{{ .style.colors.base0A }}
+background-color=#{{ .style.colors.base08 }}
+text-color=#{{ .style.colors.base00 }}
+
+{{/*
+[app-name=lightcord]
+border-color=#88c0d0
+*/ -}}
+
+[summary~="log-.*"]
+border-color=#{{ .style.colors.base0A }}
