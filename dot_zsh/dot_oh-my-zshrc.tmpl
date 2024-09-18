@@ -104,6 +104,9 @@ MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
 plugins=(
   git screen tmux  magic-enter
 {{- if not (or .darwin  .windows .termux) }}
+  {{- if lookPath "flatpak" }}
+    dluciv-flatpak
+  {{- end }}
   {{- if eq .chezmoi.osRelease.id "arch" }}
     archlinux
     dluciv-archlinux
