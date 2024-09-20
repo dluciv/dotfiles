@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+swaymsg output '*' render_bit_depth 10
