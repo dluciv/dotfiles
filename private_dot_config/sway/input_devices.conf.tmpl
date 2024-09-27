@@ -11,5 +11,6 @@ input type:touchpad {
 input '1386:890:Wacom_One_by_Wacom_S_Pen' {
     {{- /* Большой 1386:891:Wacom_One_by_Wacom_M_Pen маленький 1386:890:Wacom_One_by_Wacom_S_Pen */}}
     {{- /* rotation_angle 180.0 - не хочет... */}}
-    tool_mode pen relative
+    # tool_mode pen relative
+    tool_mode pen absolute
 }
