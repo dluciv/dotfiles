@@ -3,9 +3,14 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# ZSH=/usr/share/oh-my-zsh/
-# ZSH=~/_/safe_wf/tools/ohmyzsh/
-ZSH=$ZDOTDIR/.oh-my-zsh
+# TODO: try to resolve it via chezmoi
+if [[ -d $ZDOTDIR/.oh-my-zsh ]]; then
+  ZSH=$ZDOTDIR/.oh-my-zsh
+elif [[ -d /usr/share/oh-my-zsh ]]; then
+  ZSH=/usr/share/oh-my-zsh
+else
+  >&2 echo Oh where is my zsh?..
+fi
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$ZDOTDIR/.oh-my-custom

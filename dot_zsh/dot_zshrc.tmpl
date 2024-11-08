@@ -83,9 +83,12 @@ fi
 
 # ============== Oh my ZSH =============
 
-if {{ if not (or .linux .termux) }}! $undermc && {{ end }}[[ -d $ZDOTDIR/.oh-my-zsh ]]; then
+if {{ if not (or .linux .termux) }}! $undermc && {{ end }}[[ -f $ZDOTDIR/.oh-my-zshrc ]]; then
   . $ZDOTDIR/.oh-my-zshrc
-else
+fi
+
+if ! type omz 1>/dev/null 2>/dev/null; then
+  # OMZ absent or failed to load
   setopt PROMPT_SUBST
   PROMPT='${(%):-%~} %# '
 
