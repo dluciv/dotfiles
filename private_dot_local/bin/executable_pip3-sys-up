@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# https://stackoverflow.com/a/76672519/539470
-python3 -m venv ~/.local --system-site-packages
