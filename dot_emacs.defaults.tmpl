@@ -1,18 +1,20 @@
 ;; Sane defaults для Emacs
 ;; Этот файл должен генерироваться chezmoi или аналогичным инструментом,
-;; а затем включаться в начало ~/.emacs при помощи (load-file "~/.emacs.defaults").
-;; Emacs потом, случись чего, перепишет это ниже в .~/emacs при сохранении настроек.
+;; а затем включаться в конец ~/.emacs при помощи (load-file "~/.emacs.defaults").
+;; Emacs потом, случись чего, перепишет это в .~/emacs при сохранении настроек.
 
 ;; === Всякая кастомизация
-(setq current-language-environment "Russian")
-(setq custom-enabled-themes '(misterioso))
-(setq default-input-method "russian-computer")
-(setq global-display-line-numbers-mode t)
-(setq inhibit-startup-screen t)
-(setq ispell-dictionary "ru_RU")
-(setq line-number-mode t)
-(setq menu-bar-mode nil)
-(setq tool-bar-mode nil)
+(custom-set-variables
+ '(current-language-environment "Russian")
+ '(custom-enabled-themes '(misterioso))
+ '(default-input-method "russian-computer")
+ '(fringe-mode nil nil (fringe))
+ '(global-display-line-numbers-mode t)
+ '(inhibit-startup-screen t)
+ '(ispell-dictionary "ru_RU")
+ '(menu-bar-mode nil)
+ '(tool-bar-mode nil)
+ )
 
 ;; === Это любимый шрифт взамен шрифтов по умолчанию
 (custom-set-faces
@@ -28,11 +30,12 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
-(setq coding-system 'utf-8)
-(setq selection-coding-system 'utf-8)
+(setq-default default-buffer-file-coding-system 'utf-8)
+(setq-default coding-system 'utf-8)
+(setq-default selection-coding-system 'utf-8)
 (setq-default coding-system-for-read 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
-;;(setq default-process-coding-system 'utf-8)
+;;(setq-default default-process-coding-system 'utf-8)
 
 ;; === Это чтобы работали пакеты
 (require 'package)
