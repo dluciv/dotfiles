@@ -1,0 +1,77 @@
+;; Sane defaults для Emacs
+;; Этот файл должен генерироваться chezmoi или аналогичным инструментом,
+;; а затем включаться в начало ~/.emacs при помощи (load-file "~/.emacs.defaults").
+;; Emacs потом, случись чего, перепишет это в .~/emacs при сохранении настроек.
+;; Чтобы Emacs легче было работать с настройками, рекомендуется начинать
+;; со следующего ~/.emacs:
+;;(load-file "~/.emacs.defaults")
+;;(custom-set-variables)
+;;(custom-set-faces)
+
+;; === Всякая кастомизация
+(custom-set-variables
+ '(column-number-mode t)
+ '(custom-enabled-themes '(misterioso))
+ '(fringe-mode nil nil (fringe))
+ '(global-display-line-numbers-mode t)
+ '(inhibit-startup-screen t)
+ '(menu-bar-mode nil)
+ '(size-indication-mode t)
+ '(tool-bar-mode nil)
+ '(current-language-environment "Russian")
+ '(default-input-method "russian-computer")
+ '(ispell-dictionary "ru_RU")
+ )
+
+;; === Это любимый шрифт взамен шрифтов по умолчанию
+(custom-set-faces
+ '(default ((t (:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN" :slant normal :weight normal :height 158 :width normal))))
+ '(mode-line ((t (:background "gray30" :box (:line-width (1 . 1) :color "dark gray") :family "{{ .style.fav_font_name_nf_mono }}"))))
+ '(markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
+ '(markdown-code-face ((t (:inherit font-lock-constant-face))))
+ )
+
+;; === Это чтобы было побольше UTF-8 везде, где можно и нельзя
+(set-language-environment 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq-default default-buffer-file-coding-system 'utf-8)
+(setq-default coding-system 'utf-8)
+(setq-default selection-coding-system 'utf-8)
+(setq-default coding-system-for-read 'utf-8)
+(setq-default coding-system-for-write 'utf-8)
+;;(setq-default default-process-coding-system 'utf-8)
+
+;; === Это чтобы работали пакеты
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
+;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
+(defun reverse-input-method (input-method)
+  "Build the reverse mapping of single letters from INPUT-METHOD."
+  (interactive
+   (list (read-input-method-name "Use input method (default current): ")))
+  (if (and input-method (symbolp input-method))
+      (setq input-method (symbol-name input-method)))
+  (let ((current current-input-method)
+        (modifiers '(nil (control) (meta) (control meta))))
+    (when input-method
+      (activate-input-method input-method))
+    (when (and current-input-method quail-keyboard-layout)
+      (dolist (map (cdr (quail-map)))
+        (let* ((to (car map))
+               (from (quail-get-translation
+                      (cadr map) (char-to-string to) 1)))
+          (when (and (characterp from) (characterp to))
+            (dolist (mod modifiers)
+              (define-key local-function-key-map
+                (vector (append mod (list from)))
+                (vector (append mod (list to)))))))))
+    (when input-method
+      (activate-input-method current))))
+
+(reverse-input-method 'russian-computer)
