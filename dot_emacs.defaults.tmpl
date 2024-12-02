@@ -1,7 +1,12 @@
 ;; Sane defaults для Emacs
 ;; Этот файл должен генерироваться chezmoi или аналогичным инструментом,
-;; а затем включаться в конец ~/.emacs при помощи (load-file "~/.emacs.defaults").
+;; а затем включаться в начало ~/.emacs при помощи (load-file "~/.emacs.defaults").
 ;; Emacs потом, случись чего, перепишет это в .~/emacs при сохранении настроек.
+;; Чтобы Emacs легче было работать с настройками, рекомендуется начинать
+;; со следующего ~/.emacs:
+;;(load-file "~/.emacs.defaults")
+;;(custom-set-variables)
+;;(custom-set-faces)
 
 ;; === Всякая кастомизация
 (custom-set-variables
@@ -13,6 +18,8 @@
  '(inhibit-startup-screen t)
  '(ispell-dictionary "ru_RU")
  '(menu-bar-mode nil)
+ '(tool-bar-mode nil)
+ '(size-indication-mode t)
  '(tool-bar-mode nil)
  )
 
