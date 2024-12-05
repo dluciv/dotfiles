@@ -11,7 +11,9 @@ for tp in $toolkit_paths; do
     case $tp in
       *basher/bin)
         export PATH=$PATH:$tp
-        eval $(basher init - zsh)
+        # `eval $(basher init - zsh)` fails, no idea why
+        basher_init=$(basher init - zsh)
+        eval $basher_init
       ;;
     esac
   fi
