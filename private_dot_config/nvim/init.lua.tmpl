@@ -6,7 +6,7 @@ local api = vim.api
 
 -- Конфиг Vim
 
-api.nvim_set_option("clipboard","unnamed") 
+api.nvim_set_option("clipboard","unnamed")
 
 opt.keymap="russian-jcukenwin"
 opt.iminsert=0
@@ -31,6 +31,6 @@ if vim.g.neovide then
     vim.o.guifont = "{{ .style.fav_font_name_nf }}:h12"
 end
 
--- Пакеты
+-- Менеджер пакетов
 
-require 'plugins'
+require("config.lazy")
