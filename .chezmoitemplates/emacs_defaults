@@ -1,13 +1,3 @@
-;; Sane defaults для Emacs
-;; Этот файл должен генерироваться chezmoi или аналогичным инструментом,
-;; а затем включаться в начало ~/.emacs при помощи (load-file "~/.emacs.defaults").
-;; Emacs потом, случись чего, перепишет это в .~/emacs при сохранении настроек.
-;; Чтобы Emacs легче было работать с настройками, рекомендуется начинать
-;; со следующего ~/.emacs:
-;;(load-file "~/.emacs.defaults")
-;;(custom-set-variables)
-;;(custom-set-faces)
-
 ;; === Всякая кастомизация
 (custom-set-variables
  '(column-number-mode t)
@@ -31,7 +21,7 @@
  '(markdown-code-face ((t (:inherit font-lock-constant-face))))
  )
 
-;; === Это чтобы было побольше UTF-8 везде, где можно и нельзя
+;; === Это чтобы было побольше UTF-8 везде, где можно и нельзя, но только где надо =)
 (set-language-environment 'utf-8)
 (prefer-coding-system 'utf-8)
 (setq default-buffer-file-coding-system 'utf-8)
