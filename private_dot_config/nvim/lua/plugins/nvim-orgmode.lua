@@ -4,6 +4,7 @@ return {
     ft = {'org'},
     config = function()
             require('orgmode').setup{}
+            require('config.nvim-orgmode')
     end
   },
   {'akinsho/org-bullets.nvim',
