@@ -11,6 +11,10 @@
  '(current-language-environment "Russian")
  '(default-input-method "russian-computer")
  '(ispell-dictionary "ru_RU")
+ '(org-agenda-files  (append
+   (file-expand-wildcards "{{ if .windows }}{{ env "USERPROFILE" | replaceAllRegex "\\\\" "/" }}{{ else }}~{{ end }}/ORG/TODO/*.org")
+   (file-expand-wildcards "{{ if .windows }}{{ env "USERPROFILE" | replaceAllRegex "\\\\" "/" }}{{ else }}~{{ end }}/ORG/TODO/**/*.org")
+   ))
  )
 
 ;; === Это любимый шрифт взамен шрифтов по умолчанию
