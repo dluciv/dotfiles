@@ -1,0 +1,71 @@
+#!/bin/zsh
+
+# Usage: rofi -modes xkdtype:rofi-xkb-type -show xkdtype
+# echo $(date) RETV: $ROFI_RETV INFO: $ROFI_INFO ARGS: $* >>/tmp/rofi-xkb-type.log
+
+nil="\0"
+sep="\x1f"
+
+# detect backend
+if [[ -n $WAYLAND_DISPLAY ]]; then
+  backend=wtype
+elif [[ -n $DISPLAY ]]; then
+  backend=xdotool
+else
+  >&2 echo "Need either Wayland or Xorg/X11"
+  exit 1
+fi
+# TODO: also support ydotool or something other lowlevel
+
+function kbd_robot() {
+  case $backend in
+    wtype)
+      ( wtype -s 150 -k $1 ) &>/dev/null &|
+    ;;
+    xdotool)
+      # TODO: make xdotool work
+      (
+        sleep 0.15
+        xdotool key $1 2>&1 1>>/tmp/rofi-xkb-type.log
+      ) &>/dev/null &|
+    ;;
+    *)
+      >&2 echo "Backend <$backend> not supported"
+      exit 1
+  esac
+}
+
+if [[ $ROFI_RETV == 0 ]]; then
+
+  # Initial call
+  echo -en "${nil}prompt${sep}Что нажать?\n"
+  echo -en "${nil}message${sep}Через: ${backend}\n"
+  echo -en "${nil}markup-rows${sep}true\n"
+
+  echo -en "<b>Функциональные высшие</b>${nil}nonselectable${sep}true\n"
+  for fn in {11..35}; do
+    echo "F${fn}"
+  done
+
+  echo -en "<b>Буфер обмена</b>${nil}nonselectable${sep}true\n"
+  for platf in XF86 ; do # not identified by software: Sun osf; do
+    for oper in Copy Cut Paste; do
+      echo -en "${oper}${nil}info${sep}${platf}${oper}\n"
+    done
+  done
+
+  echo -en "<b>Алфавит ввода</b>${nil}nonselectable${sep}true\n"
+  echo -en "Алф (Рус/Лат)${nil}info${sep}ISO_Prev_Group${sep}meta${sep}ruslatscriptmodealfalph\n"
+
+  echo -en "<b>Тачпад</b>${nil}nonselectable${sep}true\n"
+  for oper in On Off Toggle; do
+    echo -en "Touchpad ${oper}${nil}info${sep}XF86Touchpad${oper}\n"
+  done
+
+else
+
+  # Type a key
+  [[ -n $ROFI_INFO ]] && keytotype=$ROFI_INFO || keytotype=$1
+  kbd_robot $keytotype
+  exit 0
+fi
