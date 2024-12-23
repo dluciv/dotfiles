@@ -9,6 +9,9 @@ bindsym --to-code {
   # XF86Macro2 exec 'wtype -k XF86AudioMute'
   XF86ScreenSaver exec '{{ .tools.wlr_lock }}'
   XF86DOS exec dosbox-x
+
+  $mod+grave        exec 'thunar ~'
+  $mod+Shift+grave  exec 'thunar /'
 }
 
 bindsym --to-code {
