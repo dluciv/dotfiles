@@ -23,17 +23,6 @@ case "$OSTYPE" in
 esac
 {{- end }}
 
-do_d_stage() {
-  stage_files=( $ZDOTDIR/.d/*.$1.d(N) )
-  if (( $#stage_files != 0 )); then
-    for dot_d in $stage_files; do
-      . $dot_d
-    done
-  fi
-}
-
-# do_d_stage env -- let's try to save time
-
 set -o allexport
 
 typeset -U path
