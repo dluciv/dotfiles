@@ -11,18 +11,6 @@ path_prefix=(
 
 path_suffix=()
 
-{{- if .windows }}
-case "$OSTYPE" in
-  cygwin*)
-    CYGWIN_MSYS=cygwin
-  ;;
-  msys*)
-    CYGWIN_MSYS=msys
-    path_suffix+=( /mingw64/bin /mingw32/bin )
-  ;;
-esac
-{{- end }}
-
 set -o allexport
 
 typeset -U path
@@ -33,29 +21,6 @@ typeset -U path
 # See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zprofile
 
 path=($path_prefix $path $path_suffix)
-
-XDG_CACHE_HOME=~/.cache
-XDG_CONFIG_HOME=~/.config
-XDG_DATA_HOME=~/.data
-
-{{- if .darwin }}
-XDG_RUNTIME_DIR=$XDG_CACHE_HOME
-{{- end }}
-
-{{- /*
-# no, it is better without it https://specifications.freedesktop.org/basedir-spec/latest/#variables
-typeset -TU XDG_DATA_DIRS xdg_data_dirs :
-xdg_data_dirs=($XDG_DATA_HOME ~/.local/share $xdg_data_dirs)
-
-typeset -TU XDG_CONFIG_DIRS xdg_config_dirs :
-xdg_config_dirs=($XDG_CONFIG_HOME $xdg_config_dirs)
-*/}}
-
-{{- if .termux }}
-TMPDIR=$PREFIX/tmp
-{{- else }}
-TMPDIR=/tmp
-{{- end }}
 
 set +o allexport
 {{- /* to speedup a bit
