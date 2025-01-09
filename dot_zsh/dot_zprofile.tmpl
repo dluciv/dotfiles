@@ -59,13 +59,13 @@ LC_ALL=$LANG
 
 [[ "$XDG_SESSION_TYPE" == "wayland" ]] && MOZ_ENABLE_WAYLAND=1
 
-# --- $PATH workaround ---
-# See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv
-path=($path_prefix $path $path_suffix)
-
 MANPATH=$MANPATH:~/.local/share/man
 
 do_d_stage profile
+
+# --- $PATH workaround ---
+# See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv
+path=($path_prefix $path $path_suffix)
 
 set +o allexport
 
