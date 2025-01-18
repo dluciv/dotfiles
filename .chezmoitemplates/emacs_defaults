@@ -39,6 +39,9 @@
 (setq-default coding-system-for-write 'utf-8)
 ;;(setq-default default-process-coding-system 'utf-8)
 
+;; === Это чтобы как у нас, а не как где попало
+(setq-default calendar-week-start-day 1)
+
 ;; === Это чтобы работали пакеты
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
