@@ -63,6 +63,10 @@ MANPATH=$MANPATH:~/.local/share/man
 
 do_d_stage profile
 
+{{- if .darwin }}
+eval "$(/usr/local/bin/brew shellenv)"
+{{- end }}
+
 # --- $PATH workaround ---
 # See https://gist.github.com/pbrisbin/45654dc74787c18e858c and .zshenv
 path=($path_prefix $path $path_suffix)
