@@ -1,5 +1,0 @@
-#!/bin/zsh
-
-# https://unix.stackexchange.com/a/709811/190164
-
-sudo /bin/env WAYLAND_DISPLAY="$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" XDG_RUNTIME_DIR=/user/run/0 $@
