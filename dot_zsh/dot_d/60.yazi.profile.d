@@ -1,6 +1,3 @@
-# chezmoi:template:line-endings=lf
-  
-{{- if lookPath "yazi" }}
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -9,4 +6,3 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
-{{- end }}
