@@ -48,7 +48,7 @@
 (package-initialize)
 
 ;; === Ну и поставим что ли...
-(dolist (package '(f org-roam  org-superstar))
+(dolist (package '(f org-roam  org-superstar org-roam-ui))
  (unless (package-installed-p package)
    (package-install package)
    (require package)))
@@ -73,6 +73,7 @@
                 ("C-c n a" . org-roam-alias-add)
                 ("C-c n l" . org-roam-buffer-toggle)))))
 
+(require 'org-roam-protocol)
 
 ;; === Org-Superstar configuration
 ;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
