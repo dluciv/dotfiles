@@ -16,6 +16,7 @@
    (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/*.org")
    (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/**/*.org")
    ))
+ '(use-package-always-ensure t)
  )
 
 ;; === Это любимый шрифт взамен шрифтов по умолчанию
@@ -47,11 +48,7 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-;; === Ну и поставим что ли...
-(dolist (package '(f org-roam  org-superstar org-roam-ui))
- (unless (package-installed-p package)
-   (package-install package)
-   (require package)))
+(require 'use-package)
 
 ;; === Org-Roam basic configuration
 ;; https://lucidmanager.org/productivity/taking-notes-with-emacs-org-mode-and-org-roam/
@@ -62,8 +59,11 @@
   :after org
   :custom
   (org-roam-directory (file-truename org-directory))
-  ;; :init
-  ;; (org-roam-setup)
+  :init
+  (progn
+    (require 'org-roam)
+    (require 'org-roam-protocol)
+    (org-roam-setup))
   :bind (("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-node-random)
          (:map org-mode-map
@@ -73,7 +73,7 @@
                 ("C-c n a" . org-roam-alias-add)
                 ("C-c n l" . org-roam-buffer-toggle)))))
 
-(require 'org-roam-protocol)
+(use-package org-roam-ui)
 
 ;; === Org-Superstar configuration
 ;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
