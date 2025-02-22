@@ -94,3 +94,6 @@
       (activate-input-method current))))
 
 (reverse-input-method 'russian-computer)
+
+;; === Это чтобы понять, что мы дошли таки до конца файла
+(message "Got to the end of .emacs")
