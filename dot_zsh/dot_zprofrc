@@ -1,11 +1,17 @@
 # Sourcing this explicitly from .zprofile and .zshrc
 # for code needed when either logging in or running interactively
 
-do_d_stage() {
-  stage_files=( $ZDOTDIR/.d/*.$1.d(N) )
-  if (( $#stage_files != 0 )); then
-    for dot_d in $stage_files; do
-      . $dot_d
-    done
-  fi
-}
+if [[ -z "$DOT_ZPROFRC" ]]; then
+
+  DOT_ZPROFRC=0
+
+  do_d_stage() {
+    stage_files=( $ZDOTDIR/.d/*.$1.d(N) )
+    if (( $#stage_files != 0 )); then
+      for dot_d in $stage_files; do
+        . $dot_d
+      done
+    fi
+  }
+
+fi

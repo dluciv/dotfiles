@@ -2,6 +2,8 @@
 
 set -o allexport
 
+. $ZDOTDIR/.zprofrc
+
 {{- if .termux }}
 TMPDIR=$PREFIX/tmp
 {{- else }}
