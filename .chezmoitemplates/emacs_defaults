@@ -13,8 +13,8 @@
  '(ispell-dictionary "ru_RU")
  '(org-startup-truncated nil)
  '(org-agenda-files  (append
-   (file-expand-wildcards "{{ if .windows }}{{ env "USERPROFILE" | replaceAllRegex "\\\\" "/" }}{{ else }}~{{ end }}/ORG/TODO/*.org")
-   (file-expand-wildcards "{{ if .windows }}{{ env "USERPROFILE" | replaceAllRegex "\\\\" "/" }}{{ else }}~{{ end }}/ORG/TODO/**/*.org")
+   (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/*.org")
+   (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/**/*.org")
    ))
  )
 
@@ -46,6 +46,27 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+
+
+;; === Org-Roam basic configuration
+;; https://lucidmanager.org/productivity/taking-notes-with-emacs-org-mode-and-org-roam/
+(setq org-directory "{{ .home_dir }}/ORG/")
+
+(use-package org-roam
+  :after org
+  :custom
+  (org-roam-directory (file-truename org-directory))
+  :init
+  (org-roam-setup)
+  :bind (("C-c n f" . org-roam-node-find)
+         ("C-c n r" . org-roam-node-random)
+         (:map org-mode-map
+               (("C-c n i" . org-roam-node-insert)
+                ("C-c n o" . org-id-get-create)
+                ("C-c n t" . org-roam-tag-add)
+                ("C-c n a" . org-roam-alias-add)
+                ("C-c n l" . org-roam-buffer-toggle)))))
+
 
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
 ;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
