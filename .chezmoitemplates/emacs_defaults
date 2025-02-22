@@ -47,17 +47,23 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+;; === Ну и поставим что ли...
+(dolist (package '(f org-roam  org-superstar))
+ (unless (package-installed-p package)
+   (package-install package)
+   (require package)))
 
 ;; === Org-Roam basic configuration
 ;; https://lucidmanager.org/productivity/taking-notes-with-emacs-org-mode-and-org-roam/
+;; M-x package-install RET org-roam RET
 (setq org-directory "{{ .home_dir }}/ORG/")
 
 (use-package org-roam
   :after org
   :custom
   (org-roam-directory (file-truename org-directory))
-  :init
-  (org-roam-setup)
+  ;; :init
+  ;; (org-roam-setup)
   :bind (("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-node-random)
          (:map org-mode-map
@@ -67,6 +73,15 @@
                 ("C-c n a" . org-roam-alias-add)
                 ("C-c n l" . org-roam-buffer-toggle)))))
 
+
+;; === Org-Superstar configuration
+;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
+;; M-x package-install RET org-superstar RET
+(use-package org-superstar
+  :config
+  (setq org-superstar-leading-bullet " ")
+  (setq org-superstar-headline-bullets-list '("◉" "○○" "⚬⚬⚬" "◈◈◈◈" "◇◇◇◇◇"))
+  :hook (org-mode . org-superstar-mode))
 
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
 ;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
