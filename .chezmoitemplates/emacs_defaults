@@ -50,6 +50,10 @@
 
 (require 'use-package)
 
+;; === Org дополнительные настройки
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(e)" "CANCELLED(c)" "FAILED(f)")))
+
 ;; === Org-Roam basic configuration
 ;; https://lucidmanager.org/productivity/taking-notes-with-emacs-org-mode-and-org-roam/
 ;; M-x package-install RET org-roam RET
