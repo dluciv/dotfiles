@@ -15,5 +15,5 @@ require'nvim-treesitter.configs'.setup {
 require('orgmode').setup({
   org_agenda_files = {'~/ORG/TODO/**/*.org'},
   org_default_notes_file = '~/ORG/inbox.org',
-  org_todo_keywords = {'TODO(t)', 'WAITING(w)', 'NEXT(n)', '|', 'DONE(d)', 'DELEGATED(e)'},
+  org_todo_keywords = {'TODO(t)', 'WAITING(w)', 'NEXT(n)', '|', 'DONE(d)', 'DELEGATED(e)', 'CANCELLED(c)', 'FAILED(f)'},
 })
