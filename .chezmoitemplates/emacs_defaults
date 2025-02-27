@@ -79,6 +79,9 @@
 
 (use-package org-roam-ui)
 
+;; === ORG-LaTeX
+(use-package org-latex-impatient)
+
 ;; === Org-Superstar configuration
 ;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
 ;; M-x package-install RET org-superstar RET
