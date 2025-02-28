@@ -45,6 +45,9 @@
 
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
+
 
 ;; === Это чтобы работали пакеты
 (require 'package)
