@@ -1,0 +1,2 @@
+exec-once ~/.local/bin/.x.autoexec.bat
+exec-once ~/.local/bin/.wlr.autoexec.bat
