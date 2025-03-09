@@ -18,6 +18,8 @@
 
 {{ if not .termux -}}
 .termux
+.local/bin/termux-*
+bin/
 {{- end }}
 
 {{ if or .headless .termux .windows -}}

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if which mcedit &>/dev/null; then
+  EDITOR=$(which mcedit)
+elif which nvim &>/dev/null; then
+  EDITOR=$(which nvim)
+else
+  EDITOR=$(which vim)
+fi
+
+$EDITOR $*
