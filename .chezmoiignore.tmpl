@@ -7,6 +7,8 @@
 
 {{ if or .headless .termux (not .linux) -}}
 .XCompose
+.Xmodmap
+.Xresources
 .local/bin/wlrsudo
 .local/bin/swy
 .config/wlogout/

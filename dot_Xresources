@@ -1,0 +1,27 @@
+URxvt*.font: xft:Liberation Mono:pixelsize=16:antialias=true
+URxvt*.boldFont: xft:Liberation Mono:pixelsize=16:style=bold:antialias=true
+URxvt*.background: black
+URxvt*.foreground: grey
+URxvt*.title: URXVT
+URxvt*.termName: rxvt-unicode-256color
+
+URxvt.perl-ext-common: default,matcher,resize-font
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+URxvt.colorUL: #4682B4
+URxvt.resize-font.smaller: C-Next
+URxvt.resize-font.bigger: C-Prior
+
+URxvt*.transparent: true
+! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
+URxvt*.shading: 25
+
+UXTerm*.faceName: Liberation Mono:pixelsize=16:antialias=true
+UXTerm*.boldFaceName: Liberation Mono:pixelsize=16:style=bold:antialias=true
+UXTerm*.background: black
+UXTerm*.foreground: grey
+UXTerm*.title: UXTerm
+UXTerm*.termName: xterm-256color
+
+Emacs.useXIM: off
