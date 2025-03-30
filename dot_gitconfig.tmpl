@@ -55,6 +55,17 @@
 {{ end -}}
 
 {{/* Windows =) */ -}}
+
+{{ if lookPath "pandoc" -}}
+[diff "pandoc"]
+	textconv=pandoc --to=markdown
+	prompt = false
+
+{{ end -}}
+
+[alias]
+	wdiff='diff --word-diff=color --unified=1'
+
 [gui]
 	encoding = utf-8
 	fontui   = -family \"{{ .style.fav_font_name_nf_mono }}\" -size 12
