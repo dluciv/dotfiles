@@ -59,7 +59,7 @@
 {{ if lookPath "pandoc" -}}
 [diff "pandoc"]
 	binary = true
-	textconv=pandoc --to=markdown
+	textconv = pandoc --to=markdown
 	prompt = false
 
 {{ end -}}
@@ -67,7 +67,7 @@
 {{ if lookPath "catdoc" -}}
 [diff "catdoc"]
 	binary = true
-	textconv=catdoc
+	textconv = catdoc
 	prompt = false
 
 {{ end -}}
