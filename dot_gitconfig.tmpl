@@ -72,6 +72,14 @@
 
 {{ end -}}
 
+{{ if lookPath "antiword" -}}
+[diff "antiword"]
+	binary = true
+	textconv = sh -c 'antiword "$0"'
+	prompt = false
+
+{{ end -}}
+
 {{ if lookPath "pdftotext" -}}
 [diff "pdftotext"]
 	binary = true

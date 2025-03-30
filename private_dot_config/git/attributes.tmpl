@@ -9,7 +9,11 @@
 {{ end -}}
 
 {{ if lookPath "catdoc" -}}
-*.doc  diff=catdoc
+# *.doc  diff=catdoc
+{{ end -}}
+
+{{ if lookPath "antiword" -}}
+*.doc  diff=antiword
 {{ end -}}
 
 {{ if lookPath "pdftotext" -}}
