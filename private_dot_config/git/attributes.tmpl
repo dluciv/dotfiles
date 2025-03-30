@@ -8,12 +8,10 @@
 *.rtf  diff=pandoc
 {{ end -}}
 
-{{ if lookPath "catdoc" -}}
-# *.doc  diff=catdoc
-{{ end -}}
-
 {{ if lookPath "antiword" -}}
 *.doc  diff=antiword
+{{ else if lookPath "catdoc" -}}
+*.doc  diff=catdoc
 {{ end -}}
 
 {{ if lookPath "pdftotext" -}}
