@@ -1,5 +1,19 @@
+{{ if not .windows }}
+
 {{ if lookPath "pandoc" -}}
 *.docx diff=pandoc
 *.xlsx diff=pandoc
 *.pptx diff=pandoc
+*.odt  diff=pandoc
+*.rtf  diff=pandoc
+{{ end -}}
+
+{{ if lookPath "catdoc" -}}
+*.doc  diff=catdoc
+{{ end -}}
+
+{{ if lookPath "pdftotext" -}}
+*.pdf  diff=pdftotext
+{{ end -}}
+
 {{ end -}}

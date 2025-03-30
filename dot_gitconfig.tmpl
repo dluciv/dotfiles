@@ -58,7 +58,24 @@
 
 {{ if lookPath "pandoc" -}}
 [diff "pandoc"]
+	binary = true
 	textconv=pandoc --to=markdown
+	prompt = false
+
+{{ end -}}
+
+{{ if lookPath "catdoc" -}}
+[diff "catdoc"]
+	binary = true
+	textconv=catdoc
+	prompt = false
+
+{{ end -}}
+
+{{ if lookPath "pdftotext" -}}
+[diff "pdftotext"]
+	binary = true
+	textconv = sh -c 'pdftotext -layout "$0" -enc UTF-8 -'
 	prompt = false
 
 {{ end -}}
