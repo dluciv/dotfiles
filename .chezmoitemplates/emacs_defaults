@@ -12,6 +12,7 @@
  '(default-input-method "russian-computer")
  '(ispell-dictionary "ru_RU")
  '(org-startup-truncated nil)
+ '(org-startup-indented t)
  '(org-agenda-files  (append
    (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/*.org")
    (file-expand-wildcards "{{ .home_dir }}/ORG/TODO/**/*.org")
