@@ -1,1 +1,1 @@
-/home/d/.local/share/broot/launcher/fish/br.fish
+../../../../.local/share/broot/launcher/fish/br.fish
