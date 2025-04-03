@@ -65,5 +65,15 @@ AppData/
 .zsh/.d/60.yazi.rc.d
 {{- end }}
 
+{{- if not (lookPath "broot") }}
+.zsh/.d/65.broot.rc.d
+.config/broot/
+.local/share/broot/
+{{- end }}
+{{- if (or (not (lookPath "broot")) (not (lookPath "fish"))) }}
+.config/fish/functions/br.fish
+.local/share/broot/launcher/fish/
+{{- end }}
+
 LICENSE
 README.md
