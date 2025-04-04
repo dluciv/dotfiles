@@ -7,6 +7,7 @@
 {{- $linux    := false -}}
 {{- $headful  := false -}}
 {{- $home_dir  := "~"   -}}
+{{- $abs_home_dir  := env "HOME" -}}
 {{- $usr_prefix := "/usr" -}}
 {{- "" -}}
 
@@ -19,6 +20,7 @@
 {{- else if eq .chezmoi.os "windows" -}}
 {{-   $windows = true -}}
 {{-   $home_dir = env "USERPROFILE" | replaceAllRegex "\\\\" "/" -}}
+{{-   $abs_home_dir = env "USERPROFILE" | replaceAllRegex "\\\\" "/" -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{-   $darwin = true -}}
 {{- else if eq .chezmoi.os "android" -}}
@@ -42,6 +44,7 @@
 
     usr_prefix = {{ if $termux }}{{ env "PREFIX" | quote }}{{else}}"/usr"{{ end }}
     home_dir = "{{ $home_dir }}"
+    abs_home_dir = "{{ $abs_home_dir }}"
 
 [data.tools]
     # misc tools

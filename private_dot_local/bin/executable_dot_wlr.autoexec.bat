@@ -20,7 +20,7 @@ systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.servi
 
 } &|
 
-{ sleep 1;
+{ sleep 2;
 
 if ! systemctl --user start mako.service; then
   systemctl --user restart dunst.service
