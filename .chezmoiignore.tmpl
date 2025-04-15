@@ -65,7 +65,7 @@ AppData/
 .zsh/.d/60.yazi.rc.d
 {{- end }}
 
-{{- if (or .windows not (lookPath "broot")) }}
+{{- if (or .windows (not (lookPath "broot"))) }}
 .zsh/.d/65.broot.rc.d
 .config/broot/
 .local/share/broot/
