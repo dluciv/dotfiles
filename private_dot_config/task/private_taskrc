@@ -3,6 +3,7 @@ news.version=3.4.1
 
 data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
+weekstart=monday
 
 # Color theme (uncomment one to use)
 #include light-16.theme
