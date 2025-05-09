@@ -107,7 +107,7 @@ MAGIC_ENTER_GIT_COMMAND=' git status -u .'
 MAGIC_ENTER_OTHER_COMMAND=' ls -lh .'
 
 plugins=(
-  git screen tmux  magic-enter
+  git screen tmux  magic-enter taskwarrior
 {{- if not (or .darwin  .windows .termux) }}
   {{- if lookPath "flatpak" }}
     dluciv-flatpak

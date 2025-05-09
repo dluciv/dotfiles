@@ -12,7 +12,7 @@ return {
     local home = vim.env.HOME
     nw.setup({
       report = "next",
-      filter = "\\(due.before:2d or due: \\)",
+      filter = "\\(due.before:7d or due: \\)",
       dir_setup = {
         {
           dir = home .. "/dev/nvim/neowarrior.nvim",
