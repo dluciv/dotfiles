@@ -86,6 +86,12 @@
 
 (use-package org-roam-ui)
 
+;; === ORG calendar view
+(use-package calfw
+  :init
+  (require 'calfw-org)
+  )
+
 ;; === ORG-LaTeX
 (use-package org-latex-impatient)
 
