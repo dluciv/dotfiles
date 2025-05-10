@@ -1,0 +1,3 @@
+#!/bin/sh
+
+zsh -l -c "emacs --execute '(cfw:open-org-calendar)'"
