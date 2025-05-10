@@ -1,0 +1,6 @@
+#!/bin/sh
+
+zsh -l -c \
+"task sync || { echo -n Sync failed. Press Enter...; read }
+ nvim -c 'lua require(\"neowarrior\").open_current()' || { echo -n NeoWarrior faied. Press Enter...; read }
+ task sync || { echo -n Sync failed. Press Enter...; read }"
