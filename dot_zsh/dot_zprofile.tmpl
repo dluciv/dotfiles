@@ -9,8 +9,12 @@ TMPDIR=$PREFIX/tmp
 {{- else }}
 TMPDIR=/tmp
 {{- end }}
+TMP=$TMPDIR
 
 XDG_CACHE_HOME=~/.cache
+# It is incorrect to use such a variable, but it is too common
+XDG_CACHE_DIR=$XDG_CACHE_HOME
+
 XDG_CONFIG_HOME=~/.config
 XDG_DATA_HOME=~/.local/share
 
