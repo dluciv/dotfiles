@@ -87,7 +87,8 @@
 (use-package org-roam-ui)
 
 ;; === ORG calendar view
-(use-package calfw
+(use-package calfw)
+(use-package calfw-org
   :init
   (require 'calfw-org)
   )
