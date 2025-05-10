@@ -1,13 +1,5 @@
-return {
-  'duckdm/neowarrior.nvim',
-  event = 'VeryLazy',
-  dependencies = {
-    'nvim-telescope/telescope.nvim',
-    --- Optional but recommended for nicer inputs
-    --- 'folke/noice.nvim',
-  },
-  config = function()
-
+(
+  function()
     local nw = require('neowarrior')
     local home = vim.env.HOME
     nw.setup({
@@ -29,4 +21,4 @@ return {
     vim.keymap.set("n", "<leader>nr", function() nw.open_right() end, { desc = "Open nwarrior on the right side" })
     vim.keymap.set("n", "<leader>nt", function() nw.focus() end, { desc = "Focus nwarrior" })
   end
-}
+)()
