@@ -5,9 +5,9 @@
  '(fringe-mode nil nil (fringe))
  '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
- '(menu-bar-mode nil)
+ '(menu-bar-mode {{ if .android }}t{{ else }}nil{{ end }})
  '(size-indication-mode t)
- '(tool-bar-mode nil)
+ '(tool-bar-mode {{ if .android }}t{{ else }}nil{{ end }})
  '(current-language-environment "Russian")
  '(default-input-method "russian-computer")
  '(ispell-dictionary "ru_RU")
@@ -22,8 +22,8 @@
 
 ;; === Это любимый шрифт взамен шрифтов по умолчанию
 (custom-set-faces
- '(default ((t (:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN" :slant normal :weight normal :height {{ if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}165{{ end }} :width normal))))
- '(mode-line ((t (:background "gray30" :box (:line-width (1 . 1) :color "dark gray") :family "{{ .style.fav_font_name_nf_mono }}"))))
+ '(default ((t ({{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN"{{ end }} :slant normal :weight normal :height {{ if .android }}240{{ else if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}165{{ end }} :width normal))))
+ '(mode-line ((t (:background "gray30" :box (:line-width (1 . 1) :color "dark gray") {{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}"{{ end }}))))
  '(markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
  '(markdown-code-face ((t (:inherit font-lock-constant-face))))
  )
@@ -56,6 +56,20 @@
 (package-initialize)
 
 (require 'use-package)
+
+;; === Немного меню https://www.emacswiki.org/emacs/EmacsOnAndroid
+(easy-menu-define my-menu global-map
+    "My Customized Menu for using Emacs on Android."
+    '("My"
+      ("File"
+       ["Save buffers" save-some-buffers])
+      ("Org"
+       ["Calendar" cfw:open-org-calendar]
+       ["Agenda List" org-agenda-list]
+       ["Global TODO List" org-todo-list]
+       ["Search for Keywords" org-search-view])
+      ("Magit"
+       ["Status" magit-status])))
 
 ;; === Org дополнительные настройки
 (setq org-todo-keywords
@@ -96,6 +110,7 @@
 ;; === ORG-LaTeX
 (use-package org-latex-impatient)
 
+{{- if false }}
 ;; === Org-Superstar configuration
 ;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
 ;; M-x package-install RET org-superstar RET
@@ -104,6 +119,7 @@
   (setq org-superstar-leading-bullet " ")
   (setq org-superstar-headline-bullets-list '("◉" "○○" "⚬⚬⚬" "◈◈◈◈" "◇◇◇◇◇"))
   :hook (org-mode . org-superstar-mode))
+{{- end }}
 
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
 ;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
