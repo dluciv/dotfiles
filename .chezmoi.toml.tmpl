@@ -121,5 +121,10 @@
     args = [          "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 {{- end }}
 
-[data.gopass]
-    mounts = []
+{{- if (and .windows (stat (joinPath $abs_roamg_cfg_dir ".chezmoi.roaming.toml"))) }}
+{{    include (joinPath $abs_roamg_cfg_dir ".chezmoi.roaming.toml") }}
+{{- end }}
+
+{{- if (stat (joinPath $abs_local_cfg_dir (printf ".chezmoi.local.%s.toml" .chezmoi.hostname))) }}
+{{    include (joinPath $abs_local_cfg_dir (printf ".chezmoi.local.%s.toml" .chezmoi.hostname)) }}
+{{- end }}

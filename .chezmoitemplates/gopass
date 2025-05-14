@@ -7,7 +7,15 @@
   safecontent = true   # Hide passwords by default (shows *****)
   autocopy = true      # Copy password to clipboard automatically
 
+{{- /*
+In Unix, ~/.config/.chezmoi.local.<hostname>.toml , in Windows, AppData\Roaming\.chezmoi.roaming.toml, add:
+[data.gopass]
+    mounts = ["/../../.."]
+*/}}
+
+{{- if (and (hasKey .data "gopass") (hasKey .data.gopass "mounts")) }}
 [mounts]
-{{ range $index, $element := .gopass.mounts }}
+{{-   range $index, $element := .data.gopass.mounts }}
   path = {{ $element }}
-{{ end }}
+{{-   end }}
+{{- end }}
