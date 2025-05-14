@@ -1,0 +1,13 @@
+[generate]
+  # Optional: Configure password generation rules
+  length =  16
+  symbols = false
+
+[show]
+  safecontent = true   # Hide passwords by default (shows *****)
+  autocopy = true      # Copy password to clipboard automatically
+
+[mounts]
+{{ range $index, $element := .gopass.mounts }}
+  path = {{ $element }}
+{{ end }}

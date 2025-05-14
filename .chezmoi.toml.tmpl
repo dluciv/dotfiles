@@ -6,9 +6,18 @@
 {{- $darwin   := false -}}
 {{- $linux    := false -}}
 {{- $headful  := false -}}
+
+{{- $usr_prefix := "/usr" -}}
+
 {{- $home_dir  := "~"   -}}
 {{- $abs_home_dir  := env "HOME" -}}
-{{- $usr_prefix := "/usr" -}}
+
+{{- $abs_local_cfg_dir := printf "%s/.config" $abs_home_dir -}}
+{{- if (ne (env "XDG_CONFIG_HOME") "") -}}
+{{-   $abs_local_cfg_dir = env "XDG_CONFIG_HOME" -}}
+{{- end }}
+{{- $abs_roamg_cfg_dir := $abs_local_cfg_dir -}}
+
 {{- "" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
@@ -21,6 +30,8 @@
 {{-   $windows = true -}}
 {{-   $home_dir = env "USERPROFILE" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_home_dir = env "USERPROFILE" | replaceAllRegex "\\\\" "/" -}}
+{{-   $abs_local_cfg_dir = env "LOCALAPPDATA" | replaceAllRegex "\\\\" "/" -}}
+{{-   $abs_roamg_cfg_dir = env "APPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{-   $darwin = true -}}
 {{- else if eq .chezmoi.os "android" -}}
@@ -45,6 +56,9 @@
     usr_prefix = {{ if $termux }}{{ env "PREFIX" | quote }}{{else}}"/usr"{{ end }}
     home_dir = "{{ $home_dir }}"
     abs_home_dir = "{{ $abs_home_dir }}"
+
+    abs_local_cfg_dir = "{{ $abs_local_cfg_dir }}"
+    abs_roamg_cfg_dir = "{{ $abs_roamg_cfg_dir }}"
 
 [data.tools]
     # misc tools
@@ -106,3 +120,6 @@
     command = "meld"
     args = [          "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Source {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
 {{- end }}
+
+[data.gopass]
+    mounts = []

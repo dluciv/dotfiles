@@ -5,7 +5,7 @@
  '(fringe-mode nil nil (fringe))
  '(global-display-line-numbers-mode t)
  '(inhibit-startup-screen t)
- '(menu-bar-mode {{ if .android }}t{{ else }}nil{{ end }})
+ '(menu-bar-mode {{ if (or .android .windows) }}t{{ else }}nil{{ end }})
  '(size-indication-mode t)
  '(tool-bar-mode {{ if .android }}t{{ else }}nil{{ end }})
  '(current-language-environment "Russian")
@@ -105,6 +105,8 @@
 (use-package calfw-org
   :init
   (require 'calfw-org)
+  :config
+  (setq cfw:display-calendar-holidays nil)
   )
 
 ;; === ORG-LaTeX
