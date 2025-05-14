@@ -7,6 +7,12 @@
   safecontent = true   # Hide passwords by default (shows *****)
   autocopy = true      # Copy password to clipboard automatically
 
+[core]
+  autopull = true
+  autopush = true
+  autosync = true
+  cliptimeout = 45
+
 {{- /*
 In Unix, ~/.config/.chezmoi.local.<hostname>.toml , in Windows, AppData\Roaming\.chezmoi.roaming.toml, add:
 [data.gopass]
