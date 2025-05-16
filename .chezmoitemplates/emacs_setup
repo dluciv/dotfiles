@@ -24,9 +24,6 @@
 
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
-(setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
-
 
 ;; === Это чтобы работали пакеты
 (require 'package)
@@ -43,6 +40,7 @@
        ["Save buffers" save-some-buffers])
       ("Org"
        ["Calendar" cfw:open-org-calendar]
+       ["Capture" org-capture]
        ["Agenda List" org-agenda-list]
        ["Global TODO List" org-todo-list]
        ["Search for Keywords" org-search-view])
@@ -50,23 +48,26 @@
        ["Status" magit-status])))
 
 ;; === Org дополнительные настройки
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(e)" "CANCELLED(c)" "FAILED(f)")))
+(setq-default org-display-custom-times t)
+(setq-default org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
+(use-package org
+  :custom
+  (org-directory "{{ .home_dir }}/ORG/")
+  (org-default-notes-file "{{ .home_dir }}/ORG/inbox.org")
+  (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(e)" "CANCELLED(c)" "FAILED(f)")))
+  :bind
+  (("C-c o p" . org-capture))
+  )
 
 ;; === Org-Roam basic configuration
 ;; https://lucidmanager.org/productivity/taking-notes-with-emacs-org-mode-and-org-roam/
-;; M-x package-install RET org-roam RET
-(setq org-directory "{{ .home_dir }}/ORG/")
-
 (use-package org-roam
   :after org
   :custom
   (org-roam-directory (file-truename org-directory))
   :init
-  (progn
-    (require 'org-roam)
-    (require 'org-roam-protocol)
-    (org-roam-setup))
+  (require 'org-roam)
+  (require 'org-roam-protocol)
   :bind (("C-c n f" . org-roam-node-find)
          ("C-c n r" . org-roam-node-random)
          (:map org-mode-map
@@ -74,7 +75,10 @@
                 ("C-c n o" . org-id-get-create)
                 ("C-c n t" . org-roam-tag-add)
                 ("C-c n a" . org-roam-alias-add)
-                ("C-c n l" . org-roam-buffer-toggle)))))
+                ("C-c n l" . org-roam-buffer-toggle))))
+  :config
+  (org-roam-setup)
+  )
 
 (use-package org-roam-ui)
 
@@ -85,6 +89,8 @@
   (require 'calfw-org)
   :config
   (setq cfw:display-calendar-holidays nil)
+  :bind
+  (("C-c o l" . cfw:open-org-calendar))
   )
 
 ;; === ORG-LaTeX
