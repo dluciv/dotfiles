@@ -20,9 +20,7 @@
  '(use-package-always-ensure t)
  )
 
-{{- if .android }}
-{{ template "emacs_setup" dict "windows" .windows  "linux" .linux "android" true "darwin" .darwin "dpi" .dpi "style" .style "home_dir" .home_dir -}}
-{{- else }}
+{{- if not .android }}
 (when (file-exists-p "~/.emacs.d/lisp/setup.el")
   (load "~/.emacs.d/lisp/setup.el"))
 {{- end }}
