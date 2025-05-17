@@ -28,6 +28,9 @@
 ;; === Это чтобы работали пакеты
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+{{- if not .android }}
+(add-to-list 'load-path "~/.emacs.d/local-packages/" t)
+{{- end }}
 (package-initialize)
 
 (require 'use-package)
@@ -105,6 +108,13 @@
   (setq org-superstar-leading-bullet " ")
   (setq org-superstar-headline-bullets-list '("◉" "○○" "⚬⚬⚬" "◈◈◈◈" "◇◇◇◇◇"))
   :hook (org-mode . org-superstar-mode))
+{{- end }}
+
+{{- if not .android }}
+;; === Space hyper control
+(use-package config/space-hyper-control
+  :ensure nil
+  )
 {{- end }}
 
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
