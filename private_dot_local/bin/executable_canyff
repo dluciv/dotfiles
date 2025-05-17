@@ -1,0 +1,10 @@
+#!/bin/bash
+device=$(v4l2-ctl --list-devices | grep -A 1 Canyon | tail -n1 | xargs)
+echo Device: $device
+
+set -exu
+
+v4l2-ctl --device=$device --set-ctrl focus_automatic_continuous=0
+v4l2-ctl --device=$device --set-ctrl focus_absolute=100
+
+v4l2-ctl --device=$device --list-ctrls | grep focus
