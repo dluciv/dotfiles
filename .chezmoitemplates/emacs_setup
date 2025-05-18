@@ -29,7 +29,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 {{- if not .android }}
-(add-to-list 'load-path "~/.emacs.d/local-packages/" t)
+(add-to-list 'load-path "~/.emacs.d/site-lisp/" t)
 {{- end }}
 (package-initialize)
 

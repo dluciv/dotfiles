@@ -21,8 +21,8 @@
  )
 
 {{- if not .android }}
-(when (file-exists-p "~/.emacs.d/lisp/setup.el")
-  (load "~/.emacs.d/lisp/setup.el"))
+(when (file-exists-p "~/.emacs.d/site-lisp/setup.el")
+  (load "~/.emacs.d/site-lisp/setup.el"))
 {{- end }}
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
