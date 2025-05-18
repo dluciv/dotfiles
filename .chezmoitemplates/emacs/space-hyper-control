@@ -3,7 +3,7 @@
 
 ; The test of Ur kewlness
 (defun dluciv-cewl-test-event () (interactive)
-  (message "You have Control, Meta, Hyper, Super, Alt and Shift modifiers.\nU R really kewl. C-H-A-S-M-s-Space! Super!")
+  (message "You have Control, Meta, Hyper, Super, Alt and Shift modifiers.\nU R really kewl, U hv hyper-control! C-H-A-S-M-s-Space!")
 )
 (global-set-key (kbd "C-H-A-S-M-s-SPC") 'dluciv-cewl-test-event)
 
@@ -14,7 +14,8 @@
     )
 )
 
-(define-key function-key-map (kbd "<C-f11>") 'dluciv-alt-next-event)
+; (define-key function-key-map (kbd "<C-f11>") 'dluciv-alt-next-event)
+(define-key function-key-map (kbd "C-c k a") 'dluciv-alt-next-event)
 
 {{- if .windows }}
 ; Windoze. Works ok. Windoze rulez...
@@ -25,7 +26,7 @@
       w32-pass-apps-to-system nil
       w32-lwindow-modifier 'super ;; Left Windows key
       w32-rwindow-modifier 'super ;; Right Windows key
-      w32-apps-modifier 'hyper) ;; Menu key 
+      w32-apps-modifier 'hyper) ;; Menu key
 {{- else }}
 ; I succeded with .Xmodmap:
 ; !
@@ -44,7 +45,18 @@
       (event-apply-modifier (read-event) 'hyper 24 "H-")
     )
 )
-(define-key function-key-map (kbd "<C-f12>") 'dluciv-hyper-next-event)
+
+; (define-key function-key-map (kbd "<C-f12>") 'dluciv-hyper-next-event)
+(define-key function-key-map (kbd "C-c k h") 'dluciv-hyper-next-event)
+
+(defun dluciv/hyper-alt-modifier (ignore-prompt)
+  (vector
+    (event-apply-modifier
+      (event-apply-modifier (read-event) 'hyper 24 "H-")
+       'alt 22 "A-")))
+
+(define-key function-key-map (kbd "C-c k r") 'dluciv/hyper-alt-modifier)
+
 
 (message "SPACE hyper control loaded")
 (provide 'config/space-hyper-control)
