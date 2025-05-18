@@ -1,3 +1,50 @@
-;; === Это чтобы понять, что мы дошли таки до конца файла
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Keyboard tweaks
+
+; The test of Ur kewlness
+(defun dluciv-cewl-test-event () (interactive)
+  (message "You have Control, Meta, Hyper, Super, Alt and Shift modifiers.\nU R really kewl. C-H-A-S-M-s-Space! Super!")
+)
+(global-set-key (kbd "C-H-A-S-M-s-SPC") 'dluciv-cewl-test-event)
+
+; Alt modifier for the both X and Windoze.
+(defun dluciv-alt-next-event (ignore-prompt)
+  (vector
+      (event-apply-modifier (read-event) 'alt 22 "A-")
+    )
+)
+
+(define-key function-key-map (kbd "<C-f11>") 'dluciv-alt-next-event)
+
+{{- if .windows }}
+; Windoze. Works ok. Windoze rulez...
+; got from http://groups.google.com/group/gnu.emacs.help/browse_thread/thread/b36b1b9c088b7e3b?pli=1
+; setting the PC keyboard's various keys to Super or Hyper
+(setq w32-pass-lwindow-to-system nil
+      w32-pass-rwindow-to-system nil
+      w32-pass-apps-to-system nil
+      w32-lwindow-modifier 'super ;; Left Windows key
+      w32-rwindow-modifier 'super ;; Right Windows key
+      w32-apps-modifier 'hyper) ;; Menu key 
+{{- else }}
+; I succeded with .Xmodmap:
+; !
+; clear Mod3
+; clear Mod4
+; keysym Menu = Hyper_L
+; add Mod3 = Hyper_L
+; add Mod4 = Super_L
+; !
+{{- end }}
+
+
+; X. When it phail to recognize real HYPER key...
+(defun dluciv-hyper-next-event (ignore-prompt)
+  (vector
+      (event-apply-modifier (read-event) 'hyper 24 "H-")
+    )
+)
+(define-key function-key-map (kbd "<C-f12>") 'dluciv-hyper-next-event)
+
 (message "SPACE hyper control loaded")
 (provide 'config/space-hyper-control)
