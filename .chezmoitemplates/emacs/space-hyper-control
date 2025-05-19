@@ -2,20 +2,20 @@
 ;; Keyboard tweaks
 
 ; The test of Ur kewlness
-(defun dluciv-cewl-test-event () (interactive)
+(defun dluciv/cewl-test-event () (interactive)
   (message "You have Control, Meta, Hyper, Super, Alt and Shift modifiers.\nU R really kewl, U hv hyper-control! C-H-A-S-M-s-Space!")
 )
-(global-set-key (kbd "C-H-A-S-M-s-SPC") 'dluciv-cewl-test-event)
+(global-set-key (kbd "C-H-A-S-M-s-SPC") 'dluciv/cewl-test-event)
 
 ; Alt modifier for the both X and Windoze.
-(defun dluciv-alt-next-event (ignore-prompt)
+(defun dluciv/alt-next-event (ignore-prompt)
   (vector
       (event-apply-modifier (read-event) 'alt 22 "A-")
     )
 )
 
-; (define-key function-key-map (kbd "<C-f11>") 'dluciv-alt-next-event)
-(define-key function-key-map (kbd "C-c k a") 'dluciv-alt-next-event)
+; (define-key function-key-map (kbd "<C-f11>") 'dluciv/alt-next-event)
+(define-key function-key-map (kbd "C-c k a") 'dluciv/alt-next-event)
 
 {{- if .windows }}
 ; Windoze. Works ok. Windoze rulez...
@@ -40,14 +40,14 @@
 
 
 ; X. When it phail to recognize real HYPER key...
-(defun dluciv-hyper-next-event (ignore-prompt)
+(defun dluciv/hyper-next-event (ignore-prompt)
   (vector
       (event-apply-modifier (read-event) 'hyper 24 "H-")
     )
 )
 
-; (define-key function-key-map (kbd "<C-f12>") 'dluciv-hyper-next-event)
-(define-key function-key-map (kbd "C-c k h") 'dluciv-hyper-next-event)
+; (define-key function-key-map (kbd "<C-f12>") 'dluciv/hyper-next-event)
+(define-key function-key-map (kbd "C-c k h") 'dluciv/hyper-next-event)
 
 (defun dluciv/hyper-alt-modifier (ignore-prompt)
   (vector
