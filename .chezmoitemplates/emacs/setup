@@ -59,7 +59,9 @@
   (org-default-notes-file "{{ .home_dir }}/ORG/inbox.org")
   (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(e)" "CANCELLED(c)" "FAILED(f)")))
   :bind
-  (("C-c o p" . org-capture))
+  (
+   ("C-c o p" . org-capture)
+   ("C-c o a" . org-agenda))
   )
 
 ;; === Org-Roam basic configuration
