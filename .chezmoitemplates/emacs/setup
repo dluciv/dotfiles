@@ -99,6 +99,10 @@
 ;; === ORG-LaTeX
 (use-package org-latex-impatient)
 
+;; === ORG Super Agenda ===
+;; === но пока не освоил...
+(use-package org-super-agenda)
+
 {{- if false }}
 ;; === Org-Superstar configuration
 ;; https://sophiebos.io/posts/prettifying-emacs-org-mode/#bullets
