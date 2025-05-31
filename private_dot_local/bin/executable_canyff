@@ -1,10 +1,16 @@
 #!/bin/bash
 device=$(v4l2-ctl --list-devices | grep -A 1 Canyon | tail -n1 | xargs)
-echo Device: $device
+echo '====== Девайс ======'
+echo $device
 
-set -exu
+set -eu
 
+echo '======== До ========'
+v4l2-ctl --device=$device --list-ctrls | grep focus
+
+echo '== настраиваем... =='
 v4l2-ctl --device=$device --set-ctrl focus_automatic_continuous=0
 v4l2-ctl --device=$device --set-ctrl focus_absolute=100
 
+echo '====== После ======='
 v4l2-ctl --device=$device --list-ctrls | grep focus
