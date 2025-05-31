@@ -1,9 +1,12 @@
 #!/bin/bash
-device=$(v4l2-ctl --list-devices | grep -A 1 Canyon | tail -n1 | xargs)
-echo '====== Девайс ======'
-echo $device
 
 set -eu
+
+signature="Canyon"
+device=$(v4l2-ctl --list-devices | grep -A 1 "${signature}" | tail -n1 | xargs)
+
+echo '====== Девайс ======'
+echo "${signature} -> ${device}"
 
 echo '======== До ========'
 v4l2-ctl --device=$device --list-ctrls | grep focus
