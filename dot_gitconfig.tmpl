@@ -20,6 +20,10 @@
 {{- end }}
 	editor = {{ if lookPath "mcedit" }}mcedit{{ else if lookPath "nvim" }}nvim{{ else }}vim{{ end }}
 	autocrlf = {{if .windows }}true{{else}}input{{end}}
+	quotepath = false
+{{- if .darwin }}
+	precomposeunicode = true
+{{- end }}
 
 {{ if lookPath "difft" -}}
 [diff]
