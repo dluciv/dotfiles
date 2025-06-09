@@ -3,6 +3,7 @@ toolkit_paths=(
   ~/go/bin
   ~/.gem/ruby/3.2.0/bin
   ~/.basher/bin
+  ~/.nix-profile/bin
 )
 
 for tp in $toolkit_paths; do
