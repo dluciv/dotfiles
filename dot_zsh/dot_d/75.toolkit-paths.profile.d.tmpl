@@ -3,7 +3,9 @@ toolkit_paths=(
   ~/go/bin
   ~/.gem/ruby/3.2.0/bin
   ~/.basher/bin
+{{- if not .darwin }}
   ~/.nix-profile/bin
+{{- end }}
 )
 
 for tp in $toolkit_paths; do
