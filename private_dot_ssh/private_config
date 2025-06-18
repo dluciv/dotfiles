@@ -3,5 +3,5 @@ AddKeysToAgent yes
 Include ~/.ssh/host_configs/*
 
 Host *
-    SendEnv         TERM COLORTERM TERM_PROGRAM LANG LANGUAGE
+    SendEnv         *TERM TERM_* TERMINAL_* LANG LC_* LANGUAGE
     ForwardAgent    yes
