@@ -92,6 +92,14 @@
 
 {{ end -}}
 
+{{ if lookPath "soffice" -}}
+[diff "soffice"]
+	binary = true
+	textconv = sh -c 'soffice --headless --cat "$0"'
+	prompt = false
+
+{{ end -}}
+
 [alias]
 	wdiff='diff --word-diff=color --unified=1'
 
