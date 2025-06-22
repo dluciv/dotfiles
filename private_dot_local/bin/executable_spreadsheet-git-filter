@@ -1,20 +1,31 @@
 #!/bin/bash
 
-set -ex
+set -e
+
+input_file=$1
+bni_file=$(basename "$input_file")
+tmp_pdf="${bni_file%.*}.pdf"
+tmp_txt="${bni_file%.*}.txt"
 
 # echo "--- ${TMPDIR} ---"
 
-input_file=$1
-tmp_pdf="${input_file%.*}.pdf"
-tmp_txt="${input_file%.*}.txt"
+echo "$$ $(date)" >>/tmp/_sgf.log
+echo "$$ $(pwd)"  >>/tmp/_sgf.log
+echo "$$ $*" >>/tmp/_sgf.log
 
-# pushd $(dirname "$input_file")
+td=$(mktemp -d)
+cp "$input_file" "$td"
+pushd $td >>/tmp/sgf.log
 
 # The most idiotic way I guess, but for me it was the only one working
-soffice --headless --convert-to pdf "$input_file" 2>/dev/null
-pdftotext -layout "$tmp_pdf" "$tmp_txt" 2>/dev/null
+soffice --headless --convert-to pdf "$bni_file" 2>>/tmp/_sgf.log 1>&2
+pdftotext -layout "$tmp_pdf" "$tmp_txt" 2>>/tmp/_sgf.log 1>&2
 cat "$tmp_txt"
 
-rm $tmp_pdf $tmp_txt
+# set +e
+# rm $tmp_pdf $tmp_txt
 
-# popd
+popd
+rm -rf "$td"
+
+echo '$$ -------------------------' >>/tmp/_sgf.log
