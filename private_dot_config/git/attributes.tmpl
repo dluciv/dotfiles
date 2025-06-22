@@ -7,13 +7,11 @@
 *.rtf  diff=pandoc
 {{ end -}}
 
-{{ if false -}}{{/* neither works... */ -}}
-{{ if lookPath "soffice" -}}
-*.xls   diff=soffice
-*.xlsx  diff=soffice
+{{ if lookPath "ssconvert" -}}
+*.xls   diff=ssconvert
+*.xlsx  diff=ssconvert
 {{ else if lookPath "pandoc" -}}
 *.xlsx diff=pandoc
-{{ end -}}
 {{ end -}}
 
 {{ if lookPath "antiword" -}}
