@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -ex
+
+# echo "--- ${TMPDIR} ---"
+
+input_file=$1
+tmp_pdf="${input_file%.*}.pdf"
+tmp_txt="${input_file%.*}.txt"
+
+# pushd $(dirname "$input_file")
+
+# The most idiotic way I guess, but for me it was the only one working
+soffice --headless --convert-to pdf "$input_file" 2>/dev/null
+pdftotext -layout "$tmp_pdf" "$tmp_txt" 2>/dev/null
+cat "$tmp_txt"
+
+rm $tmp_pdf $tmp_txt
+
+# popd

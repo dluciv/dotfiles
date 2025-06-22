@@ -7,7 +7,10 @@
 *.rtf  diff=pandoc
 {{ end -}}
 
-{{ if lookPath "ssconvert" -}}
+{{ if lookPath "spreadsheet-git-filter" -}}
+*.xls   diff=spreadsheet-git-filter
+*.xlsx  diff=spreadsheet-git-filter
+{{ else if lookPath "ssconvert" -}}
 *.xls   diff=ssconvert
 *.xlsx  diff=ssconvert
 {{ else if lookPath "pandoc" -}}

@@ -103,7 +103,15 @@
 {{ if lookPath "ssconvert" -}}
 [diff "ssconvert"]
 	binary = true
-	textconv = sh -c 'ssconvert --export-type=txt --export-options= "$0"'
+	textconv = sh -c 'ssconvert --export-type=Gnumeric_stf:stf_assistant --export-options= "$0"'
+	prompt = false
+
+{{ end -}}
+
+{{ if lookPath "spreadsheet-git-filter" -}}
+[diff "spreadsheet-git-filter"]
+	binary = true
+	textconv = sh -c 'spreadsheet-git-filter "$0"'
 	prompt = false
 
 {{ end -}}
