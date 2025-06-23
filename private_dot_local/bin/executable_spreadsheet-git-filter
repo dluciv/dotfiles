@@ -3,40 +3,47 @@
 set -e
 
 input_file=$1
-temp_root="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
+systmp="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
 
-touch "${temp_root}/_sgf.log"
-chmod go-rwx "${temp_root}/_sgf.log"
+touch "${systmp}/_sgf.log"
+chmod go-rwx "${systmp}/_sgf.log"
 
-if command -v ssconvert 1>/dev/null 2>&1; then
-  ssconvert --export-type='Gnumeric_html:xhtml_range' "$input_file" 'fd://1' 2>>"${temp_root}/_sgf.log" | pandoc -t markdown -f html 2>>"${temp_root}/_sgf.log"
-elif command -v soffice 1>/dev/null 2>&1; then
-  bni_file=$(basename "$input_file")
+echo "$$ ----- $(date) -----" >>"${systmp}/_sgf.log"
+echo "$$ $(pwd)"  >>"${systmp}/_sgf.log"
+echo "$$ $*" >>"${systmp}/_sgf.log"
+
+cnvtmp=$(mktemp -d)
+cp "$input_file" "$cnvtmp"
+bni_file=$(basename "$input_file")
+pushd $cnvtmp >>"${systmp}/_sgf.log"
+
+# The most idiotic way I guess, but for me it was the only one working
+
+if command -v soffice 1>/dev/null 2>&1; then
+
   tmp_html="${bni_file%.*}.html"
   tmp_txt="${bni_file%.*}.txt"
 
-  # echo "--- ${TMPDIR} ---"
+  soffice --headless --convert-to html "$bni_file" 2>>"${systmp}/_sgf.log" 1>&2
+  pandoc -t markdown -f html "$tmp_html" 2>>"${systmp}/_sgf.log"
 
+elif command -v ssconvert 1>/dev/null 2>&1; then
 
-  echo "$$ $(date)" >>"${temp_root}/_sgf.log"
-  echo "$$ $(pwd)"  >>"${temp_root}/_sgf.log"
-  echo "$$ $*" >>"${temp_root}/_sgf.log"
+  ssconvert --export-type='Gnumeric_html:xhtml' -S "$bni_file" 'ssconvert.%n.html' 2>>"${systmp}/_sgf.log"
+  touch output.md
+  for sht in ssconvert.*.html; do
+    printf "\n# %s\n\n" "$sht" >>output.md
+    pandoc -t markdown -f html "$sht" 2>>"${systmp}/_sgf.log" 1>>output.md
+  done
+  cat output.md
 
-  td=$(mktemp -d)
-  cp "$input_file" "$td"
-  pushd $td >>"${temp_root}/_sgf.log"
-
-  # The most idiotic way I guess, but for me it was the only one working
-  soffice --headless --convert-to html "$bni_file" 2>>"${temp_root}/_sgf.log" 1>&2
-  pandoc -t markdown -f html "$tmp_html" 2>>"${temp_root}/_sgf.log"
-
-  # set +e
-  # rm $tmp_pdf $tmp_txt
-
-  popd
-  rm -rf "$td"
 else
-  echo "$$ no ssconvert (gnumeric) or soffice installed" >>"${temp_root}/_sgf.log"
+
+  echo "$$ no ssconvert (gnumeric) or soffice installed" >>"${systmp}/_sgf.log"
+
 fi
 
-echo '$$ -------------------------' >>/tmp/_sgf.log
+popd
+rm -rf "$cnvtmp"
+
+echo '$$ -------------------------' >>"${systmp}/_sgf.log"
