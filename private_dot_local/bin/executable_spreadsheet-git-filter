@@ -43,7 +43,7 @@ else
 
 fi
 
-popd
+popd >>"${systmp}/_sgf.log"
 rm -rf "$cnvtmp"
 
 echo '$$ -------------------------' >>"${systmp}/_sgf.log"
