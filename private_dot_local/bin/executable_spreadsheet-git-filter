@@ -3,31 +3,40 @@
 set -e
 
 input_file=$1
-bni_file=$(basename "$input_file")
-tmp_html="${bni_file%.*}.html"
-tmp_txt="${bni_file%.*}.txt"
+temp_root="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
 
-# echo "--- ${TMPDIR} ---"
+touch "${temp_root}/_sgf.log"
+chmod go-rwx "${temp_root}/_sgf.log"
 
-touch /tmp/_sgf.log
-chmod go-rwx /tmp/_sgf.log
+if command -v ssconvert 1>/dev/null 2>&1; then
+  ssconvert --export-type='Gnumeric_html:xhtml_range' "$input_file" 'fd://1' 2>>"${temp_root}/_sgf.log" | pandoc -t markdown -f html 2>>"${temp_root}/_sgf.log"
+elif command -v soffice 1>/dev/null 2>&1; then
+  bni_file=$(basename "$input_file")
+  tmp_html="${bni_file%.*}.html"
+  tmp_txt="${bni_file%.*}.txt"
 
-echo "$$ $(date)" >>/tmp/_sgf.log
-echo "$$ $(pwd)"  >>/tmp/_sgf.log
-echo "$$ $*" >>/tmp/_sgf.log
+  # echo "--- ${TMPDIR} ---"
 
-td=$(mktemp -d)
-cp "$input_file" "$td"
-pushd $td >>/tmp/sgf.log
 
-# The most idiotic way I guess, but for me it was the only one working
-soffice --headless --convert-to html "$bni_file" 2>>/tmp/_sgf.log 1>&2
-pandoc -t markdown -f html "$tmp_html" 2>>/tmp/_sgf.log
+  echo "$$ $(date)" >>"${temp_root}/_sgf.log"
+  echo "$$ $(pwd)"  >>"${temp_root}/_sgf.log"
+  echo "$$ $*" >>"${temp_root}/_sgf.log"
 
-# set +e
-# rm $tmp_pdf $tmp_txt
+  td=$(mktemp -d)
+  cp "$input_file" "$td"
+  pushd $td >>"${temp_root}/_sgf.log"
 
-popd
-rm -rf "$td"
+  # The most idiotic way I guess, but for me it was the only one working
+  soffice --headless --convert-to html "$bni_file" 2>>"${temp_root}/_sgf.log" 1>&2
+  pandoc -t markdown -f html "$tmp_html" 2>>"${temp_root}/_sgf.log"
+
+  # set +e
+  # rm $tmp_pdf $tmp_txt
+
+  popd
+  rm -rf "$td"
+else
+  echo "$$ no ssconvert (gnumeric) or soffice installed" >>"${temp_root}/_sgf.log"
+fi
 
 echo '$$ -------------------------' >>/tmp/_sgf.log
