@@ -4,10 +4,13 @@ set -e
 
 input_file=$1
 bni_file=$(basename "$input_file")
-tmp_pdf="${bni_file%.*}.pdf"
+tmp_html="${bni_file%.*}.html"
 tmp_txt="${bni_file%.*}.txt"
 
 # echo "--- ${TMPDIR} ---"
+
+touch /tmp/_sgf.log
+chmod go-rwx /tmp/_sgf.log
 
 echo "$$ $(date)" >>/tmp/_sgf.log
 echo "$$ $(pwd)"  >>/tmp/_sgf.log
@@ -18,9 +21,8 @@ cp "$input_file" "$td"
 pushd $td >>/tmp/sgf.log
 
 # The most idiotic way I guess, but for me it was the only one working
-soffice --headless --convert-to pdf "$bni_file" 2>>/tmp/_sgf.log 1>&2
-pdftotext -layout "$tmp_pdf" "$tmp_txt" 2>>/tmp/_sgf.log 1>&2
-cat "$tmp_txt"
+soffice --headless --convert-to html "$bni_file" 2>>/tmp/_sgf.log 1>&2
+pandoc -t markdown -f html "$tmp_html" 2>>/tmp/_sgf.log
 
 # set +e
 # rm $tmp_pdf $tmp_txt
