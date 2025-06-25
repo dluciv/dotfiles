@@ -64,8 +64,11 @@ if [[ -d "{{- $zppref -}}" ]]; then
   source {{ $zppref -}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   [[ ! $undermc ]] && source {{ $zppref -}}/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
-
 {{- end }}
+
+{{-   if lookPath "git-psykorebase" }}
+source /usr/share/doc/git-extras/git-extras-completion.zsh
+{{-   end }}
 
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' group-name ''
