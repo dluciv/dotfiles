@@ -1,6 +1,6 @@
 #!/bin/sh
 
-zsh -l -c \
+zsh -li -c \
 "task sync || { echo -n Sync failed. Press Enter...; read }
  tasksh || { echo -n TaskSH faied. Press Enter...; read }
  task sync || { echo -n Sync failed. Press Enter...; read }"
