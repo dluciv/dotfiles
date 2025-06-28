@@ -2,8 +2,10 @@ $include /etc/inputrc
 "\C-p":history-search-backward
 "\C-n":history-search-forward
 
+{{- if not .termux }}
 set ansi-color-aware On
 set complete−filenames On
+{{- end }}
 
 set colored-stats On
 set completion-ignore-case On
