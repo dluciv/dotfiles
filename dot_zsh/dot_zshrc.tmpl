@@ -123,6 +123,11 @@ alias todofi=todofi.sh
 alias todo=todo.sh
 alias task-sync='task sync'
 */}}
+{{- if lookPath "taskwarrior-tui" }}
+alias stus='task sync || { echo -n Sync failed. Press Enter...; read }
+ taskwarrior-tui || { echo -n TaskWarrior-TUI faied. Press Enter...; read }
+ task sync && sleep 1 || { echo -n Sync failed. Press Enter...; read }'
+{{- end }}
 
 alias czm=chezmoi
 czmcd () { cd $(chezmoi source-path) }
