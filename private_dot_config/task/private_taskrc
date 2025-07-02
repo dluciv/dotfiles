@@ -22,6 +22,9 @@ include dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
 
+# local settings
+include ~/.config/task/local-settings
+
 # private sync credentials
 include ~/.config/task/sync-credentials
 # e.g. sync.encryption_secret=...
