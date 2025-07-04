@@ -1,0 +1,7 @@
+# In Unix, ~/.config/.chezmoi.local.<hostname>.toml & ~/.config/.chezmoi.local.toml, in Windows, AppData\Roaming\.chezmoi.roaming.toml
+# e.g.
+# [data.git]
+#    syncfolders = ["../.."]
+#    safefolders = ["../.."]
+# [data.gopass]
+#    mounts = ["/../../.."]

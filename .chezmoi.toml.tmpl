@@ -127,4 +127,6 @@
 
 {{- if (stat (joinPath $abs_local_cfg_dir (printf ".chezmoi.local.%s.toml" .chezmoi.hostname))) }}
 {{    include (joinPath $abs_local_cfg_dir (printf ".chezmoi.local.%s.toml" .chezmoi.hostname)) }}
+{{- else if (stat (joinPath $abs_local_cfg_dir ".chezmoi.local.toml")) }}
+{{    include (joinPath $abs_local_cfg_dir ".chezmoi.local.toml") }}
 {{- end }}
