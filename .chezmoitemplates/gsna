@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+{{- if (and (hasKey .data "git") (hasKey .data.git "syncfolders")) }}
+{{- /*
+In Unix, ~/.config/.chezmoi.local.<hostname>.toml , in Windows, AppData\Roaming
+[data.git]
+    syncfolders = ["/../../.."]
+*/}}
+{{-   range $index, $element := .data.git.syncfolders }}
+echo '=== Syncing {{ $element }} ... ==='
+pushd '{{ $element }}'
+bash g-s -n && sleep 1 || { echo -n Sync failed. Press Enter...; read }
+popd
+{{-   end }}
+echo '======================='
+sleep 2
+{{- end }}
