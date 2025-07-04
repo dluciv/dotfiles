@@ -158,5 +158,17 @@
 	helper = oauth
 {{- end }}
 
+{{- if (and (hasKey . "git") (hasKey .git "safefolders")) }}
+{{- /*
+In Unix, ~/.config/.chezmoi.local.<hostname>.toml , in Windows, AppData\Roaming
+[data.git]
+    safefolders = ["/../../.."]
+*/}}
+[safe]
+{{-   range $index, $element := .git.safefolders }}
+	directory = "{{ $element }}"
+{{-   end }}
+{{- end }}
+
 [include]
 	path = ~/.gitconfig.local
