@@ -1,6 +1,6 @@
-{{- if .windows }}
+{{- if .windows -}}
 @echo off
-{{- else }}
+{{- else -}}
 #!/bin/zsh
 {{- end }}
 {{- if (and (hasKey .data "git") (hasKey .data.git "syncfolders")) }}
