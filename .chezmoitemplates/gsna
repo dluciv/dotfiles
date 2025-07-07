@@ -15,6 +15,7 @@ And yes, chezmoi, if .windows does not work within range... =(
 {{-     range $index, $element := .data.git.syncfolders }}
 echo "=== Syncing {{ $element }} ... ==="
 pushd "{{ $element }}"
+git status -s
 call g-s -n
 if not ERRORLEVEL 1 (
   timeout /nobreak /t 1
@@ -28,6 +29,7 @@ popd
 {{-     range $index, $element := .data.git.syncfolders }}
 echo '=== Syncing {{ $element }} ... ==='
 pushd '{{ $element }}'
+git status -s
 bash g-s -n && sleep 1 || { echo -n Sync failed. Press Enter...; read }
 popd
 {{-     end }}
