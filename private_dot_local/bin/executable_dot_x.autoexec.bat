@@ -43,6 +43,12 @@ rm ~/.cache/*rofi*
 
 ionice -c 3 -- nice ferdium $ferdium_parms &>/dev/null &|
 
+if command -v 64gram-desktop >/dev/null; then
+  ionice -c 3 -- nice 64gram-desktop &>/dev/null &|
+elif command -v telegram-desktop >/dev/null; then
+  ionice -c 3 -- nice telegram-desktop &>/dev/null &|
+fi
+
 if [[ $HOST != "clover" ]]; then ionice -c 3 -- nice flameshot &|; fi
 # Let's use syncthing
 # nohup ionice -c 3 -- nice dropbox &>/dev/null &
