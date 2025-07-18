@@ -55,7 +55,7 @@ if [[ $HOST != "clover" ]]; then ionice -c 3 -- nice flameshot &|; fi
 
 command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || SYNCTHINGTRAY=syncthingtray
 { sleep 45; ionice -c 3 -- nice $SYNCTHINGTRAY --wait } &|
-{ sleep 5;  nice ~/_/safe_wf/tools/pytraycharmap/run.sh &>/dev/null } &|
+{ sleep 5;  nice ~/_/safe_wf/tools/pytraycharmap/run.sh cccp-p &>/dev/null } &|
 { sleep 5;  nice nekoray &>/dev/null } &|
 
 
