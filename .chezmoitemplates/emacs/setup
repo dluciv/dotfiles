@@ -162,6 +162,13 @@
   :hook (org-mode . org-superstar-mode))
 {{- end }}
 
+;; === TODO.txt mode
+(use-package todotxt
+  :config
+  (setq todotxt-file "{{ .home_dir }}/.todo/todo.txt")
+  :bind
+  (("C-c t t" . todotxt)))
+
 {{- if not .android }}
 ;; === Space hyper control
 (use-package config/space-hyper-control
