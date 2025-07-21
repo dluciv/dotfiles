@@ -1,0 +1,113 @@
+{{- /* https://github.com/Fanteria/todotxt-tui */ -}}
+init_widget = "List"
+window_title = "ToDo tui"
+layout = "[  Direction: Horizontal,  Size: 50%,  [    List: 80%, Preview: 20%,  ],  [    Direction: Vertical,    Done: 60%,    [      Contexts: 50%,      Projects: 50%,    ],  ],]"
+paste_behavior = "Insert"
+enable_mouse = true
+use_done = false
+pending_sort = "None"
+done_sort = "None"
+delete_final_date = true
+set_final_date = "OnlyMissing"
+todo_path = "{{ .abs_home_dir }}/.todo/todo.txt"
+archive_path = "{{ .abs_home_dir }}/.todo/done.txt"
+file_watcher = true
+save_policy = "OnChange"
+border_type = "Rounded"
+list_shift = 4
+pending_format = "[$subject](! priority)"
+done_format = "[$subject](! priority)"
+preview_format = """
+Pending: $pending Done: $done
+Subject: $subject
+Priority: $priority
+Create date: $create_date
+Link: $link"""
+wrap_preview = true
+active_color = "Red"
+
+[window_keybinds]
+"Shift+l" = "MoveRight"
+"Shift+s" = "Save"
+"Shift+h" = "MoveLeft"
+u = "Load"
+"Shift+j" = "MoveDown"
+q = "Quit"
+"Shift+i" = "InsertMode"
+"Shift+e" = "EditMode"
+"/" = "SearchMode"
+"Shift+k" = "MoveUp"
+
+[list_refresh_rate]
+secs = 5
+nanos = 0
+
+[autosave_duration]
+secs = 900
+nanos = 0
+
+[tasks_keybind]
+"Shift+d" = "SwapDownItem"
+x = "RemoveItem"
+d = "MoveItem"
+Enter = "Select"
+n = "NextSearch"
+"Shift+n" = "PrevSearch"
+"Shift+u" = "SwapUpItem"
+
+[category_keybind]
+Backspace = "Remove"
+"Shift+n" = "PrevSearch"
+Enter = "Select"
+n = "NextSearch"
+
+[list_keybind]
+"Shift+g" = "ListLast"
+j = "ListDown"
+h = "CleanSearch"
+g = "ListFirst"
+k = "ListUp"
+
+[list_active_color]
+bg = "LightRed"
+
+[pending_active_color]
+
+[done_active_color]
+
+[category_active_color]
+
+[projects_active_color]
+
+[contexts_active_color]
+
+[tags_active_color]
+
+[priority_style.C]
+fg = "Blue"
+
+[priority_style.A]
+fg = "Red"
+
+[priority_style.B]
+fg = "Yellow"
+
+[projects_style]
+
+[contexts_style]
+
+[hashtags_style]
+
+[category_style]
+
+[category_select_style]
+fg = "Green"
+
+[category_remove_style]
+fg = "Red"
+
+[custom_category_style."+todo-tui"]
+fg = "LightBlue"
+
+[highlight]
+bg = "Yellow"
