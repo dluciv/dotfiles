@@ -2,7 +2,7 @@
 
 set -e
 
-input_file=$1
+input_file="$@"
 systmp="${TMPDIR:-${TEMP:-${TMP:-/tmp}}}"
 
 touch "${systmp}/_sgf.log"
