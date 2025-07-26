@@ -4,6 +4,7 @@ set -eu
 
 signature="Canyon"
 device=$(v4l2-ctl --list-devices | grep -A 1 "${signature}" | tail -n1 | xargs)
+abs_focus=75
 
 echo '====== Девайс ======'
 echo "${signature} -> ${device}"
@@ -13,7 +14,7 @@ v4l2-ctl --device=$device --list-ctrls | grep focus
 
 echo '== настраиваем... =='
 v4l2-ctl --device=$device --set-ctrl focus_automatic_continuous=0
-v4l2-ctl --device=$device --set-ctrl focus_absolute=100
+v4l2-ctl --device=$device --set-ctrl focus_absolute=$abs_focus
 
 echo '====== После ======='
 v4l2-ctl --device=$device --list-ctrls | grep focus
