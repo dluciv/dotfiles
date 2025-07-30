@@ -18,8 +18,11 @@
 (setq-default coding-system-for-read 'utf-8)
 (setq-default coding-system-for-write 'utf-8)
 ;;(setq-default default-process-coding-system 'utf-8)
+
 {{- if .windows }}
 (set-clipboard-coding-system 'utf-16le-dos)
+{{- else }}
+(setq-default file-name-coding-system 'utf-8)
 {{- end }}
 
 ;; === Это чтобы как у нас, а не как где попало
