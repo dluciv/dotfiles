@@ -61,6 +61,7 @@
   (org-directory "{{ .home_dir }}/ORG/")
   (org-default-notes-file "{{ .home_dir }}/ORG/inbox.org")
   (org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "DELEGATED(e)" "CANCELLED(c)" "FAILED(f)")))
+  (org-log-into-drawer t)
   :bind
   (
    ("C-c o p" . org-capture)
