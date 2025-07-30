@@ -54,8 +54,8 @@
        ["Status" magit-status])))
 
 ;; === Org дополнительные настройки
-(setq-default org-display-custom-times t)
-(setq-default org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
+;(setq-default org-display-custom-times t)
+;(setq-default org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
 (use-package org
   :custom
   (org-directory "{{ .home_dir }}/ORG/")
