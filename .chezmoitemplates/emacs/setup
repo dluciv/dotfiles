@@ -54,8 +54,13 @@
        ["Status" magit-status])))
 
 ;; === Org дополнительные настройки
-;(setq-default org-display-custom-times t)
-;(setq-default org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
+
+{{- if .windows }}
+; В Винде дни недели явно печатаются в однобайтной кодировке, хотя файл в UTF-8. Лучше никак, чем так.
+(setq-default org-display-custom-times t)
+(setq-default org-time-stamp-custom-formats '("<%F>" . "<%F %T>"))
+{{- end }}
+
 (use-package org
   :custom
   (org-directory "{{ .home_dir }}/ORG/")
