@@ -13,9 +13,6 @@ xmodmap ~/.Xmodmap
 
 # -- apps --
 
-ferdium_parms='--enable-features=WaylandWindowDecorations --ozone-platform-hint=wayland'
-
-
 else
 
 # -- system --
@@ -41,7 +38,8 @@ rm ~/.cache/*rofi*
 
 #ionice -c 3 -- nice nohup rambox &>/dev/null &
 
-ionice -c 3 -- nice ferdium $ferdium_parms &>/dev/null &|
+# Ferdium
+frdm &>/dev/null &|
 
 if command -v 64gram-desktop >/dev/null; then
   ionice -c 3 -- nice 64gram-desktop &>/dev/null &|

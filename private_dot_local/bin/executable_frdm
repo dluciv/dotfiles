@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+[[ "$XDG_SESSION_TYPE" == "wayland" ]] && ferdium_parms='--enable-features=WaylandWindowDecorations --ozone-platform-hint=wayland' || ferdium_parms=''
+ionice -c 3 -- nice ferdium $ferdium_parms
