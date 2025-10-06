@@ -1,0 +1,3 @@
+SUBURL='https://...'
+WEBSECRET='...password...'
+HCLIBIN=/.../.../HiddifyCli

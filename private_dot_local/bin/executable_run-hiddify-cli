@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+. ~/.config/hiddify-cli/config.run
+
+if command -v $HCLIBIN 1>/dev/null; then
+
+  $HCLIBIN run \
+    --log-level warn \
+    --web-port 16756 \
+    --web-secret $WEBSECRET \
+    --hiddify ~/.config/hiddify-cli/config.json \
+    --config $SUBURL
+
+else
+
+  >&2 echo WTF
+
+fi
