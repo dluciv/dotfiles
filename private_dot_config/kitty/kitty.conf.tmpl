@@ -82,6 +82,8 @@ clipboard_control write-primary write-clipboard no-append read-primary-ask read-
 
 # Open new tab for MC
 map shift+enter send_text application kitty @ launch --type=tab --cwd=current\x20
+# Open current directory
+map ctrl+` send_text application \x20open .\n
 
 # Interaction
 # env TERM_PROGRAM=KovIdTTY
