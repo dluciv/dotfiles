@@ -87,7 +87,7 @@
 {{ if lookPath "pdftotext" -}}
 [diff "pdftotext"]
 	binary = true
-	textconv = sh -c 'pdftotext -layout "$0" -enc UTF-8 -'
+	textconv = sh -c 'pdftotext -layout "$0" -enc UTF-8 - 2>/dev/null'
 	prompt = false
 
 {{ end -}}
