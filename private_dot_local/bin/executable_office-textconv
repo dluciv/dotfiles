@@ -34,15 +34,14 @@ textconv_document () {
   # Use soffice as universal fallback tool & for RTF
   if installed soffice; then
     tmpdir=$(mktemp -d)
-    cp "$inpfile" "$tmpdir"
+    ln -s "$(realpath "$inpfile")" "${tmpdir}/convert.${inpsufx}"
     pushd "$tmpdir" &>/dev/null || exit 1
 
     if installed pandoc; then # RTF
-      tmphtmlbase="${inpbase%.*}.html"
-      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "$inpfile" &>/dev/null
-      pandoc -t markdown -f html "$tmphtmlbase"
+      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "convert.${inpsufx}" &>/dev/null
+      pandoc -t markdown -f html convert.html
     else
-      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "$inpfile" 2>/dev/null
+      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "convert.${inpsufx}" 2>/dev/null
     fi
 
     popd &>/dev/null || exit 1
@@ -55,28 +54,27 @@ textconv_document () {
 
 textconv_spreadsheet () {
   tmpdir=$(mktemp -d)
-  tmphtmlbase="${inpbase%.*}.html"
-  cp "$inpfile" "$tmpdir"
+  ln -s "$(realpath "$inpfile")" "${tmpdir}/convert.${inpsufx}"
+  pushd "$tmpdir" &>/dev/null || exit 1
 
   if installed soffice; then
-    pushd "$tmpdir" &>/dev/null || exit 1
-    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "$tmpdir/$inpbase" &>/dev/null
-    popd &>/dev/null || exit 1
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "convert.${inpsufx}" &>/dev/null
   elif installed ssconvert; then
-    ssconvert "$tmpdir/$inpbase" "$tmpdir/$tmphtmlbase" &>/dev/null
+    ssconvert "convert.${inpsufx}" "convert.html" &>/dev/null
   else
     echo "No GNUmeric ssconvert or soffice installed..." >&2
     exit 1
   fi
+  popd &>/dev/null || exit 1
 
   if installed pandoc; then
-    pandoc -t markdown -f html "$tmpdir/$tmphtmlbase"
+    pandoc -t markdown -f html "${tmpdir}/convert.html"
   elif installed links; then
-    links -dump "$tmpdir/$tmphtmlbase" 2>/dev/null
+    links -dump "${tmpdir}/convert.html" 2>/dev/null
   elif installed w3m; then
-    w3m -dump "$tmpdir/$tmphtmlbase" 2>/dev/null
+    w3m -dump "${tmpdir}/convert.html" 2>/dev/null
   elif installed lynx; then
-    lynx -dump -force_html "$tmpdir/$tmphtmlbase" 2>/dev/null
+    lynx -dump -force_html "${tmpdir}/convert.html" 2>/dev/null
   else
     echo "No pandoc or links or w3m or lynx installed..." >&2
     exit 1
@@ -89,12 +87,12 @@ textconv_slides () {
   if installed soffice && installed pdftotext; then
 
     tmpdir=$(mktemp -d)
-    cp "$inpfile" "$tmpdir"
-    pushd "$tmpdir" &>/dev/null || exit 1
-    tmppdfbase="${inpbase%.*}.pdf"
+    ln -s "$(realpath "$inpfile")" "${tmpdir}/convert.${inpsufx}"
 
-    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to pdf "$inpfile" &>/dev/null
-    textconv_pdf "$tmppdfbase"
+    pushd "$tmpdir" &>/dev/null || exit 1
+
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to pdf "convert.${inpsufx}" &>/dev/null
+    textconv_pdf "convert.pdf"
 
     popd &>/dev/null || exit 1
     rm -rf "$tmpdir"
