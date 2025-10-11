@@ -9,7 +9,7 @@ installed () {
 }
 
 textconv_pdf () {
-  pdftotext -layout "$inpfile" -enc UTF-8 - 2>/dev/null
+  pdftotext -layout "$1" -enc UTF-8 - 2>/dev/null
 }
 
 textconv_document () {
@@ -86,10 +86,20 @@ textconv_spreadsheet () {
 }
 
 textconv_slides () {
-  if installed soffice; then
-    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "$inpfile"
+  if installed soffice && installed pdftotext; then
+
+    tmpdir=$(mktemp -d)
+    cp "$inpfile" "$tmpdir"
+    pushd "$tmpdir" &>/dev/null || exit 1
+    tmppdfbase="${inpbase%.*}.pdf"
+
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to pdf "$inpfile" &>/dev/null
+    textconv_pdf "$tmppdfbase"
+
+    popd &>/dev/null || exit 1
+    rm -rf "$tmpdir"
   else
-    echo "No soffice installed..." >&2
+    echo "No soffice & pdftotext installed..." >&2
     exit 1
   fi
 }
@@ -100,7 +110,7 @@ prepare_output () {
 
   case "$inpsufx" in
     pdf)
-      textconv_pdf
+      textconv_pdf "$inpfile"
     ;;
     odt|docx|doc|rtf)
       textconv_document
