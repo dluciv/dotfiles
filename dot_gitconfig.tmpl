@@ -60,61 +60,70 @@
 
 {{/* Windows =) */ -}}
 
-{{ if lookPath "pandoc" -}}
+{{ if lookPath "office-textconv" -}}
+[diff "office-textconv"]
+	# Converts office docs + PDFs to text to diff them
+	binary = true
+	textconv = office-textconv
+	prompt = false
+
+{{ else -}}
+  {{ if lookPath "pandoc" -}}
 [diff "pandoc"]
 	binary = true
 	textconv = pandoc --to=markdown
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "catdoc" -}}
+  {{ if lookPath "catdoc" -}}
 [diff "catdoc"]
 	binary = true
 	textconv = catdoc
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "antiword" -}}
+  {{ if lookPath "antiword" -}}
 [diff "antiword"]
 	binary = true
 	textconv = sh -c 'antiword "$0"'
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "pdftotext" -}}
+  {{ if lookPath "pdftotext" -}}
 [diff "pdftotext"]
 	binary = true
 	textconv = sh -c 'pdftotext -layout "$0" -enc UTF-8 - 2>/dev/null'
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "soffice" -}}
+  {{ if lookPath "soffice" -}}
 [diff "soffice"]
 	binary = true
 	textconv = sh -c 'soffice --headless --cat "$0"'
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "ssconvert" -}}
+  {{ if lookPath "ssconvert" -}}
 [diff "ssconvert"]
 	binary = true
 	textconv = sh -c 'ssconvert --export-type=Gnumeric_stf:stf_assistant --export-options= "$0"'
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
 
-{{ if lookPath "spreadsheet-git-filter" -}}
+  {{ if lookPath "spreadsheet-git-filter" -}}
 [diff "spreadsheet-git-filter"]
 	binary = true
 	textconv = sh -c 'spreadsheet-git-filter "$0"'
 	prompt = false
 
-{{ end -}}
+  {{ end -}}
+{{end -}}
 
 [alias]
 	wdiff='diff --word-diff=color --unified=1'

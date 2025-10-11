@@ -1,34 +1,53 @@
-{{ if not .windows }}
+{{ if not .windows -}}
 
-{{ if lookPath "pandoc" -}}
+  {{ if lookPath "office-textconv" -}}
+*.odt  diff=office-textconv
+*.docx diff=office-textconv
+*.doc  diff=office-textconv
+*.rtf  diff=office-textconv
+
+*.ods   diff=office-textconv
+*.xls   diff=office-textconv
+*.xlsx  diff=office-textconv
+
+*.odp   diff=office-textconv
+*.ppt   diff=office-textconv
+*.pptx  diff=office-textconv
+
+*.pdf   diff=office-textconv
+{{ else -}}
+
+    {{ if lookPath "pandoc" -}}
 *.docx diff=pandoc
 *.pptx diff=pandoc
 *.odt  diff=pandoc
 *.rtf  diff=pandoc
-{{ end -}}
+    {{ end -}}
 
-{{ if lookPath "spreadsheet-git-filter" -}}
+    {{ if lookPath "spreadsheet-git-filter" -}}
 *.ods   diff=spreadsheet-git-filter
 *.xls   diff=spreadsheet-git-filter
 *.xlsx  diff=spreadsheet-git-filter
-{{ else if lookPath "ssconvert" -}}
+    {{ else if lookPath "ssconvert" -}}
 *.xls   diff=ssconvert
 *.xlsx  diff=ssconvert
-{{ else if lookPath "pandoc" -}}
+    {{ else if lookPath "pandoc" -}}
 *.ods  diff=pandoc
 *.xlsx diff=pandoc
-{{ end -}}
+    {{ end -}}
 
-{{ if lookPath "antiword" -}}
+    {{ if lookPath "antiword" -}}
 *.doc  diff=antiword
-{{ else if lookPath "catdoc" -}}
+    {{ else if lookPath "catdoc" -}}
 *.doc  diff=catdoc
-{{ else if lookPath "soffice" -}}
+    {{ else if lookPath "soffice" -}}
 *.doc  diff=soffice
-{{ end -}}
+    {{ end -}}
 
-{{ if lookPath "pdftotext" -}}
+    {{ if lookPath "pdftotext" -}}
 *.pdf  diff=pdftotext
-{{ end -}}
+    {{ end -}}
+
+  {{ end -}}
 
 {{ end -}}

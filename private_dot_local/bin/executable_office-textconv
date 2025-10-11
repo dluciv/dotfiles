@@ -1,0 +1,124 @@
+#!/bin/bash
+
+inpfile="$1" # Git pinks?.. $@?..
+inpbase=$(basename "$inpfile")
+inpsufx=${inpbase##*.}
+
+installed () {
+  command -v "$1" &>/dev/null;
+}
+
+textconv_pdf () {
+  pdftotext -layout "$inpfile" -enc UTF-8 - 2>/dev/null
+}
+
+textconv_document () {
+  case "$inpsufx" in
+    odt|docx)
+      if installed pandoc; then
+        pandoc -t markdown -f docx "$inpfile"
+        return
+      fi
+    ;;
+    doc)
+      if installed antiword; then
+        catdoc "$inpfile"
+        return
+      elif installed catdoc; then
+        catdoc <"$inpfile"
+        return
+      fi
+    ;;
+  esac
+
+  # Use soffice as universal fallback tool & for RTF
+  if installed soffice; then
+    tmpdir=$(mktemp -d)
+    cp "$inpfile" "$tmpdir"
+    pushd "$tmpdir" &>/dev/null || exit 1
+
+    if installed pandoc; then # RTF
+      tmphtmlbase="${inpbase%.*}.html"
+      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "$inpfile" &>/dev/null
+      pandoc -t markdown -f html "$tmphtmlbase"
+    else
+      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "$inpfile" 2>/dev/null
+    fi
+
+    popd &>/dev/null || exit 1
+    rm -rf "$tmpdir"
+  else
+    echo "No pandoc or antiword or catdoc or soffice installed..." >&2
+    exit 1
+  fi
+}
+
+textconv_spreadsheet () {
+  tmpdir=$(mktemp -d)
+  tmphtmlbase="${inpbase%.*}.html"
+  cp "$inpfile" "$tmpdir"
+
+  if installed soffice; then
+    pushd "$tmpdir" &>/dev/null || exit 1
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "$tmpdir/$inpbase" &>/dev/null
+    popd &>/dev/null || exit 1
+  elif installed ssconvert; then
+    ssconvert "$tmpdir/$inpbase" "$tmpdir/$tmphtmlbase" &>/dev/null
+  else
+    echo "No GNUmeric ssconvert or soffice installed..." >&2
+    exit 1
+  fi
+
+  if installed pandoc; then
+    pandoc -t markdown -f html "$tmpdir/$tmphtmlbase"
+  elif installed links; then
+    links -dump "$tmpdir/$tmphtmlbase" 2>/dev/null
+  elif installed w3m; then
+    w3m -dump "$tmpdir/$tmphtmlbase" 2>/dev/null
+  elif installed lynx; then
+    lynx -dump -force_html "$tmpdir/$tmphtmlbase" 2>/dev/null
+  else
+    echo "No pandoc or links or w3m or lynx installed..." >&2
+    exit 1
+  fi
+
+  rm -rf "$tmpdir"
+}
+
+textconv_slides () {
+  if installed soffice; then
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "$inpfile"
+  else
+    echo "No soffice installed..." >&2
+    exit 1
+  fi
+}
+
+prepare_output () {
+  md5sum -b "$inpfile" # To better visualize file change without textual representation change
+  echo '========================================'
+
+  case "$inpsufx" in
+    pdf)
+      textconv_pdf
+    ;;
+    odt|docx|doc|rtf)
+      textconv_document
+    ;;
+    ods|xlsx|xls)
+      textconv_spreadsheet
+    ;;
+    odp|pptx|ppt)
+      textconv_slides
+    ;;
+    *)
+      echo "How to convert '$inpfile'?.." >&2
+    ;;
+  esac
+}
+
+if [[ -t 1 ]]; then
+  prepare_output | "${PAGER:-less}"
+else
+  prepare_output
+fi
