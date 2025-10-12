@@ -1,6 +1,6 @@
 #!/bin/bash
 
-inpfile="$1" # Git pinks?.. $@?..
+inpfile="$1"
 inpbase=$(basename "$inpfile")
 inpsufx=${inpbase##*.}
 
