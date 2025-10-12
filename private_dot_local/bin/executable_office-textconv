@@ -8,15 +8,28 @@ installed () {
   command -v "$1" &>/dev/null;
 }
 
-textconv_pdf () {
+cat_pdf () {
   pdftotext -layout "$1" -enc UTF-8 - 2>/dev/null
+}
+
+textconv_pdf () {
+  cat_pdf "$inpfile"
 }
 
 textconv_document () {
   case "$inpsufx" in
     odt|docx)
       if installed pandoc; then
-        pandoc -t markdown -f docx "$inpfile"
+        pandoc -t plain -f docx "$inpfile"
+        return
+      fi
+    ;;
+    rtf)
+      if installed pandoc; then
+        pandoc -t plain -f rtf "$inpfile"
+        return
+      elif installed unrtf; then
+        unrtf --text "$inpfile"
         return
       fi
     ;;
@@ -31,23 +44,18 @@ textconv_document () {
     ;;
   esac
 
-  # Use soffice as universal fallback tool & for RTF
+  # Use soffice as universal fallback tool
   if installed soffice; then
     tmpdir=$(mktemp -d)
     ln -s "$(realpath "$inpfile")" "${tmpdir}/convert.${inpsufx}"
     pushd "$tmpdir" &>/dev/null || exit 1
 
-    if installed pandoc; then # RTF
-      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to html "convert.${inpsufx}" &>/dev/null
-      pandoc -t markdown -f html convert.html
-    else
-      SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "convert.${inpsufx}" 2>/dev/null
-    fi
+    SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --cat "convert.${inpsufx}" 2>/dev/null
 
     popd &>/dev/null || exit 1
     rm -rf "$tmpdir"
   else
-    echo "No pandoc or antiword or catdoc or soffice installed..." >&2
+    echo "No pandoc or antiword or catdoc or unrtf or soffice installed..." >&2
     exit 1
   fi
 }
@@ -68,7 +76,7 @@ textconv_spreadsheet () {
   popd &>/dev/null || exit 1
 
   if installed pandoc; then
-    pandoc -t markdown -f html "${tmpdir}/convert.html"
+    pandoc -t plain -f html "${tmpdir}/convert.html"
   elif installed links; then
     links -dump "${tmpdir}/convert.html" 2>/dev/null
   elif installed w3m; then
@@ -92,7 +100,7 @@ textconv_slides () {
     pushd "$tmpdir" &>/dev/null || exit 1
 
     SAL_DISABLE_OPENCL=1 SAL_DISABLEGL=1 soffice --headless --convert-to pdf "convert.${inpsufx}" &>/dev/null
-    textconv_pdf "convert.pdf"
+    cat_pdf "convert.pdf"
 
     popd &>/dev/null || exit 1
     rm -rf "$tmpdir"
@@ -108,7 +116,7 @@ prepare_output () {
 
   case "$inpsufx" in
     pdf)
-      textconv_pdf "$inpfile"
+      textconv_pdf
     ;;
     odt|docx|doc|rtf)
       textconv_document
