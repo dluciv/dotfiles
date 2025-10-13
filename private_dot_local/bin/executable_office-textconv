@@ -111,8 +111,8 @@ textconv_slides () {
 }
 
 prepare_output () {
-  md5sum -b "$inpfile" # To better visualize file change without textual representation change
-  echo '========================================'
+  printf "========== MD5: %s ==========\n" "$(md5sum -b "$inpfile" | cut -d ' ' -f 1)"
+  # MD5 SUM To better visualize file change without textual representation change
 
   case "$inpsufx" in
     pdf)
