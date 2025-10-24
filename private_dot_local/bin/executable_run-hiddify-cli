@@ -2,14 +2,32 @@
 
 . ~/.config/hiddify-cli/config.run
 
-if command -v $HCLIBIN 1>/dev/null; then
-
-  $HCLIBIN run \
+runhcli () {
+  ionice -c 3 -- nice $HCLIBIN run \
     --log-level warn \
     --web-port 16756 \
     --web-secret $WEBSECRET \
     --hiddify ~/.config/hiddify-cli/config.json \
     --config $SUBURL
+}
+
+if command -v $HCLIBIN 1>/dev/null; then
+
+  case $1 in
+    start)
+      runhcli &>/dev/null &!
+      echo $! >"${XDG_RUNTIME_DIR}/hcli.pid"
+    ;;
+
+    stop)
+      pid=$(cat "${XDG_RUNTIME_DIR}/hcli.pid") && kill $pid || killall $HCLIBIN
+      rm "${XDG_RUNTIME_DIR}/hcli.pid"
+    ;;
+
+    *)
+      runhcli
+    ;;
+  esac
 
 else
 
