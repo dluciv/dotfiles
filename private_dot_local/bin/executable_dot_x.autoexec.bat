@@ -55,8 +55,11 @@ command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || S
 { sleep 45; ionice -c 3 -- nice $SYNCTHINGTRAY --wait } &|
 { sleep 5;  nice ~/_/safe_wf/tools/pytraycharmap/run.sh cccp-p &>/dev/null } &|
 
-{ sleep 5;  nice nekoray &>/dev/null } &|
-# { sleep 5;  nice hiddify &>/dev/null } &|
-# { sleep 5; run-hiddify-cli start } &|
+{
+  sleep 5;
+  if ! nice nekoray &>/dev/null; then
+    run-hiddify-cli start
+  fi
+} &|
 
 echo `date`: $USER : $0 end >> /tmp/_.xwx.log
