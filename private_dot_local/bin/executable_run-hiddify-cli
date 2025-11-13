@@ -3,12 +3,14 @@
 . ~/.config/hiddify-cli/config.run
 
 runhcli () {
+  pushd $(dirname $(readlink $HCLIBIN)) &>/dev/null
   ionice -c 3 -- nice $HCLIBIN run \
     --log-level warn \
     --web-port 16756 \
     --web-secret $WEBSECRET \
     --hiddify ~/.config/hiddify-cli/config.json \
     --config $SUBURL
+  popd &>/dev/null
 }
 
 if command -v $HCLIBIN 1>/dev/null; then
