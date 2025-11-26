@@ -4,12 +4,6 @@ set -o allexport
 
 . $ZDOTDIR/.zprofrc
 
-{{- if .termux }}
-TMPDIR=$PREFIX/tmp
-{{- else }}
-TMPDIR=/tmp
-{{- end }}
-TMP=$TMPDIR
 
 XDG_CACHE_HOME=~/.cache
 # It is incorrect to use such a variable, but it is too common
@@ -30,6 +24,15 @@ xdg_config_dirs=($XDG_CONFIG_HOME $xdg_config_dirs)
 {{- if .darwin }}
 XDG_RUNTIME_DIR=$XDG_CACHE_HOME
 {{- end }}
+
+{{- if .termux }}
+TMPDIR=$PREFIX/tmp
+{{- else if .linux }}
+TMPDIR="${XDG_RUNTIME_DIR:-/tmp}"
+{{- else }}
+TMPDIR=/tmp
+{{- end }}
+TMP=$TMPDIR
 
 {{- if .windows }}
 case "$OSTYPE" in
