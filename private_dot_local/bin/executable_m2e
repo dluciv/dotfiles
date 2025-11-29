@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# https://aur.archlinux.org/packages/python-extract-msg
+# https://pypi.org/project/extract-msg/
+# https://github.com/TeamMsgExtractor/msg-extractor
+
+python3 -m extract_msg --use-filename --html --allow-fallback --save-header $@
