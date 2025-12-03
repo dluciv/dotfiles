@@ -34,6 +34,8 @@ TMPDIR=/tmp
 {{- end }}
 TMP=$TMPDIR
 
+mkdir -p "${TMPDIR}/downloads"
+
 {{- if .windows }}
 case "$OSTYPE" in
   cygwin*)
