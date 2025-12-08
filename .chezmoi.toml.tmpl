@@ -25,6 +25,9 @@
 {{-   if or (eq (env "XDG_SESSION_TYPE") "tty" "") (ne (env "SSH_TTY") "") -}}
 {{-     $server = true   -}}
 {{-     $headless = true -}}
+{{-     if eq "clover" .chezmoi.hostname -}}
+{{-       (warnf "I remember host [%s] is headful, run from GUI" .chezmoi.hostname) -}}
+{{-     end -}}
 {{-   end -}}
 {{- else if eq .chezmoi.os "windows" -}}
 {{-   $windows = true -}}
