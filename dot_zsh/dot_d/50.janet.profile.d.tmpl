@@ -1,0 +1,7 @@
+# chezmoi:template:line-endings=lf
+{{- if not .windows -}}
+JANET_TREE=$HOME/.local/share/jpm_tree
+JANET_PATH=$JANET_TREE/lib
+JANET_BINPATH=$HOME/.local/bin
+{{- else -}}
+{{- end }}
