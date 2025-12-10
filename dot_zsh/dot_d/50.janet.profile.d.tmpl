@@ -2,6 +2,8 @@
 {{- if not .windows -}}
 JANET_TREE=$HOME/.local/share/jpm_tree
 JANET_PATH=$JANET_TREE/lib
-JANET_BINPATH=$HOME/.local/bin
+# JANET_BINPATH=$HOME/.local/bin
+JANET_BINPATH=$JANET_TREE/bin
+path_suffix+=( $JANET_BINPATH )
 {{- else -}}
 {{- end }}
