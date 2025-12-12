@@ -34,7 +34,7 @@ TMPDIR=/tmp
 {{- end }}
 TMP=$TMPDIR
 
-mkdir -p "${TMPDIR}/downloads"
+mkdir -p "${TMP}/downloads" "${TMP}/tmp" "${TMP}/mnt"
 
 {{- if .windows }}
 case "$OSTYPE" in
