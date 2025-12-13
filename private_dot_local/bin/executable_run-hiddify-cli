@@ -26,8 +26,18 @@ if command -v $HCLIBIN 1>/dev/null; then
       rm "${XDG_RUNTIME_DIR}/hcli.pid"
     ;;
 
-    *)
+    run)
       runhcli
+    ;;
+
+    *)
+      pid=$(cat "${XDG_RUNTIME_DIR}/hcli.pid")
+      if [[ $? == 0 ]] && kill -0 $pid; then
+        echo "Running, pif $pid"
+        netstat -tpln | grep HiddifyCli
+      else
+        echo "Likely not runnging"
+      fi
     ;;
   esac
 
