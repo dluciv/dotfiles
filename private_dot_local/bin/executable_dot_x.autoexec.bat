@@ -57,9 +57,9 @@ command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || S
 
 {
   sleep 5;
-  if ! nice nekoray &>/dev/null; then
-    run-hiddify-cli start
-  fi
+  if   nice hiddify &>/dev/null; then
+  elif nice nekoray &>/dev/null; then
+  else run-hiddify-cli start; fi
 } &|
 
 echo `date`: $USER : $0 end >> /tmp/_.xwx.log
