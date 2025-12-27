@@ -28,6 +28,28 @@
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
 
+;; === Это чтобы выглядывать из Чебурнета
+(defcustom cheburnet-proxy "PROXY 127.0.0.1:12334"
+  "Прокси из Чебурнета. HTTP — \"PROXY хоcт:порт\", SOCKS — \"SOCKS хоcт:порт\""
+  :type 'string
+  :group 'cheburnet)
+
+(setq-default
+ url-proxy-locator
+ (lambda (url host)
+   (cond ((string-match-p
+           (concat
+            "\\("
+            "melpa\\.org\\|"
+            "elpa\\.gnu\\.org\\|"
+            "elpa\\.nongnu\\.org"
+            "\\)")
+           host)
+          cheburnet-proxy ; можно для отладки (progn (message "Ту-ту!") cheburnet-proxy)
+          )
+         t (url-default-find-proxy-for-url url host)
+         )))
+
 ;; === Это чтобы работали пакеты
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
