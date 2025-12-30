@@ -25,6 +25,18 @@
 (setq-default file-name-coding-system 'utf-8)
 {{- end }}
 
+;; === Это где лежат файлы для org-agenda
+(defcustom
+  org-agenda-file-masks
+  '("~/ORG/TODO/*.org" "~/ORG/TODO/**/*.org")
+  "Маски файлов для org-mode agendа"
+  :type '(repeat string)
+  :group 'orgmode)
+
+(setopt
+  org-agenda-files
+  (mapcan #'file-expand-wildcards org-agenda-file-masks))
+
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
 
