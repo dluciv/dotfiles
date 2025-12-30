@@ -79,7 +79,7 @@
       ("File"
        ["Save buffers" save-some-buffers])
       ("Org"
-       ["Calendar" cfw:open-org-calendar]
+       ["Calendar" calfw-org-open-calendar]
        ["Capture" org-capture]
        ["Agenda List" org-agenda-list]
        ["Global TODO List" org-todo-list]
@@ -136,9 +136,9 @@
   :init
   (require 'calfw-org)
   :config
-  (setq cfw:display-calendar-holidays nil)
+  (setq calfw-display-calendar-holidays nil)
   :bind
-  (("C-c o l" . cfw:open-org-calendar))
+  (("C-c o l" . calfw-org-open-calendar))
   )
 
 ;; === ORG-LaTeX
