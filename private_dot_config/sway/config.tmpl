@@ -54,6 +54,13 @@ include input_devices.conf
     bindsym $mod+Return exec $term
     bindsym $mod+KP_Enter exec $term
 
+    {{- if lookPath "far2l" }}
+
+    # Start far2l
+    bindsym --to-code $mod+Shift+Return   exec sh -c 'COLORTERM=truecolor far2l --wayland'
+    bindsym --to-code $mod+Shift+KP_Enter exec sh -c 'COLORTERM=truecolor far2l --wayland'
+    {{- end }}
+
     # Kill focused window
     bindsym --to-code $mod+Shift+q kill
 
