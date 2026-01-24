@@ -8,33 +8,33 @@ function yy() {
 }
 
 # https://chat.deepseek.com/share/tqoz48p4zclmoa9hac
-# Функция для запуска файлового менеджера
-launch-file-manager() {
-    local fg_cmd="yy"  # или "lf" для lf
+function quick-fm {
+    local cmd="yy"
 
-    # Если уже в файловом менеджере, просто выходим
-    if [[ -n "$YA_ZI_PID" ]] || [[ -n "$LF_PID" ]]; then
-        zle send-break
-        return 0
-    fi
-
-    # Сохраняем текущую командную строку в историю
+    # Сохраняем текущую команду если нужно
     if [[ -n "$BUFFER" ]]; then
-        print -rs -- "$BUFFER"
+        # Можно сохранить в переменную
+        _SAVED_BUFFER="$BUFFER"
         BUFFER=""
+        zle redisplay
     fi
 
-    # Запускаем файловый менеджер
+    # Запускаем
     zle push-input
-    BUFFER="$fg_cmd"
+    BUFFER="$cmd"
     zle accept-line
 }
 
-# Привязка двойного Escape
-zle -N launch-file-manager
-bindkey '\e\e' launch-file-manager  # Двойной Escape
+# Восстановление команды после FM
+function restore-cmd {
+    if [[ -n "$_SAVED_BUFFER" ]]; then
+        BUFFER="$_SAVED_BUFFER"
+        _SAVED_BUFFER=""
+        zle end-of-line
+    fi
+}
 
-# Одиночный Escape работает как обычно (для vim, less и т.д.)
-bindkey '^[' vi-cmd-mode  # Если используете vim-режим
-# или
-bindkey '^[' undo  # Если в emacs-режиме - отмена
+zle -N quick-fm
+zle -N restore-cmd
+bindkey '\e\e' quick-fm          # Двойной Escape запускает FM
+bindkey '^x^e' restore-cmd       # Ctrl+X E восстанавливает команду
