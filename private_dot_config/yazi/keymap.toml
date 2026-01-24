@@ -5,6 +5,6 @@
 [mgr]
 
 prepend_keymap = [
-	{ on = "<A-Esc>",   run = "quit", desc = "Quit the process" },
-	{ on = "<Esc-Esc>", run = "quit", desc = "Quit the process" }
+	{ on = "<A-Esc>", run = "quit", desc = "Quit the process" },
+	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" }
 ]
