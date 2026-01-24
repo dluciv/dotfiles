@@ -21,7 +21,7 @@ function quick-fm {
 
     # Запускаем
     zle push-input
-    BUFFER="$cmd"
+    BUFFER=" $cmd" # Пробел чтобы без истории
     zle accept-line
 }
 
