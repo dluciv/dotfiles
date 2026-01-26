@@ -73,6 +73,10 @@ AppData/
 .local/share/applications/yazi-open.desktop
 {{- end }}
 
+{{- if not (lookPath "far2l") }}
+.local/share/applications/far2l-open.desktop
+{{- end }}
+
 {{- if not (lookPath "janet") }}
 .zsh/.d/50.janet.profile.d
 {{- end }}
