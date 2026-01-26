@@ -63,6 +63,8 @@
     abs_local_cfg_dir = "{{ $abs_local_cfg_dir }}"
     abs_roamg_cfg_dir = "{{ $abs_roamg_cfg_dir }}"
 
+    fav_term = "{{ if $windows }}wezterm{{ else }}kitty{{ end }}"
+
 [data.tools]
     # misc tools
 {{- if $linux }}
