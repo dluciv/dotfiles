@@ -26,7 +26,7 @@ desc = "Quit Yazi"
 
 {{- if (and (lookPath "cb") (not .termux)) }}
 [[mgr.prepend_keymap]]
-on = ["<C-y>", "c"]
+on = ["<C-y>", "y"]
 run = ["plugin system-clipboard"]
 desc = "cb copy"
 
