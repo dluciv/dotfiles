@@ -2,11 +2,30 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[mgr]
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "windows"
+run  = 'shell "cmd.exe" --block'
+desc = "Open CMD here"
 
-prepend_keymap = [
-	{ on   = "!", for  = "windows", run  = 'shell "cmd.exe" --block', desc = "Open CMD here" },
-	{ on   = "!", for  = "unix", run  = 'shell "$SHELL" --block', desc = "Open $SHELL here" },
-	{ on = "<A-Esc>", run = "quit", desc = "Quit the process" },
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on = "<A-Esc>"
+run = "quit"
+desc = "Quit the process"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "y"]
+run = ["plugin system-clipboard"]
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "p"]
+run = 'shell "cb paste" --block'
+
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
-]
+
