@@ -5,6 +5,8 @@
 [mgr]
 
 prepend_keymap = [
+	{ on   = "!", for  = "windows", run  = 'shell "cmd.exe" --block', desc = "Open CMD here" },
+	{ on   = "!", for  = "unix", run  = 'shell "$SHELL" --block', desc = "Open $SHELL here" },
 	{ on = "<A-Esc>", run = "quit", desc = "Quit the process" },
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
 ]
