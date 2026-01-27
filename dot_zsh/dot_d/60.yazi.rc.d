@@ -37,4 +37,5 @@ function restore-cmd {
 zle -N quick-fm
 zle -N restore-cmd
 bindkey '\e\e' quick-fm          # Двойной Escape запускает FM
+bindkey '^o'   quick-fm          # Ctrl+O запускает FM
 bindkey '^x^e' restore-cmd       # Ctrl+X E восстанавливает команду

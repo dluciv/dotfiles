@@ -17,15 +17,25 @@ desc = "Open $SHELL here"
 [[mgr.prepend_keymap]]
 on = "<A-Esc>"
 run = "quit"
-desc = "Quit the process"
+desc = "Quit Yazi"
 
 [[mgr.prepend_keymap]]
-on = ["<C-y>", "y"]
+on = "<C-o>"
+run = "quit"
+desc = "Quit Yazi"
+
+{{- if (lookPath "cb") }}
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "c"]
 run = ["plugin system-clipboard"]
+desc = "cb copy"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "p"]
 run = 'shell "cb paste" --block'
+desc = "cb paste"
+
+{{- end }}
 
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
 
