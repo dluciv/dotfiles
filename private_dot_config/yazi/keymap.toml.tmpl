@@ -24,7 +24,7 @@ on = "<C-o>"
 run = "quit"
 desc = "Quit Yazi"
 
-{{- if (lookPath "cb") }}
+{{- if (and (lookPath "cb") (not .termux)) }}
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "c"]
 run = ["plugin system-clipboard"]
