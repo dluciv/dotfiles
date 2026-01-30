@@ -25,6 +25,7 @@ run = "quit"
 desc = "Quit Yazi"
 
 {{- if (and (lookPath "cb") (not .termux)) }}
+# System clipboard: ya pkg add orhnk/system-clipboard
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
 run = ["plugin system-clipboard"]
@@ -36,6 +37,12 @@ run = 'shell "cb paste" --block'
 desc = "cb paste"
 
 {{- end }}
+
+# Command: ya pkg add KKV9/command
+[[mgr.prepend_keymap]]
+on   = [ "c", "p" ]
+run  = "plugin command"
+desc = "Open command palette"
 
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
 
