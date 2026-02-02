@@ -38,21 +38,21 @@ desc = "cb paste"
 
 {{- end }}
 
-{{- if (lookPath "xclip-copyfile") }}
+{{- if (lookPath "cccp-files") }}
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
-run = 'shell -- xclip-copyfile %s'
+run = 'shell -- cccp-files copy %s'
 desc = "yank selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "x"]
-run = 'shell -- xclip-cutfile %s'
+run = 'shell -- cccp-files cut %s'
 desc = "cut selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "p"]
-run = 'shell -- xclip-pastefile %s'
+run = 'shell -- cccp-files paste'
 desc = "paste selected from session cb"
 
 {{- end }}
