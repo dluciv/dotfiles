@@ -24,7 +24,7 @@ on = "<C-o>"
 run = "quit"
 desc = "Quit Yazi"
 
-{{- if (and (lookPath "cb") (not .termux)) }}
+{{- if (and false (lookPath "cb") (not .termux)) }}
 # System clipboard: ya pkg add orhnk/system-clipboard
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
@@ -35,6 +35,25 @@ desc = "cb copy"
 on = ["<C-y>", "p"]
 run = 'shell "cb paste" --block'
 desc = "cb paste"
+
+{{- end }}
+
+{{- if (lookPath "xclip-copyfile") }}
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "y"]
+run = 'shell -- xclip-copyfile %s'
+desc = "yank selected to session cb"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "x"]
+run = 'shell -- xclip-cutfile %s'
+desc = "cut selected to session cb"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "p"]
+run = 'shell -- xclip-pastefile %s'
+desc = "paste selected from session cb"
 
 {{- end }}
 
