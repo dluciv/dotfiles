@@ -42,17 +42,17 @@ desc = "cb paste"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
-run = 'shell -- cccp-files copy %s'
+run = 'shell -- fxcv copy %s'
 desc = "yank selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "x"]
-run = 'shell -- cccp-files cut %s'
+run = 'shell -- fxcv cut %s'
 desc = "cut selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "p"]
-run = 'shell -- cccp-files paste'
+run = 'shell -- fxcv paste'
 desc = "paste selected from session cb"
 
 {{- end }}
