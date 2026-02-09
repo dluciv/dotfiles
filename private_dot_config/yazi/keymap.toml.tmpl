@@ -63,5 +63,11 @@ on   = [ "c", "p" ]
 run  = "plugin command"
 desc = "Open command palette"
 
-#	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
 
+# Open folder
+[[mgr.prepend_keymap]]
+on = ["c", "<enter>"]
+run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open") }}open{{ else }}start{{ end }} %S"'
+desc = "System open"
+
+#	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
