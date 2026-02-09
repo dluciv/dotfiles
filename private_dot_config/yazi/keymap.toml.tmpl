@@ -70,4 +70,9 @@ on = ["c", "<enter>"]
 run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open") }}open{{ else }}start{{ end }} %S"'
 desc = "System open"
 
+[[mgr.prepend_keymap]]
+on = ["c", "."]
+run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open") }}open{{ else }}start{{ end }} ."'
+desc = "System open folder"
+
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
