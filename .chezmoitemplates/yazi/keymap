@@ -1,0 +1,78 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "windows"
+run  = 'shell "cmd.exe" --block'
+desc = "Open CMD here"
+
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on = "<A-Esc>"
+run = "quit"
+desc = "Quit Yazi"
+
+[[mgr.prepend_keymap]]
+on = "<C-o>"
+run = "quit"
+desc = "Quit Yazi"
+
+{{- if (and false (lookPath "cb") (not .termux)) }}
+# System clipboard: ya pkg add orhnk/system-clipboard
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "y"]
+run = ["plugin system-clipboard"]
+desc = "cb copy"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "p"]
+run = 'shell "cb paste" --block'
+desc = "cb paste"
+
+{{- end }}
+
+{{- if (lookPath "cccp-files") }}
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "y"]
+run = 'shell -- fxcv copy %s'
+desc = "yank selected to session cb"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "x"]
+run = 'shell -- fxcv cut %s'
+desc = "cut selected to session cb"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "p"]
+run = 'shell -- fxcv paste'
+desc = "paste selected from session cb"
+
+{{- end }}
+
+# Command: ya pkg add KKV9/command
+[[mgr.prepend_keymap]]
+on   = [ "c", "p" ]
+run  = "plugin command"
+desc = "Open command palette"
+
+
+# Open folder
+[[mgr.prepend_keymap]]
+on = ["c", "<enter>"]
+run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open") }}open{{ else }}start{{ end }} %S"'
+desc = "System open"
+
+[[mgr.prepend_keymap]]
+on = ["c", "."]
+run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open") }}open{{ else }}start{{ end }} ."'
+desc = "System open folder"
+
+#	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
