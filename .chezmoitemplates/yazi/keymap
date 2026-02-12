@@ -4,15 +4,15 @@
 
 [[mgr.prepend_keymap]]
 on   = "!"
+{{- if .windows }}
 for  = "windows"
 run  = 'shell "cmd.exe" --block'
 desc = "Open CMD here"
-
-[[mgr.prepend_keymap]]
-on   = "!"
+{{- else }}
 for  = "unix"
 run  = 'shell "$SHELL" --block'
 desc = "Open $SHELL here"
+{{- end }}
 
 [[mgr.prepend_keymap]]
 on = "<A-Esc>"
