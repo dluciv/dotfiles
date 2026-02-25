@@ -5,3 +5,7 @@ Include ~/.ssh/host_configs/*
 Host *
     SendEnv         *TERM TERM_* TERMINAL_* LANG LC_* LANGUAGE
     ForwardAgent    yes
+
+Host sk.*
+    # https://www.reddit.com/r/yubikey/comments/17hd7gm/ssh_agent_refused_operation_with_nonresident/
+    IdentityAgent   none
