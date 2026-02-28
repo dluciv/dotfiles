@@ -1,2 +1,9 @@
 [manager]
 show_hidden = true
+
+{{- if .headless }}
+
+[preview]
+max_width = 384
+max_height = 384
+{{- end }}
