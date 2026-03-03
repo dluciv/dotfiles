@@ -67,6 +67,9 @@ AppData/
 .zsh/.d/75.scoop-shims.profile.d
 {{- end }}
 
+{{ if or (not .darwin) (not (lookPath "zb")) -}}
+.zsh/.d/77.zerobrew.profile.d
+{{- end }}
 
 {{- if not (lookPath "yazi") }}
 .zsh/.d/60.yazi.rc.d
