@@ -43,17 +43,22 @@ desc = "cb paste"
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
 run = 'shell -- fxcv copy %s'
-desc = "yank selected to session cb"
+desc = "Yank selected to session cb"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>", "a"]
+run = 'shell -- fxcv attach %s'
+desc = "Attach selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "x"]
 run = 'shell -- fxcv cut %s'
-desc = "cut selected to session cb"
+desc = "Cut selected to session cb"
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "p"]
 run = 'shell -- fxcv paste'
-desc = "paste selected from session cb"
+desc = "Paste selected from session cb"
 
 {{- end }}
 
