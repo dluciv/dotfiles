@@ -57,8 +57,8 @@ command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || S
 
 {
   sleep 5;
-  if   nice hiddify &>/dev/null; then
-  elif nice nekoray &>/dev/null; then
+  if   nice nekoray &>/dev/null; then
+  elif nice hiddify &>/dev/null; then
   else run-hiddify-cli start; fi
 } &|
 
