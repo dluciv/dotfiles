@@ -1,3 +1,14 @@
+{{/*
+$ ya pkg list
+Plugins:
+	KKV9/command (523e6a5)
+	macydnah/office (41ebef8)
+Maybe...
+	boydaihungst/gvfs (30440c7)
+	orhnk/system-clipboard (888026c)
+	MasouShizuka/projects (198c2ba)
+*/ -}}
+
 [manager]
 show_hidden = true
 
@@ -8,7 +19,7 @@ max_width = 512
 max_height = 512
 {{- end }}
 
-{{- if (and (lookPath "libreoffice") (lookPath "pdftoppm") ) }}
+{{- if (and (lookPath "libreoffice") (lookPath "pdftoppm") (exec "sh" "-c" "ya pkg list | grep 'macydnah/office'") ) }}
 [plugin]
 
 prepend_preloaders = [
