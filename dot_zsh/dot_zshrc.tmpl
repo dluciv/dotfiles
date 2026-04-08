@@ -28,7 +28,7 @@ if ! tput cols &>/dev/null; then
 fi
 
 if which mcedit &>/dev/null; then
-  EDITOR=$(which mcedit)
+  EDITOR="$(which mcedit) -u"
 elif which nvim &>/dev/null; then
   EDITOR=$(which nvim)
 else
