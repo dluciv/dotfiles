@@ -1,0 +1,31 @@
+# chezmoi:template:line-endings=lf
+#!/bin/bash
+# https://chat.qwen.ai/s/t_d8ea5fe6-fa6c-441b-8c1a-287adc6f2687?fev=0.2.35
+
+{{- if .linux }}
+{{-   if (lookPath "systemd-run") }}
+
+systemd-run --user \
+  --slice=rconstrain.slice \
+  -p CPUWeight=512 \
+  -p IOWeight=1 \
+  -p MemoryMax=3G \
+  -p MemoryHigh=1.5G \
+  -- "$@"
+
+{{-   else }}
+
+local cmd=("$@")
+command -v ionice >/dev/null 2>&1 && cmd=(ionice -c 3 "${cmd[@]}")
+nice -n 20 "${cmd[@]}"
+
+{{-   end }}
+{{- else if .darwin }}
+
+nice -n 20 "$@"
+
+{{- else }}
+
+"$@"
+
+{{- end }}
