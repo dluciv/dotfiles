@@ -38,7 +38,7 @@ desc = "cb paste"
 
 {{- end }}
 
-{{- if (lookPath "cccp-files") }}
+{{- if (lookPath "fxcv") }}
 
 [[mgr.prepend_keymap]]
 on = ["<C-y>", "y"]
