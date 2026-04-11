@@ -33,6 +33,10 @@ fi
 
 # ------------ COMMON ---------------
 
+if command -v tailscale &>/dev/null; then
+  tailscale systray &>/dev/null &|
+fi
+
 rm ~/.cache/*rofi*
 { run-weepad.sh } &|
 
