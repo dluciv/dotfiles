@@ -81,3 +81,17 @@ run = 'shell "{{ if (lookPath "xdg-open") }}xdg-open{{ else if (lookPath "open")
 desc = "System open folder"
 
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
+
+{{- if (exec "sh" "-c" "ya pkg list | grep 'stelcodes/bunny'") }}
+
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi"
+on = ";"
+run = "plugin bunny"
+
+# Optionally, add another keymap to immediately fuzzy search bookmarks
+[[mgr.prepend_keymap]]
+desc = "Start bunny.yazi fuzzy search"
+on = "'"
+run = "plugin bunny fuzzy"
+{{- end }}

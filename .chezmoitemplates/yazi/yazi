@@ -3,6 +3,7 @@ $ ya pkg list
 Plugins:
 	KKV9/command (523e6a5)
 	macydnah/office (41ebef8)
+	stelcodes/bunny
 Maybe...
 	boydaihungst/gvfs (30440c7)
 	orhnk/system-clipboard (888026c)
