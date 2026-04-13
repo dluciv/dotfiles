@@ -61,6 +61,15 @@ map {{ $cmdkey }}+shift+minus change_font_size current -2.0
 map {{ $cmdkey }}+shift+kp_subtract change_font_size current -2.0
 map {{ $cmdkey }}+shift+backspace change_font_size current 0
 
+# =========== Split ============
+
+# Enable the splits layout
+enabled_layouts splits
+
+# Create splits
+map {{ $cmdkey }}+alt+h launch --location=hsplit
+map {{ $cmdkey }}+alt+v launch --location=vsplit
+
 # ========= Clipboard ==========
 
 map ctrl+shift+c copy_to_clipboard
