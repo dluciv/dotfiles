@@ -59,12 +59,12 @@ command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || S
 { sleep 45; ionice -c 3 -- nice $SYNCTHINGTRAY --wait } &|
 { sleep 5;  nice ~/_/safe_wf/tools/pytraycharmap/run.sh cccp-p &>/dev/null } &|
 
-{
-  sleep 5;
-  if   nice hiddify &>/dev/null; then
-  elif nice nekobox &>/dev/null; then
-  elif nice nekoray &>/dev/null; then
-  else run-hiddify-cli start; fi
-} &|
+# .d
+stage_files=( $HOME/.local/bin/x.autoexec.d/*.d(N) )
+if (( $#stage_files != 0 )); then
+  for dot_d in $stage_files; do
+    . $dot_d
+  done
+fi
 
 echo `date`: $USER : $0 end >> /tmp/_.xwx.log
