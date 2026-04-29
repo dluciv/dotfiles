@@ -3,7 +3,8 @@ require("bunny"):setup({
   hops = {
     { key = "/",          path = "/",                                    },
     { key = "t",          path = "/tmp",                                 },
-    { key = "r",          path = "/run/user/1000", desc = "cdru"         },
+    { key = "m",          path = "/run/media/{{ env "USER" }}",             desc = "media" },
+    { key = "r",          path = "/run/user/{{ trim (output "id" "-u") }}", desc = "cdru"  },
     { key = "~",          path = "~",              desc = "Home"         },
     { key = "d",          path = "~/DropST",       desc =  "DropST"      },
     { key = "D",          path = "~/Documents",    desc = "Documents"    },
