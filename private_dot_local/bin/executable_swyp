@@ -1,5 +1,6 @@
 #!/bin/zsh
 
-pushd ~/.config/sway/profiles
+pushd ~/.config/sway/profiles &>/dev/null
+rm current.profile 2>/dev/null
 ln -s $1.profile current.profile
-popd
+popd &>/dev/null
