@@ -12,3 +12,6 @@ workspace 3  output DP-3
 workspace 4  output DP-3
 workspace 10 output eDP-1
 exec swaymsg focus output DP-3
+
+bindsym --to-code $mod+Shift+n move workspace to output DP-3
+bindsym --to-code $mod+Shift+p move workspace to output eDP-1
