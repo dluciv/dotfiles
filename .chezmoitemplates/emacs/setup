@@ -1,6 +1,6 @@
 ;; === Это любимый шрифт взамен шрифтов по умолчанию
 (custom-set-faces
- '(default ((t ({{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN"{{ end }} :slant normal :weight normal :height {{ if .android }}240{{ else if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}165{{ end }} :width normal))))
+ '(default ((t ({{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN"{{ end }} :slant normal :weight normal :height {{ if .android }}240{{ else if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}160{{ end }} :width normal))))
  '(mode-line ((t (:background "gray30" :box (:line-width (1 . 1) :color "dark gray") {{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}"{{ end }}))))
  '(markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
  '(markdown-code-face ((t (:inherit font-lock-constant-face))))

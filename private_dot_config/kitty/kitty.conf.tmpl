@@ -38,7 +38,7 @@ font_features    {{ $font_psname }}-Italic                 {{- range .style.fav_
 bold_italic_font {{ $font_family }} {{ $font_bold }} Italic
 font_features    {{ $font_psname }}-{{ $font_bold }}Italic {{- range .style.fav_font_variants }} +{{ . }}{{ end }}
 
-font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16.5{{ end }}
+font_size        {{ if eq .dpi.level .dpi.retina }}18.0{{else}}16{{ end }}
 disable_ligatures cursor
 
 symbol_map U+E000-U+F8FF,U+F0000-U+FFFFF,U+100000-U+10FFFF {{ .style.fav_font_psname_nf }}
