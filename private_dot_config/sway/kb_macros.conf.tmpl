@@ -31,7 +31,8 @@ bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
 bindsym XF86AudioMicMute exec 'pactl set-source-mute @DEFAULT_SOURCE@ toggle'
 bindsym XF86AudioMute    exec 'pactl set-sink-mute   @DEFAULT_SINK@   toggle'
 
-bindsym --to-code XF86PowerOff exec 'systemctl suspend'
+bindsym --to-code XF86PowerOff     exec 'systemctl suspend'
+bindsym --to-code $mod+Shift+Pause exec 'systemctl suspend'
 
 bindsym --to-code $mod+ctrl+t exec cccp t
 
@@ -70,3 +71,6 @@ mode "nag" {
     Down      $nag --select prev
   }
 }
+
+bindsym --to-code $mod+Shift+n     move workspace to output next
+bindsym --to-code $mod+Shift+p     move workspace to output prev

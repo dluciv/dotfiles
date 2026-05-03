@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+pushd ~/.config/sway/profiles
+ln -s $1.profile current.profile
+popd
