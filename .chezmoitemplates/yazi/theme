@@ -11,7 +11,7 @@ rules = [
 	{ mime = "inode/directory", fg = "white" },
 
 	# Empty files
-	{ mime = "inode/empty", fg = "cyan" },
+	{ mime = "inode/empty", fg = "blue" },
 
 	# Orphan symbolic links
 	{ url = "*", is = "orphan", fg = "red" },
@@ -19,5 +19,5 @@ rules = [
 	# ...
 
 	# Fallback
-	{ url = "*/", fg = "blue" }
+	{ url = "*/", fg = "cyan" }
 ]
