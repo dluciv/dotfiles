@@ -45,8 +45,14 @@ fi
 
 {{- if .termux }}
 BROWSER=termux-open-url
-{{- else }}
+{{- else if lookPath "zen-browser" }}
+BROWSER=zen-browser
+{{- else if lookPath "brave" }}
 BROWSER=brave
+{{- else if lookPath "firefox" }}
+BROWSER=firefox
+{{- else }}
+BROWSER=open
 {{- end }}
 
 SHELL_INSTANCE=$$
