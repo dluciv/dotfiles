@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 swaymsg output '*' hdr on
-# swaymsg output '*' render_bit_depth 10
+swaymsg output '*' render_bit_depth 10
