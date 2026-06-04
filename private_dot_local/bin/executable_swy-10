@@ -1,3 +1,4 @@
 #!/bin/zsh
 
-swaymsg output '*' render_bit_depth 10
+swaymsg output '*' hdr on
+# swaymsg output '*' render_bit_depth 10
