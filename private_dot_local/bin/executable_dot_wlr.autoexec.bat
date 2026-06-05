@@ -13,14 +13,16 @@ wpaperd &|
 
 repipe
 
-sleep 5
+sleep $(( RANDOM % 5 + 1 ));
 
 systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
 # systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service
 
 } &|
 
-{ sleep 2;
+{
+
+sleep $(( RANDOM % 3 + 1 ));
 
 if ! systemctl --user start mako.service; then
   systemctl --user restart dunst.service
