@@ -45,6 +45,8 @@ fi
 
 {{- if .termux }}
 BROWSER=termux-open-url
+{{- else if lookPath "brave-beta" }}
+BROWSER=brave-beta
 {{- else if lookPath "brave" }}
 BROWSER=brave
 {{- else if lookPath "zen-browser" }}
