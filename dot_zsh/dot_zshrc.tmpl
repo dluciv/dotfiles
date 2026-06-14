@@ -3,6 +3,17 @@
 
 . $ZDOTDIR/.zprofrc
 
+# ================ Completion ==================
+
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' group-name ''
+zstyle ':compinstall'  filename $ZDOTDIR/.zshrc
+
+# ================ .d/*.rc.d ===================
+
 do_d_stage rc
 
 # =============== MC & TERM fixes ==============
@@ -79,13 +90,6 @@ fi
 {{-   if lookPath "git-psykorebase" }}
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 {{-   end }}
-
-zstyle ':completion:*' completer _complete _ignored _approximate
-zstyle ':completion:*' group-name ''
-zstyle :compinstall filename $ZDOTDIR/.zshrc
-
-autoload -Uz compinit
-compinit
 
 {{- if not .cygwin }}
 # ------ zoxide ------
