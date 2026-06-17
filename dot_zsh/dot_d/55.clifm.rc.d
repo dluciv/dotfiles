@@ -5,3 +5,6 @@ cfm () {
     cd -- "$dir" || return 1
   fi
 }
+
+zle -N cfm_w cfm
+bindkey '\ec' cfm_w
