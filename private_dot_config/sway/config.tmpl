@@ -232,7 +232,7 @@ for_window [app_id="io.github.tdesktop_x64.TDesktop"] border pixel 2
 for_window [class="^Emacs" title="^Speedbar"] floating ebable # can not yet...
 # Teams Brave
 for_window [app_id="brave-"] border pixel 2
-for_window [app_id="flameshot"] floating ebable
+for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable
 
 # Terminals & File managers floating
 #  for_window [app_id="kitty"]                  floating enable
@@ -246,7 +246,7 @@ for_window [app_id="flameshot"] floating ebable
 # https://gist.github.com/dluciv/592c630211fe77624d174ce6bd6a9e55
 for_window {
   [title="^🗨 "] {
-    floating enable
+    border pixel 3, floating enable, fullscreen disable
   }
 }
 
