@@ -71,6 +71,7 @@ function M:peek(job)
     local skip = job.skip
     local area_h = job.area.h
     local area_w = job.area.w
+    -- local area_w = math.floor(job.area.w * 1.5) -- no idea...
 
     -- Wrap lines based on preview width to prevent cutoff
     local wrapped_lines = {}
