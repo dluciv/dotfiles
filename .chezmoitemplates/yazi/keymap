@@ -82,6 +82,15 @@ desc = "System open folder"
 
 #	{ on = ["<Esc>", "<Esc>"], run = "quit", desc = "Quit the process" },
 
+{{- if (exec "sh" "-c" "ya pkg list | grep 'Ape/smart-enter'") }}
+
+[[mgr.prepend_keymap]]
+on   = "<Enter>"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+{{- end }}
+
+
 {{- if (exec "sh" "-c" "ya pkg list | grep 'stelcodes/bunny'") }}
 
 [[mgr.prepend_keymap]]
