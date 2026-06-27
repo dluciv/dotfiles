@@ -2,13 +2,13 @@
 $ ya pkg list
 Plugins:
 	KKV9/command (523e6a5)
-	macydnah/office (41ebef8)
 	stelcodes/bunny
 	Ape/smart-enter
 Maybe...
 	boydaihungst/gvfs (30440c7)
 	orhnk/system-clipboard (888026c)
 	MasouShizuka/projects (198c2ba)
+	macydnah/office (41ebef8)
 */ -}}
 
 [manager]
@@ -21,13 +21,35 @@ max_width = 512
 max_height = 512
 {{- end }}
 
-{{- if (and (lookPath "libreoffice") (lookPath "pdftoppm") (exec "sh" "-c" "ya pkg list | grep 'macydnah/office'") ) }}
+{{- if (lookPath "office-textconv") }}
+[plugin]
+
+prepend_preloaders = [
+    # Office Documents
+    { mime = "application/openxmlformats-officedocument.*", run = "office-textonv-filter" },
+    { mime = "application/oasis.opendocument.*", run = "office-textonv-filter" },
+    { mime = "application/vnd.openxmlformats-officedocument.*", run = "office-textonv-filter" },
+    { mime = "application/ms-*", run = "office-textonv-filter" },
+    { mime = "application/msword", run = "office-textonv-filter" },
+]
+
+prepend_previewers = [
+    # Office Documents
+    { mime = "application/openxmlformats-officedocument.*", run = "office-textonv-filter" },
+    { mime = "application/oasis.opendocument.*", run = "office-textonv-filter" },
+    { mime = "application/vnd.openxmlformats-officedocument.*", run = "office-textonv-filter" },
+    { mime = "application/ms-*", run = "office-textonv-filter" },
+    { mime = "application/msword", run = "office-textonv-filter" },
+]
+
+{{- else if (and (lookPath "libreoffice") (lookPath "pdftoppm") (exec "sh" "-c" "ya pkg list | grep 'macydnah/office'") ) }}
 [plugin]
 
 prepend_preloaders = [
     # Office Documents
     { mime = "application/openxmlformats-officedocument.*", run = "office" },
     { mime = "application/oasis.opendocument.*", run = "office" },
+    { mime = "application/vnd.openxmlformats-officedocument.*", run = "office" },
     { mime = "application/ms-*", run = "office" },
     { mime = "application/msword", run = "office" },
 ]
@@ -36,6 +58,7 @@ prepend_previewers = [
     # Office Documents
     { mime = "application/openxmlformats-officedocument.*", run = "office" },
     { mime = "application/oasis.opendocument.*", run = "office" },
+    { mime = "application/vnd.openxmlformats-officedocument.*", run = "office" },
     { mime = "application/ms-*", run = "office" },
     { mime = "application/msword", run = "office" },
 ]
