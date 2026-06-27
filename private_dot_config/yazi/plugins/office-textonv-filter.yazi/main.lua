@@ -24,20 +24,20 @@ local function get_lines(job)
 
     -- Handle execution errors (e.g., script not found)
     if not output then
-        cache = { 
-            url = url, 
-            modified = modified, 
-            lines = { string.format("Failed to start `office-textconv`: %s", err) } 
+        cache = {
+            url = url,
+            modified = modified,
+            lines = { string.format("Failed to start `office-textconv`: %s", err) }
         }
         return cache.lines
     end
 
     -- Handle script runtime errors (e.g., non-zero exit code)
     if not output.status.success then
-        cache = { 
-            url = url, 
-            modified = modified, 
-            lines = { "office-textconv failed:", output.stderr or "Unknown error" } 
+        cache = {
+            url = url,
+            modified = modified,
+            lines = { "office-textconv failed:", output.stderr or "Unknown error" }
         }
         return cache.lines
     end
