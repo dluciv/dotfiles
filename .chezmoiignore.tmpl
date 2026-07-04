@@ -57,6 +57,10 @@ AppData/
 .local/bin/swy-10
 {{- end }}
 
+{{ if not (lookPath "playerctld") -}}
+.config/sway/autoexec.d/playerctld
+{{- end }}
+
 {{ if .windows -}}
 {{- /* Windows fails to symlink .zshenv */ -}}
 .zshenv

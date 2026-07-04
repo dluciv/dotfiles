@@ -47,6 +47,13 @@ bindsym Shift+Print exec 'grim -t ppm -g "$(slurp)" - | swappy -f - -o - | wl-co
 
 bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
 
+{{ if (lookPath "playerctl") -}}
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+{{- end }}
+
 # NAG
 # https://wiki.archlinux.org/title/sway#Control_swaynag_with_the_keyboard
 # yay -S swaynagmode
