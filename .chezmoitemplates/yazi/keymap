@@ -24,6 +24,16 @@ on = "<C-o>"
 run = "quit"
 desc = "Quit Yazi"
 
+[[mgr.prepend_keymap]]
+on = "<Home>"
+run = "arrow top"
+desc = "Move cursor to the top"
+
+[[mgr.prepend_keymap]]
+on = "<End>"
+run = "arrow bot"
+desc = "Move cursor to the bottom"
+
 {{- if (and false (lookPath "cb") (not .termux)) }}
 # System clipboard: ya pkg add orhnk/system-clipboard
 [[mgr.prepend_keymap]]
