@@ -22,14 +22,14 @@ bindsym --to-code {
 # Control keys
 bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock }}'
 
-bindsym XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
-bindsym XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
+bindsym --locked XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
+bindsym --locked XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
 
-bindsym XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +5%'
-bindsym XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
+bindsym --locked XF86AudioRaiseVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ +5%'
+bindsym --locked XF86AudioLowerVolume exec 'pactl set-sink-volume @DEFAULT_SINK@ -5%'
 
-bindsym XF86AudioMicMute exec 'pactl set-source-mute @DEFAULT_SOURCE@ toggle'
-bindsym XF86AudioMute    exec 'pactl set-sink-mute   @DEFAULT_SINK@   toggle'
+bindsym --locked XF86AudioMicMute exec 'pactl set-source-mute @DEFAULT_SOURCE@ toggle'
+bindsym --locked XF86AudioMute    exec 'pactl set-sink-mute   @DEFAULT_SINK@   toggle'
 
 bindsym --to-code XF86PowerOff     exec 'systemctl suspend'
 bindsym --to-code $mod+Shift+Pause exec 'systemctl suspend'
@@ -48,10 +48,12 @@ bindsym Shift+Print exec 'grim -t ppm -g "$(slurp)" - | swappy -f - -o - | wl-co
 bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
 
 {{ if (lookPath "playerctl") -}}
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioStop exec playerctl stop
+# Special keys to control media via playerctl                                              
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioStop exec playerctl stop
 {{- end }}
 
 # NAG
