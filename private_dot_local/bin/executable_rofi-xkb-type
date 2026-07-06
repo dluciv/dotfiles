@@ -44,7 +44,7 @@ if [[ $ROFI_RETV == 0 ]]; then
 
   echo -en "<b>Функциональные высшие</b>${nil}nonselectable${sep}true\n"
   for fn in {11..35}; do
-    echo "F${fn}"
+    echo -en "FN/F${fn}${nil}info${sep}F${fn}\n"
   done
 
   echo -en "<b>Буфер обмена</b>${nil}nonselectable${sep}true\n"
