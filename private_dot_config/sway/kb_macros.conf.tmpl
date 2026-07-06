@@ -19,6 +19,8 @@ bindsym --to-code {
   XF86TouchpadOff input '2:7:SynPS/2_Synaptics_TouchPad' events disabled
 }
 
+bindsym $mod+Tab exec 'rofi -show window'
+
 # Control keys
 bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock }}'
 
