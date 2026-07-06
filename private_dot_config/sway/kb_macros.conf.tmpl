@@ -64,6 +64,10 @@ bindsym --locked {
 bindsym --to-code $mod+m exec rofimoji
 {{- end }}
 
+{{ if (lookPath "rofi-xkb-type") -}}
+bindsym --to-code $mod+n exec 'rofi -show xkbtype'
+{{- end }}
+
 # NAG
 # https://wiki.archlinux.org/title/sway#Control_swaynag_with_the_keyboard
 # yay -S swaynagmode
