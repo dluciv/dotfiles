@@ -50,12 +50,18 @@ bindsym Shift+Print exec 'grim -t ppm -g "$(slurp)" - | swappy -f - -o - | wl-co
 bindsym XF86Calculator exec rofi -show calc -modi calc -no-show-match -no-sort
 
 {{ if (lookPath "playerctl") -}}
-# Special keys to control media via playerctl                                              
-bindsym --locked XF86AudioPlay exec playerctl play-pause
-bindsym --locked XF86AudioPause exec playerctl play-pause
-bindsym --locked XF86AudioPrev exec playerctl previous
-bindsym --locked XF86AudioNext exec playerctl next
-bindsym --locked XF86AudioStop exec playerctl stop
+# Special keys to control media via playerctl
+bindsym --locked {
+  XF86AudioPlay exec playerctl play-pause
+  XF86AudioPause exec playerctl play-pause
+  XF86AudioPrev exec playerctl previous
+  XF86AudioNext exec playerctl next
+  XF86AudioStop exec playerctl stop
+}
+{{- end }}
+
+{{ if (lookPath "rofimoji") -}}
+bindsym --to-code $mod+m exec rofimoji
 {{- end }}
 
 # NAG
