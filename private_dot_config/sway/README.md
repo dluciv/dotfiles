@@ -10,6 +10,7 @@
 // @author       Dmitry Luciv <github.com/dluciv>
 // @include      *
 // @grant        none
+// @icon         https://swaywm.org/logo.png
 // @run-at       document-start
 // ==/UserScript==
 
