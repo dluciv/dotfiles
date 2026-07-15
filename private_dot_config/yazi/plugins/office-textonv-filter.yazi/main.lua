@@ -91,36 +91,144 @@ function M:preload(job)
     return true
 end
 
+local wrapped_cache = {
+    lines = {},
+    width = 0
+}
+
+-- Функция для подсчета количества UTF-8 символов в строке
+local function utf8_len(s)
+    local len = 0
+    local i = 1
+    while i <= #s do
+        local c = s:byte(i)
+        if c < 0x80 then
+            i = i + 1
+        elseif c < 0xE0 then
+            i = i + 2
+        elseif c < 0xF0 then
+            i = i + 3
+        else
+            i = i + 4
+        end
+        len = len + 1
+    end
+    return len
+end
+
+-- Умный перенос текста по словам с поддержкой UTF-8
+local function wrap_text(lines, width)
+    if width == wrapped_cache.width then
+        return cache.lines
+    end
+
+    local wrapped = {}
+
+    for _, line in ipairs(lines) do
+        -- Сохраняем пустые строки (абзацы)
+        if line == "" then
+            table.insert(wrapped, "")
+        elseif utf8_len(line) <= width then
+            -- Короткая строка — оставляем как есть
+            table.insert(wrapped, line)
+        else
+            -- Длинная строка — переносим по словам
+            local words = {}
+            for word in line:gmatch("%S+") do
+                table.insert(words, word)
+            end
+
+            local current_line = ""
+            local current_len = 0
+
+            for _, word in ipairs(words) do
+                local word_len = utf8_len(word)
+
+                -- Если слово само по себе длиннее width, разрезаем его по символам
+                if word_len > width then
+                    if current_line ~= "" then
+                        table.insert(wrapped, current_line)
+                        current_line = ""
+                        current_len = 0
+                    end
+
+                    -- Разрезаем длинное слово посимвольно
+                    local i = 1
+                    while i <= #word do
+                        local c = word:byte(i)
+                        local char_bytes
+                        if c < 0x80 then
+                            char_bytes = 1
+                        elseif c < 0xE0 then
+                            char_bytes = 2
+                        elseif c < 0xF0 then
+                            char_bytes = 3
+                        else
+                            char_bytes = 4
+                        end
+
+                        local char = word:sub(i, i + char_bytes - 1)
+
+                        if current_len + 1 > width then
+                            table.insert(wrapped, current_line)
+                            current_line = char
+                            current_len = 1
+                        else
+                            current_line = current_line .. char
+                            current_len = current_len + 1
+                        end
+
+                        i = i + char_bytes
+                    end
+                else
+                    -- Проверяем, поместится ли слово в текущую строку
+                    local space_needed = (current_line == "" and 0 or 1)
+                    local new_len = current_len + space_needed + word_len
+
+                    if new_len > width then
+                        -- Слово не помещается — начинаем новую строку
+                        table.insert(wrapped, current_line)
+                        current_line = word
+                        current_len = word_len
+                    else
+                        -- Помещается — добавляем к текущей строке
+                        if current_line == "" then
+                            current_line = word
+                        else
+                            current_line = current_line .. " " .. word
+                        end
+                        current_len = new_len
+                    end
+                end
+            end
+
+            -- Добавляем последнюю собранную строку
+            if current_line ~= "" then
+                table.insert(wrapped, current_line)
+            end
+        end
+    end
+
+    wrapped_cache = { lines = wrapped, width = width }
+    return wrapped
+end
+
 function M:peek(job)
     local lines = get_lines(job)
     local skip = job.skip
     local area_h = job.area.h
     local area_w = job.area.w
-    -- local area_w = math.floor(job.area.w * 1.5) -- no idea...
 
-    -- Wrap lines based on preview width to prevent cutoff
-    local wrapped_lines = {}
-    for _, line in ipairs(lines) do
-        if #line <= area_w then
-            table.insert(wrapped_lines, line)
-        else
-            local start = 1
-            while start <= #line do
-                table.insert(wrapped_lines, line:sub(start, start + area_w - 1))
-                start = start + area_w
-            end
-        end
-    end
-
+    local wrapped_lines = wrap_text(lines, area_w)
     local visible_lines = {}
-    -- Slice the lines based on scroll position (skip) and available height
+
     for i = skip + 1, math.min(skip + area_h, #wrapped_lines) do
-        table.insert(visible_lines, wrapped_lines[i])
+        table.insert(visible_lines, ui.Line(wrapped_lines[i]))
     end
 
     -- Create the text widget and push it to the preview pane
     -- We use ui.Text.parse to safely render the joined string
-    local text = ui.Text.parse(table.concat(visible_lines, "\n"))
+    local text = ui.Text(visible_lines)
     ya.preview_widget(job, text:area(job.area))
 end
 
