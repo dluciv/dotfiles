@@ -4,6 +4,12 @@ inpfile="$1"
 inpbase=$(basename "$inpfile")
 inpsufx=${inpbase##*.}
 
+[[ "$2" == "nowrap" ]] && nowrap=true || nowrap=false
+
+if $nowrap; then
+  pandoc_doc_extopts="--wrap=none"
+fi
+
 installed () {
   command -v "$1" &>/dev/null;
 }
@@ -20,13 +26,13 @@ textconv_document () {
   case "$inpsufx" in
     odt|docx)
       if installed pandoc; then
-        pandoc -t plain -f docx "$inpfile"
+        pandoc -t plain -f docx $pandoc_doc_extopts "$inpfile"
         return
       fi
     ;;
     rtf)
       if installed pandoc; then
-        pandoc -t plain -f rtf "$inpfile"
+        pandoc -t plain -f rtf $pandoc_doc_extopts "$inpfile"
         return
       elif installed unrtf; then
         unrtf --text "$inpfile"
