@@ -9,18 +9,35 @@ local cache = {
     lines = {}
 }
 
+local text_docs = { ".doc", ".docx", ".odt", ".rtf" }
+
 local function get_lines(job)
     local file = job.file
     local url = tostring(file.url)
     local modified = file.cha.modified
+
+    local nowrap = false
+    for _, suffix in ipairs(text_docs) do
+        -- Check if the end of the string matches the suffix
+        if string.sub(url, -#suffix) == suffix then
+            nowrap = true
+        end
+    end
+
 
     -- Return cached lines if we are looking at the same, unmodified file
     if cache.url == url and cache.modified == modified then
         return cache.lines
     end
 
+    cmdargs = { tostring(file.path) }
+
+    if nowrap then
+        table.insert(cmdargs, "nowrap")
+    end
+
     -- Run the external script
-    local output, err = Command("office-textconv"):arg(tostring(file.path)):output()
+    local output, err = Command("office-textconv"):arg(cmdargs):output()
 
     -- Handle execution errors (e.g., script not found)
     if not output then
@@ -46,6 +63,7 @@ local function get_lines(job)
     local lines = {}
     local normalized = output.stdout:gsub("\r\n", "\n"):gsub("\r", "\n")
     local start = 1
+
     while true do
         local pos = normalized:find("\n", start, true)
         if not pos then
@@ -69,6 +87,7 @@ end
 -- 1. Явно объявляем preload, чтобы избежать ошибок вызова nil в Yazi
 -- Возврат true сообщает Yazi, что предварительная загрузка "завершена" (или не нужна)
 function M:preload(job)
+    get_lines(job)
     return true
 end
 
