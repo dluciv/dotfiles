@@ -66,6 +66,12 @@ local function get_lines(job)
     return cache.lines
 end
 
+-- 1. Явно объявляем preload, чтобы избежать ошибок вызова nil в Yazi
+-- Возврат true сообщает Yazi, что предварительная загрузка "завершена" (или не нужна)
+function M:preload(job)
+    return true
+end
+
 function M:peek(job)
     local lines = get_lines(job)
     local skip = job.skip
