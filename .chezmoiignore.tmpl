@@ -85,6 +85,11 @@ AppData/
 .config/clifm/
 {{- end }}
 
+{{- if not (lookPath "lf") }}
+.zsh/.d/60.lf.rc.d
+.config/lf/
+{{- end }}
+
 {{- if not (lookPath "far2l") }}
 .local/share/applications/far2l-open.desktop
 {{- end }}
