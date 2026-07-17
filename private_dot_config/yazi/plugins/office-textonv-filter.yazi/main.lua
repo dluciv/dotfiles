@@ -1,15 +1,18 @@
 local M = {}
 
--- https://chat.qwen.ai/s/t_1483db45-7283-4aa9-88ee-beac25e1dbe0?fev=0.2.67
+local set_line_cache = ya.sync(function(state, cache)
+	state.line_cache = cache
+end)
 
--- Cache to prevent re-running the external script on every scroll
-local cache = {
-    url = "",
-    modified = 0,
-    lines = {}
-}
-
-local text_docs = { ".doc", ".docx", ".odt", ".rtf" }
+local get_line_cache = ya.sync(function(state)
+	return state.line_cache or {
+        url = "",
+        modified = 0,
+        lines = {},
+        wrapped_width = 0,
+        wrapped_lines = {},
+    }
+end)
 
 local function get_lines(job)
     local file = job.file
@@ -17,14 +20,14 @@ local function get_lines(job)
     local modified = file.cha.modified
 
     local nowrap = false
-    for _, suffix in ipairs(text_docs) do
+    for _, suffix in ipairs({ ".doc", ".docx", ".odt", ".rtf" }) do
         -- Check if the end of the string matches the suffix
         if string.sub(url, -#suffix) == suffix then
             nowrap = true
         end
     end
 
-
+    cache = get_line_cache()
     -- Return cached lines if we are looking at the same, unmodified file
     if cache.url == url and cache.modified == modified then
         return cache.lines
@@ -36,10 +39,13 @@ local function get_lines(job)
         table.insert(cmdargs, "nowrap")
     end
 
-    -- Run the external script
+    ya.notify {
+    	title = "Office preview",
+	    content = "Converting\n" .. file.url.name .. "\nwith office-textconv...",
+    	timeout = 1,
+    } 
     local output, err = Command("office-textconv"):arg(cmdargs):output()
 
-    -- Handle execution errors (e.g., script not found)
     if not output then
         cache = {
             url = url,
@@ -49,7 +55,6 @@ local function get_lines(job)
         return cache.lines
     end
 
-    -- Handle script runtime errors (e.g., non-zero exit code)
     if not output.status.success then
         cache = {
             url = url,
@@ -80,7 +85,12 @@ local function get_lines(job)
     end
 
     -- Save to cache
-    cache = { url = url, modified = modified, lines = lines }
+    cache = {
+        url = url, modified = modified,
+        lines = lines,
+        wrapped_width = 0, wrapped_lines = {}
+    }
+    set_line_cache(cache)
     return cache.lines
 end
 
@@ -90,11 +100,6 @@ function M:preload(job)
     get_lines(job)
     return true
 end
-
-local wrapped_cache = {
-    lines = {},
-    width = 0
-}
 
 -- Функция для подсчета количества UTF-8 символов в строке
 local function utf8_len(s)
@@ -118,8 +123,17 @@ end
 
 -- Умный перенос текста по словам с поддержкой UTF-8
 local function wrap_text(lines, width)
-    if width == wrapped_cache.width then
-        return cache.lines
+
+    cache = get_line_cache()
+
+    if width == cache.wrapped_width then
+        return cache.wrapped_lines
+    else
+        ya.notify {
+            title = "Office preview",
+            content = "Wrapping at col " .. width,
+            timeout = 0.5,
+        } 
     end
 
     local wrapped = {}
@@ -209,7 +223,10 @@ local function wrap_text(lines, width)
         end
     end
 
-    wrapped_cache = { lines = wrapped, width = width }
+    cache.wrapped_lines = wrapped
+    cache.wrapped_width = width
+    set_line_cache(cache)
+
     return wrapped
 end
 
