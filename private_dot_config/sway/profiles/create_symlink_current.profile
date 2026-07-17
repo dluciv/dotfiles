@@ -1,1 +1,1 @@
-autonomous.profile
+alone.profile
