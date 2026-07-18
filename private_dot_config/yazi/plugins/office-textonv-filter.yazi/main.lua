@@ -68,8 +68,6 @@ local function get_lines(job)
 		return c.lines
 	end
 
-	ya.notify({ title = "Office preview", content = "Converting " .. job.file.url.name .. "...", timeout = 1 })
-
 	local args = { tostring(job.file.path) }
 	if is_doc(url) then
 		args[#args + 1] = "nowrap"
@@ -80,10 +78,27 @@ local function get_lines(job)
 	local lines
 	if not out then
 		lines = { ("office-textconv: %s"):format(err) }
+		ya.notify {
+			title = "Office textconv failed\non " .. job.file.url.name,
+			content = lines[1],
+			timeout = 3,
+			level = "error"
+		}
 	elseif not out.status.success then
 		lines = { "office-textconv failed:", out.stderr or "unknown error" }
+		ya.notify {
+			title = "Office textconv failed",
+			content = "With unknown error\non " .. job.file.url.name,
+			timeout = 3,
+			level = "error"
+		}
 	else
 		lines = split_lines(out.stdout)
+		ya.notify {
+			title = "Office textconv",
+			content = "Converting " .. job.file.url.name .. "...",
+			timeout = 0.5
+		}
 	end
 
 	set_cache({ url = url, modified = modified, lines = lines, wrap_width = 0, wrap_lines = {} })
