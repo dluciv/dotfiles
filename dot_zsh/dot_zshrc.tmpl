@@ -49,10 +49,15 @@ fi
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 
+{{- if lookPath "ov" }}
+PAGER=ov
+{{- else if lookPath "less" }}
+PAGER=less
+{{- else if lookPath "most" }}
 PAGER=most
-if ! $PAGER &>/dev/null ; then
-  PAGER=less
-fi
+{{- else if lookPath "more" }}
+PAGER=more
+{{- end }}
 
 {{- if .termux }}
 BROWSER=termux-open-url
