@@ -1,4 +1,9 @@
 #!/bin/zsh
 
 [[ "$XDG_SESSION_TYPE" == "wayland" ]] && ferdium_parms='--enable-features=WaylandWindowDecorations --ozone-platform-hint=wayland' || ferdium_parms=''
-rconstrain ferdium $ferdium_parms
+
+if systemctl is-active --quiet ananicy-cpp.service; then
+  ferdium $ferdium_parms
+else
+  rconstrain ferdium $ferdium_parms
+fi
