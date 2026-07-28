@@ -189,10 +189,13 @@ function M:seek(job)
 	if not h or h.url ~= job.file.url then
 		return
 	end
+	local lines = get_lines(job)
+	local wrapped = wrap(lines, job.area.w, tostring(job.file.url))
+	local max_skip = math.max(0, #wrapped - job.area.h)
 	local step = math.floor(job.units * job.area.h / 10)
 	step = step == 0 and ya.clamp(-1, job.units, 1) or step
 	ya.emit("peek", {
-		math.max(0, cx.active.preview.skip + step),
+		math.max(0, math.min(max_skip, cx.active.preview.skip + step)),
 		only_if = job.file.url,
 	})
 end
