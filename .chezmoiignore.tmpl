@@ -112,5 +112,9 @@ AppData/
 .local/share/broot/launcher/fish/
 {{- end }}
 
+{{ if not (lookPath "opencode") -}}
+.config/opencode/
+{{- end }}
+
 LICENSE
 README.md
