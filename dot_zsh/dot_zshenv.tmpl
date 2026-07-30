@@ -7,6 +7,9 @@ path_prefix=(
   ~/.local/bin
   /usr/local/bin
   /usr/local/sbin
+  {{- if stat "/opt/local/bin" }}
+  /opt/local/bin
+  {{- end }}
 )
 
 path_suffix=()
