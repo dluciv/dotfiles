@@ -108,7 +108,11 @@
 {{- end }}
 
 [data.style.colors]
+{{- if (stat (joinPath .chezmoi.sourceDir ".chezmoitemplates" "color_theme.yml")) }}
 {{ includeTemplate "color_theme.yml" | fromYaml | toToml }}
+{{- else }}
+{{ includeTemplate "color_theme_fallback.yml" | fromYaml | toToml }}
+{{- end }}
 
 {{- if or $headless $termux }}
 [diff]

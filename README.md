@@ -19,4 +19,5 @@
 
 ## Инструменты
 
-* [pastel](https://github.com/sharkdp/pastel) — есть в Arch Linux, Ubuntu (snap или deb), Termux, HomeBrew, Scoop — необязательно
+* [tinty](https://github.com/tinted-theming/tinty) — есть много где; необязательно
+* [pastel](https://github.com/sharkdp/pastel) — есть в Arch Linux, Ubuntu (snap или deb), Termux, HomeBrew, Scoop; необязательно
