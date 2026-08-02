@@ -18,6 +18,11 @@
 {{- end }}
 {{- $abs_roamg_cfg_dir := $abs_local_cfg_dir -}}
 
+{{- $abs_appdata_dir := printf "%s/.local/share" $abs_home_dir -}}
+{{- if (ne (env "XDG_DATA_HOME") "") -}}
+{{-   $abs_appdata_dir = env "XDG_DATA_HOME" -}}
+{{- end }}
+
 {{- "" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
@@ -35,6 +40,7 @@
 {{-   $abs_home_dir = env "USERPROFILE" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_local_cfg_dir = env "LOCALAPPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_roamg_cfg_dir = env "APPDATA" | replaceAllRegex "\\\\" "/" -}}
+{{-   $abs_appdata_dir = $abs_local_cfg_dir -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{-   $darwin = true -}}
 {{- else if eq .chezmoi.os "android" -}}
@@ -62,6 +68,8 @@
 
     abs_local_cfg_dir = "{{ $abs_local_cfg_dir }}"
     abs_roamg_cfg_dir = "{{ $abs_roamg_cfg_dir }}"
+
+    abs_appdata_dir = "{{ $abs_appdata_dir }}"
 
     fav_term = "{{ if $windows }}wezterm{{ else }}kitty{{ end }}"
 
