@@ -23,11 +23,7 @@
 
 ## Темы
 
-Все цвета тянутся из активной Base24-темы:
+Цвета тянутся из активной Base24-темы:
 
-* `tinty apply <base24-...>` генерирует `.chezmoitemplates/color_theme.yml` (шаблоны в `private_dot_config/tinted-theming/templates/`) и сам запускает `chezmoi apply --init` (пересоберёт `~/.config/chezmoi/chezmoi.toml` с новыми цветами);
-* если `color_theme.yml` нет, используется fallback `.chezmoitemplates/color_theme_fallback.yml` (Base24 «Space Gray Eighties»).
-
-Шаблоны tinty живут в `private_dot_config/tinted-theming/templates/` (chezmoi-таргет → `~/.config/tinted-theming/templates/`). Собранные `tinty build` темы из галереи tinted — временный артефакт в `~/.config/tinted-theming/themes/` (chezmoi их не управляет), в репозитории не хранится.
-
-Чтобы включить на новой машине: `chezmoi apply` (поставит `~/.config/tinted-theming/tinty/config.toml`), затем `tinty sync` и `tinty build`, после чего `tinty init` или `tinty apply base24-space-gray-eighties`.
+* `tinty apply <base24-...>` записывает `~/.local/share/tinted-theming/tinty/current_scheme`
+* если не удалось прочитать, используется fallback `.chezmoitemplates/color_theme_fallback.yml`

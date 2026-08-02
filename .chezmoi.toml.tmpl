@@ -116,9 +116,10 @@
 {{- end }}
 
 [data.style.colors]
-{{- if (stat (joinPath .chezmoi.sourceDir ".chezmoitemplates" "color_theme.yml")) }}
-{{ includeTemplate "color_theme.yml" | fromYaml | toToml }}
+{{- if (stat (joinPath $abs_appdata_dir "tinted-theming" "tinty" "current_scheme")) }}
+{{ includeTemplate "color_theme_tinted.yml" (dict "abs_appdata_dir" $abs_appdata_dir) | fromYaml | toToml }}
 {{- else }}
+{{ warnf "Using fallback color theme, install tinty and apply one" }}
 {{ includeTemplate "color_theme_fallback.yml" | fromYaml | toToml }}
 {{- end }}
 
