@@ -12,49 +12,49 @@
 
 palette:
   black:
-    normal: &black_normal '#000000'
-    bright: &black_bright '#1f1f1f'
-    dim: &black_dim '#000000'
+    normal: &black_normal '000000'
+    bright: &black_bright '1f1f1f'
+    dim: &black_dim '000000'
   red:
-    normal: &red_normal '#cc0000'
-    bright: &red_bright '#ff0a0a'
-    dim: &red_dim '#8f0000'
+    normal: &red_normal 'cc0000'
+    bright: &red_bright 'ff0a0a'
+    dim: &red_dim '8f0000'
   green:
-    normal: &green_normal '#00cc00'
-    bright: &green_bright '#0aff0a'
-    dim: &green_dim '#008f00'
+    normal: &green_normal '00cc00'
+    bright: &green_bright '0aff0a'
+    dim: &green_dim '008f00'
   yellow:
-    normal: &yellow_normal '#cccc00'
-    bright: &yellow_bright '#ffff0a'
-    dim: &yellow_dim '#8f8f00'
+    normal: &yellow_normal 'cccc00'
+    bright: &yellow_bright 'ffff0a'
+    dim: &yellow_dim '8f8f00'
   blue:
-    normal: &blue_normal '#0000cc'
-    bright: &blue_bright '#0a0aff'
-    dim: &blue_dim '#00008f'
+    normal: &blue_normal '0000cc'
+    bright: &blue_bright '0a0aff'
+    dim: &blue_dim '00008f'
   magenta:
-    normal: &magenta_normal '#cc00cc'
-    bright: &magenta_bright '#ff0aff'
-    dim: &magenta_dim '#8f008f'
+    normal: &magenta_normal 'cc00cc'
+    bright: &magenta_bright 'ff0aff'
+    dim: &magenta_dim '8f008f'
   cyan:
-    normal: &cyan_normal '#00cccc'
-    bright: &cyan_bright '#0affff'
-    dim: &cyan_dim '#008f8f'
+    normal: &cyan_normal '00cccc'
+    bright: &cyan_bright '0affff'
+    dim: &cyan_dim '008f8f'
   white:
-    normal: &white_normal '#cccccc'
-    bright: &white_bright '#ebebeb'
-    dim: &white_dim '#adadad'
+    normal: &white_normal 'cccccc'
+    bright: &white_bright 'ebebeb'
+    dim: &white_dim 'adadad'
   orange:
-    normal: &orange_normal '#ddaa00'
-    bright: &orange_bright '#ffca1b'
-    dim: &orange_dim '#a07b00'
+    normal: &orange_normal 'ddaa00'
+    bright: &orange_bright 'ffca1b'
+    dim: &orange_dim 'a07b00'
   brown:
-    normal: &brown_normal '#2a2209'
-    bright: &brown_bright '#5f4c11'
-    dim: &brown_dim '#000000'
+    normal: &brown_normal '2a2209'
+    bright: &brown_bright '5f4c11'
+    dim: &brown_dim '000000'
   gray:
-    normal: &gray_normal '#777777'
-    bright: &gray_bright '#969696'
-    dim: &gray_dim '#585858'
+    normal: &gray_normal '777777'
+    bright: &gray_bright '969696'
+    dim: &gray_dim '585858'
 
 ansi:
   ansi_0: *black_normal
