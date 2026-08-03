@@ -116,11 +116,11 @@
 {{- end }}
 
 [data.style.colors]
-{{- if (stat (joinPath $abs_appdata_dir "tinted-theming" "tinty" "current_scheme")) }}
-{{ includeTemplate "colors/tinted_theme.yml" (dict "abs_appdata_dir" $abs_appdata_dir) | fromYaml | toToml }}
+{{- if (stat (joinPath $abs_roamg_cfg_dir "current-color-theme.yml")) }}
+{{ include (joinPath $abs_roamg_cfg_dir "current-color-theme.yml") | fromYaml | toToml }}
 {{- else }}
-{{ warnf "Using fallback color theme, install tinty and apply one" }}
-{{ includeTemplate "colors/fallback_theme.yml" | fromYaml | toToml }}
+{{ warnf "Using fallback color theme" }}
+{{ includeTemplate "colors/fallback-color-theme.yml" | fromYaml | toToml }}
 {{- end }}
 
 {{- if or $headless $termux }}

@@ -1,0 +1,269 @@
+# =============================================================================
+# Meta Information
+# =============================================================================
+# system: tinted8
+# family: VGA
+# style: Hardware
+# author: https://github.com/dluciv
+# theme_author: https://dluciv.name
+# supported_styling_version: 0.2.0
+# variant: dark
+# =============================================================================
+
+palette:
+  black:
+    normal: &black_normal '#000000'
+    bright: &black_bright '#1f1f1f'
+    dim: &black_dim '#000000'
+  red:
+    normal: &red_normal '#cc0000'
+    bright: &red_bright '#ff0a0a'
+    dim: &red_dim '#8f0000'
+  green:
+    normal: &green_normal '#00cc00'
+    bright: &green_bright '#0aff0a'
+    dim: &green_dim '#008f00'
+  yellow:
+    normal: &yellow_normal '#cccc00'
+    bright: &yellow_bright '#ffff0a'
+    dim: &yellow_dim '#8f8f00'
+  blue:
+    normal: &blue_normal '#0000cc'
+    bright: &blue_bright '#0a0aff'
+    dim: &blue_dim '#00008f'
+  magenta:
+    normal: &magenta_normal '#cc00cc'
+    bright: &magenta_bright '#ff0aff'
+    dim: &magenta_dim '#8f008f'
+  cyan:
+    normal: &cyan_normal '#00cccc'
+    bright: &cyan_bright '#0affff'
+    dim: &cyan_dim '#008f8f'
+  white:
+    normal: &white_normal '#cccccc'
+    bright: &white_bright '#ebebeb'
+    dim: &white_dim '#adadad'
+  orange:
+    normal: &orange_normal '#ddaa00'
+    bright: &orange_bright '#ffca1b'
+    dim: &orange_dim '#a07b00'
+  brown:
+    normal: &brown_normal '#2a2209'
+    bright: &brown_bright '#5f4c11'
+    dim: &brown_dim '#000000'
+  gray:
+    normal: &gray_normal '#777777'
+    bright: &gray_bright '#969696'
+    dim: &gray_dim '#585858'
+
+ansi:
+  ansi_0: *black_normal
+  ansi_1: *red_normal
+  ansi_2: *green_normal
+  ansi_3: *yellow_normal
+  ansi_4: *blue_normal
+  ansi_5: *magenta_normal
+  ansi_6: *cyan_normal
+  ansi_7: *white_normal
+  ansi_8: *black_bright
+  ansi_9: *red_bright
+  ansi_a: *green_bright
+  ansi_b: *yellow_bright
+  ansi_c: *blue_bright
+  ansi_d: *magenta_bright
+  ansi_e: *cyan_bright
+  ansi_f: *white_bright
+
+ui:
+  deprecated: *brown_normal
+  accent:
+    normal: *cyan_normal
+  border:
+    normal: *gray_dim
+  chrome:
+    background:
+      dark: *black_dim
+      light: *gray_dim
+      normal: *black_bright
+    foreground:
+      dark: *white_dim
+      light: *white_bright
+  cursor:
+    muted:
+      background: *gray_bright
+      foreground: *gray_dim
+    normal:
+      background: *white_normal
+      foreground: *black_normal
+  global:
+    background:
+      dark: *black_dim
+      light: *black_bright
+      normal: *black_normal
+    foreground:
+      dark: *white_dim
+      light: *white_bright
+      normal: *white_normal
+  gutter:
+    background: *black_normal
+    foreground: *white_dim
+  highlight:
+    button:
+      background: *black_bright
+      foreground: *white_normal
+    line:
+      background: *gray_dim
+      foreground: *white_dim
+    search:
+      background: *black_bright
+      foreground: *yellow_normal
+    text:
+      active_background: *gray_normal
+      active_foreground: *white_normal
+      background: *gray_dim
+      foreground: *white_normal
+  indent_guide:
+    active_background: *gray_dim
+    background: *black_bright
+  link:
+    normal: *cyan_normal
+  selection:
+    background: *black_bright
+    foreground: *white_normal
+    inactive_background: *black_bright
+  status:
+    error: *red_normal
+    info: *orange_normal
+    success: *green_normal
+    warning: *yellow_normal
+  tooltip:
+    background: *black_dim
+    foreground: *white_normal
+  whitespace:
+    foreground: *gray_normal
+
+syntax:
+  source: *white_normal
+  text: *white_normal
+  comment:
+    default: *gray_dim
+    block: *gray_dim
+    documentation: *gray_dim
+    line: *gray_dim
+  constant:
+    default: *orange_normal
+    language: *orange_normal
+    other: *orange_normal
+    character:
+      default: *orange_normal
+      entity: *orange_normal
+      escape: *orange_normal
+    numeric:
+      default: *orange_normal
+      float: *orange_normal
+      hex: *orange_normal
+      integer: *orange_normal
+  entity:
+    default: *white_normal
+    name:
+      default: *white_normal
+      class: *yellow_normal
+      label: *white_normal
+      namespace: *yellow_normal
+      section: *cyan_normal
+      tag: *white_normal
+      function:
+        default: *blue_normal
+        constructor: *blue_normal
+      type:
+        default: *cyan_normal
+        class: *cyan_normal
+        enum: *cyan_normal
+    other:
+      default: *white_normal
+      attribute_name: *magenta_normal
+      inherited_class: *white_normal
+  invalid:
+    default: *red_bright
+    deprecated: *yellow_bright
+    illegal: *red_bright
+  keyword:
+    default: *magenta_normal
+    declaration: *magenta_normal
+    operator: *magenta_normal
+    other: *magenta_normal
+    control:
+      default: *magenta_normal
+      flow: *magenta_normal
+      import: *magenta_normal
+  markup:
+    default: *orange_normal
+    bold: *orange_normal
+    changed: *yellow_bright
+    deleted: *red_bright
+    heading: *magenta_normal
+    inserted: *green_bright
+    italic: *orange_normal
+    link: *yellow_normal
+    quote: *orange_normal
+    raw: *orange_normal
+    underline: *orange_normal
+    list:
+      default: *orange_normal
+      numbered: *cyan_normal
+      unnumbered: *cyan_normal
+  meta:
+    default: *white_normal
+    annotation: *orange_normal
+    block: *white_normal
+    class: *white_normal
+    embedded: *white_normal
+    function: *white_normal
+    import: *white_normal
+    object: *orange_normal
+    preprocessor: *white_normal
+    tag: *white_normal
+    type: *white_normal
+  punctuation:
+    default: *white_dim
+    section: *orange_normal
+    separator: *white_normal
+    definition:
+      default: *white_normal
+      comment: *gray_dim
+      string: *green_normal
+  storage:
+    default: *magenta_normal
+    modifier: *magenta_normal
+    type: *magenta_normal
+  string:
+    default: *green_normal
+    interpolated: *green_normal
+    other: *green_normal
+    regexp: *red_normal
+    template: *green_normal
+    unquoted: *green_normal
+    quoted:
+      default: *green_normal
+      double: *green_normal
+      single: *green_normal
+  support:
+    default: *blue_normal
+    class: *blue_normal
+    constant: *magenta_normal
+    other: *blue_normal
+    type: *blue_normal
+    variable: *cyan_normal
+    function:
+      default: *blue_normal
+      builtin: *blue_bright
+  variable:
+    default: *white_normal
+    language: *magenta_normal
+    parameter: *cyan_bright
+    other:
+      default: *white_normal
+      constant: *white_normal
+      object:
+        default: *white_normal
+        property: *white_normal
