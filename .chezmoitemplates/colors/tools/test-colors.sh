@@ -27,3 +27,7 @@ for entry in "${colors[@]}"; do
     printf "\e[1;%sm%-20s\e[0s\n" "$code" "Sample Text"
 done
 printf "\n"
+
+notify-send -u low      -i dialog-information "Normal" "This is a normal notification"
+notify-send -u normal   -i dialog-warning     "Warning" "This is a warning notification"
+notify-send -u critical -i dialog-error       "Error" "This is an error notification"
