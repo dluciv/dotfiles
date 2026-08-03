@@ -115,22 +115,29 @@
     fav_font_variants = [ "cv03" ]
 {{- end }}
 
-[data.style.colors]
+{{- define "colors_toml" -}}
+{{-   $parent := index . 0 -}}
+{{-   $table  := index . 1 -}}
+{{ printf "[%s]\n" $parent -}}
+{{-   range $key, $value := $table -}}
+{{-     if not (kindIs "map" $value) -}}
+{{-       printf "%s = %q\n" $key (toString $value) -}}
+{{-     end -}}
+{{-   end -}}
+{{-   range $key, $value := $table -}}
+{{-     if kindIs "map" $value -}}
+{{-       template "colors_toml" (list (printf "%s.%s" $parent $key) $value) -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
 {{- $colors := "" -}}
 {{- if (stat (joinPath $abs_roamg_cfg_dir "current-color-theme.yml")) -}}
-{{-   $colors = include (joinPath $abs_roamg_cfg_dir "current-color-theme.yml") | fromYaml | toToml -}}
+{{-   $colors = include (joinPath $abs_roamg_cfg_dir "current-color-theme.yml") | fromYaml -}}
 {{- else -}}
 {{-   warnf "Using fallback color theme" -}}
-{{-   $colors = includeTemplate "colors/fallback-color-theme.yml" | fromYaml | toToml -}}
+{{-   $colors = includeTemplate "colors/fallback-color-theme.yml" | fromYaml -}}
 {{- end -}}
-{{- $colors = replace "[ansi]" "[data.style.colors.ansi]" $colors -}}
-{{- $colors = replace "[palette]" "[data.style.colors.palette]" $colors -}}
-{{- $colors = replace "[palette." "[data.style.colors.palette." $colors -}}
-{{- $colors = replace "[ui]" "[data.style.colors.ui]" $colors -}}
-{{- $colors = replace "[ui." "[data.style.colors.ui." $colors -}}
-{{- $colors = replace "[syntax]" "[data.style.colors.syntax]" $colors -}}
-{{- $colors = replace "[syntax." "[data.style.colors.syntax." $colors -}}
-{{ printf "\n%s" $colors }}
+{{ "\n" }}{{ template "colors_toml" (list "data.style.colors" $colors) }}
 
 {{- if or $headless $termux }}
 [diff]
