@@ -49,18 +49,18 @@ cf.initial_cols = 132
 
 -- cf.color_scheme = "Eighties (base16)"
 local custom_colors = wezterm.color.get_builtin_schemes()['Eighties (base16)'];
-custom_colors.ansi[2]    = '#{{ .style.colors.ansi1 }}'
-custom_colors.ansi[3]    = '#{{ .style.colors.ansi2 }}'
-custom_colors.ansi[4]    = '#{{ .style.colors.ansi3 }}'
-custom_colors.ansi[5]    = '#{{ .style.colors.ansi4 }}'
-custom_colors.ansi[6]    = '#{{ .style.colors.ansi5 }}'
-custom_colors.ansi[7]    = '#{{ .style.colors.ansi6 }}'
-custom_colors.brights[2] = '#{{ .style.colors.ansi9 }}'
-custom_colors.brights[3] = '#{{ .style.colors.ansiA }}'
-custom_colors.brights[4] = '#{{ .style.colors.ansiB }}'
-custom_colors.brights[5] = '#{{ .style.colors.ansiC }}'
-custom_colors.brights[6] = '#{{ .style.colors.ansiD }}'
-custom_colors.brights[7] = '#{{ .style.colors.ansiE }}'
+custom_colors.ansi[2]    = '#{{ .style.colors.ansi.ansi_1 }}'
+custom_colors.ansi[3]    = '#{{ .style.colors.ansi.ansi_2 }}'
+custom_colors.ansi[4]    = '#{{ .style.colors.ansi.ansi_3 }}'
+custom_colors.ansi[5]    = '#{{ .style.colors.ansi.ansi_4 }}'
+custom_colors.ansi[6]    = '#{{ .style.colors.ansi.ansi_5 }}'
+custom_colors.ansi[7]    = '#{{ .style.colors.ansi.ansi_6 }}'
+custom_colors.brights[2] = '#{{ .style.colors.ansi.ansi_9 }}'
+custom_colors.brights[3] = '#{{ .style.colors.ansi.ansi_a }}'
+custom_colors.brights[4] = '#{{ .style.colors.ansi.ansi_b }}'
+custom_colors.brights[5] = '#{{ .style.colors.ansi.ansi_c }}'
+custom_colors.brights[6] = '#{{ .style.colors.ansi.ansi_d }}'
+custom_colors.brights[7] = '#{{ .style.colors.ansi.ansi_e }}'
 
 cf.color_schemes = { ['my_custom'] = custom_colors }
 cf.color_scheme = 'my_custom';

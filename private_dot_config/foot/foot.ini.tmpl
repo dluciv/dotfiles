@@ -74,36 +74,43 @@ bold-text-in-bright=yes
 [touch]
 # long-press-delay=400
 
+{{- $c := .style.colors }}
+
 [colors-dark]
 # alpha=1.0
-background={{ .style.colors.base00 }}
-foreground={{ .style.colors.base05 }}
+background=#{{ $c.ui.global.background.normal }}
+foreground=#{{ $c.ui.global.foreground.normal }}
 
 
 ## Normal/regular colors (color palette 0-7)
-regular0={{ .style.colors.ansi0 }} # black
-regular1={{ .style.colors.ansi1 }} # red
-regular2={{ .style.colors.ansi2 }} # green
-regular3={{ .style.colors.ansi3 }} # yellow
-regular4={{ .style.colors.ansi4 }} # blue
-regular5={{ .style.colors.ansi5 }} # magenta
-regular6={{ .style.colors.ansi6 }} # cyan
-regular7={{ .style.colors.ansi7 }} # white
+regular0=#{{ $c.ansi.ansi_0 }} # black
+regular1=#{{ $c.ansi.ansi_1 }} # red
+regular2=#{{ $c.ansi.ansi_2 }} # green
+regular3=#{{ $c.ansi.ansi_3 }} # yellow
+regular4=#{{ $c.ansi.ansi_4 }} # blue
+regular5=#{{ $c.ansi.ansi_5 }} # magenta
+regular6=#{{ $c.ansi.ansi_6 }} # cyan
+regular7=#{{ $c.ansi.ansi_7 }} # white
 
 ## Bright colors (color palette 8-15)
-bright0={{ .style.colors.ansi8 }}  # bright black
-bright1={{ .style.colors.ansi9 }}  # bright red
-bright2={{ .style.colors.ansiA }}  # bright green
-bright3={{ .style.colors.ansiB }}  # bright yellow
-bright4={{ .style.colors.ansiC }}  # bright blue
-bright5={{ .style.colors.ansiD }}  # bright magenta
-bright6={{ .style.colors.ansiE }}  # bright cyan
-bright7={{ .style.colors.ansiF }}  # bright white
+bright0=#{{ $c.ansi.ansi_8 }}  # bright black
+bright1=#{{ $c.ansi.ansi_9 }}  # bright red
+bright2=#{{ $c.ansi.ansi_a }}  # bright green
+bright3=#{{ $c.ansi.ansi_b }}  # bright yellow
+bright4=#{{ $c.ansi.ansi_c }}  # bright blue
+bright5=#{{ $c.ansi.ansi_d }}  # bright magenta
+bright6=#{{ $c.ansi.ansi_e }}  # bright cyan
+bright7=#{{ $c.ansi.ansi_f }}  # bright white
 
 ## dimmed colors (see foot.ini(5) man page)
-# dim0=<not set>
-# ...
-# dim7=<not-set>
+dim0=#{{ $c.palette.black.dim }} # dim black
+dim1=#{{ $c.palette.red.dim }} # dim red
+dim2=#{{ $c.palette.green.dim }} # dim green
+dim3=#{{ $c.palette.yellow.dim }} # dim yellow
+dim4=#{{ $c.palette.blue.dim }} # dim blue
+dim5=#{{ $c.palette.magenta.dim }} # dim magenta
+dim6=#{{ $c.palette.cyan.dim }} # dim cyan
+dim7=#{{ $c.palette.white.dim }} # dim white
 
 ## The remaining 256-color palette
 # 16 = <256-color palette #16>
@@ -118,7 +125,7 @@ bright7={{ .style.colors.ansiF }}  # bright white
 # search-box-no-match=<regular0> <regular1>  # black-on-red
 # search-box-match=<regular0> <regular3>     # black-on-yellow
 # urls=<regular3>
-urls={{ .style.colors.base04 }}
+urls=#{{ $c.ui.link.normal }}
 
 
 [csd]

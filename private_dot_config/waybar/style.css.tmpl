@@ -6,13 +6,13 @@
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: "{{ .style.fav_font_name }}", "{{ .style.fav_font_name_nf }}", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
-    color: @base07;
+    color: @fg;
 }
 
 window#waybar {
   /* you can also GTK3 CSS functions! */
-  background-color: shade(@base00, 0.9);
-  border: 2px solid alpha(@base02, 0.3);
+  background-color: shade(@bg, 0.9);
+  border: 2px solid alpha(@bg_lighter, 0.3);
 }
 
 button {
@@ -26,11 +26,11 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 1px 1px @base0F;
+    box-shadow: inset 1px 1px @deprecated;
 }
 
 #workspaces {
-    background-color: @base02;
+    background-color: @bg_lighter;
 }
 
 #workspaces button {
@@ -38,17 +38,17 @@ button:hover {
 }
 
 #workspaces button:hover {
-    background-color: @base04;
+    background-color: @fg_dim;
 }
 
 #workspaces button.focused {
-    background-color: @base0D;
-    box-shadow: inset 0 -3px @base04;
+    background-color: @accent;
+    box-shadow: inset 0 -3px @fg_dim;
 }
 
 #workspaces button.urgent {
-    background-color: @base09;
-    color: @base00;
+    background-color: @warning;
+    color: @bg;
 }
 
 #language,
@@ -70,18 +70,23 @@ button:hover {
 #power-profiles-daemon,
 #mpd {
     padding: 0 10px;
-    background-color: @base02;
+    background-color: @bg_lighter;
     min-width: 18px;
 }
 
 #battery.critical:not(.charging) {
-    background-color: @base09;
-    color: @base00;
+    background-color: @error;
+    color: @bg;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#battery.warning:not(.charging) {
+    background-color: @warning;
+    color: @bg;
 }
 
 @keyframes blink {
@@ -92,8 +97,8 @@ button:hover {
 }
 
 #temperature.critical {
-    background-color: @base09;
-    color: @base00;
+    background-color: @error;
+    color: @bg;
 }
 
 #tray > .passive {
@@ -102,13 +107,13 @@ button:hover {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: @base09;
+    background-color: @warning;
 }
 
 #tray menu * {
-    color: @base00;
+    color: @bg;
 }
 
 #tray menu menuitem:hover {
-  background-color: @base0D;
+  background-color: @accent;
 }

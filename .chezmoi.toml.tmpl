@@ -116,12 +116,21 @@
 {{- end }}
 
 [data.style.colors]
-{{- if (stat (joinPath $abs_roamg_cfg_dir "current-color-theme.yml")) }}
-{{ include (joinPath $abs_roamg_cfg_dir "current-color-theme.yml") | fromYaml | toToml }}
-{{- else }}
-{{ warnf "Using fallback color theme" }}
-{{ includeTemplate "colors/fallback-color-theme.yml" | fromYaml | toToml }}
-{{- end }}
+{{- $colors := "" -}}
+{{- if (stat (joinPath $abs_roamg_cfg_dir "current-color-theme.yml")) -}}
+{{-   $colors = include (joinPath $abs_roamg_cfg_dir "current-color-theme.yml") | fromYaml | toToml -}}
+{{- else -}}
+{{-   warnf "Using fallback color theme" -}}
+{{-   $colors = includeTemplate "colors/fallback-color-theme.yml" | fromYaml | toToml -}}
+{{- end -}}
+{{- $colors = replace "[ansi]" "[data.style.colors.ansi]" $colors -}}
+{{- $colors = replace "[palette]" "[data.style.colors.palette]" $colors -}}
+{{- $colors = replace "[palette." "[data.style.colors.palette." $colors -}}
+{{- $colors = replace "[ui]" "[data.style.colors.ui]" $colors -}}
+{{- $colors = replace "[ui." "[data.style.colors.ui." $colors -}}
+{{- $colors = replace "[syntax]" "[data.style.colors.syntax]" $colors -}}
+{{- $colors = replace "[syntax." "[data.style.colors.syntax." $colors -}}
+{{ printf "\n%s" $colors }}
 
 {{- if or $headless $termux }}
 [diff]

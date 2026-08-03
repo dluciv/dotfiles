@@ -2,10 +2,8 @@
 # Meta Information
 # =============================================================================
 # system: tinted8
-# family: VGA
-# style: Hardware
-# author: https://github.com/dluciv
-# theme_author: https://dluciv.name
+# name: VGA BIOS
+# author: IBM VGA Standard
 # supported_styling_version: 0.2.0
 # variant: dark
 # =============================================================================
@@ -13,48 +11,48 @@
 palette:
   black:
     normal: &black_normal '000000'
-    bright: &black_bright '1f1f1f'
+    bright: &black_bright '555555'
     dim: &black_dim '000000'
   red:
-    normal: &red_normal 'cc0000'
-    bright: &red_bright 'ff0a0a'
-    dim: &red_dim '8f0000'
+    normal: &red_normal 'aa0000'
+    bright: &red_bright 'ff5555'
+    dim: &red_dim '6d0000'
   green:
-    normal: &green_normal '00cc00'
-    bright: &green_bright '0aff0a'
-    dim: &green_dim '008f00'
+    normal: &green_normal '00aa00'
+    bright: &green_bright '55ff55'
+    dim: &green_dim '006d00'
   yellow:
-    normal: &yellow_normal 'cccc00'
-    bright: &yellow_bright 'ffff0a'
-    dim: &yellow_dim '8f8f00'
+    normal: &yellow_normal 'aa5500'
+    bright: &yellow_bright 'ffff55'
+    dim: &yellow_dim '6d3600'
   blue:
-    normal: &blue_normal '0000cc'
-    bright: &blue_bright '0a0aff'
-    dim: &blue_dim '00008f'
+    normal: &blue_normal '0000aa'
+    bright: &blue_bright '5555ff'
+    dim: &blue_dim '00006d'
   magenta:
-    normal: &magenta_normal 'cc00cc'
-    bright: &magenta_bright 'ff0aff'
-    dim: &magenta_dim '8f008f'
+    normal: &magenta_normal 'aa00aa'
+    bright: &magenta_bright 'ff55ff'
+    dim: &magenta_dim '6d006d'
   cyan:
-    normal: &cyan_normal '00cccc'
-    bright: &cyan_bright '0affff'
-    dim: &cyan_dim '008f8f'
+    normal: &cyan_normal '00aaaa'
+    bright: &cyan_bright '55ffff'
+    dim: &cyan_dim '006d6d'
   white:
-    normal: &white_normal 'cccccc'
-    bright: &white_bright 'ebebeb'
-    dim: &white_dim 'adadad'
+    normal: &white_normal 'aaaaaa'
+    bright: &white_bright 'ffffff'
+    dim: &white_dim '8b8b8b'
   orange:
-    normal: &orange_normal 'ddaa00'
-    bright: &orange_bright 'ffca1b'
-    dim: &orange_dim 'a07b00'
+    normal: &orange_normal 'aa3900'
+    bright: &orange_bright 'e74e00'
+    dim: &orange_dim '6d2400'
   brown:
-    normal: &brown_normal '2a2209'
-    bright: &brown_bright '5f4c11'
+    normal: &brown_normal '0e0603'
+    bright: &brown_bright '421b0c'
     dim: &brown_dim '000000'
   gray:
-    normal: &gray_normal '777777'
-    bright: &gray_bright '969696'
-    dim: &gray_dim '585858'
+    normal: &gray_normal '555555'
+    bright: &gray_bright '747474'
+    dim: &gray_dim '363636'
 
 ansi:
   ansi_0: *black_normal
