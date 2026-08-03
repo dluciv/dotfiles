@@ -9,8 +9,8 @@ base05: &base05 "f0f0f0" # Clean Light Gray (Interpolated)
 base06: &base06 "f5f5f5" # Clean Near-White (Interpolated)
 base07: &base07 "ffffff" # Pure White (Lightest Foreground)
 base08: &base08 "aa0000" # VGA Red
-base09: &base09 "aa5500" # VGA Brown / Orange
-base0A: &base0A "aaaa00" # VGA Yellow / Dark Yellow
+base09: &base09 "aaaa00" # VGA Yellow / Dark Yellow | These two are wrong in many themes
+base0A: &base0A "000088" # VGA Dark Blue            | So here I also use it in a wrong way
 base0B: &base0B "00aa00" # VGA Green
 base0C: &base0C "00aaaa" # VGA Cyan
 base0D: &base0D "0000aa" # VGA Blue (Standard)
@@ -20,28 +20,9 @@ base10: &base10 "5555ff" # VGA Bright Blue
 base11: &base11 "55ff55" # VGA Bright Green
 base12: &base12 "ff5555" # VGA Bright Red
 base13: &base13 "ffff55" # VGA Bright Yellow
-base14: &base14 "ff55ff" # VGA Bright Magenta
+base14: &base14 "55ff55" # VGA Bright Green         | In most themes...
 base15: &base15 "ffffff" # White Extra Accent
 base16: &base16 "000000" # Black Extra Accent
 base17: &base17 "808080" # Gray Extra Accent
 
-# ANSI terminal colors, per the standard Base24 -> ANSI mapping.
-# Each entry reuses the baseXX color defined above (YAML alias).
-# regular:
-ansi0: *base00  # ANSI Black          = base00
-ansi1: *base08  # ANSI Red            = base08
-ansi2: *base0B  # ANSI Green          = base0B
-ansi3: *base0A  # ANSI Yellow         = base0A
-ansi4: *base0D  # ANSI Blue           = base0D
-ansi5: *base0E  # ANSI Magenta        = base0E
-ansi6: *base0C  # ANSI Cyan           = base0C
-ansi7: *base05  # ANSI White          = base05
-# bright:
-ansi8: *base03  # ANSI Bright Black   = base03
-ansi9: *base12  # ANSI Bright Red     = base12
-ansiA: *base14  # ANSI Bright Green   = base14
-ansiB: *base13  # ANSI Bright Yellow  = base13
-ansiC: *base16  # ANSI Bright Blue    = base16
-ansiD: *base17  # ANSI Bright Magenta = base17
-ansiE: *base15  # ANSI Bright Cyan    = base15
-ansiF: *base07  # ANSI Bright White   = base07
+{{ includeTemplate "colors/ansi_colors.yml" }}
