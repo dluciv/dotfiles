@@ -1,0 +1,13 @@
+{{-   $parent := index . 0 -}}
+{{-   $table  := index . 1 -}}
+{{ printf "[%s]\n" $parent -}}
+{{-   range $key, $value := $table -}}
+{{-     if not (kindIs "map" $value) -}}
+{{-       printf "%s = %q\n" $key (toString $value) -}}
+{{-     end -}}
+{{-   end -}}
+{{-   range $key, $value := $table -}}
+{{-     if kindIs "map" $value -}}
+{{-       template "hierarchical_toml.tmpl" (list (printf "%s.%s" $parent $key) $value) -}}
+{{-     end -}}
+{{-   end -}}
