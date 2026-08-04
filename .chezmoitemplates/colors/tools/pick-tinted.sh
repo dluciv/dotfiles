@@ -109,24 +109,36 @@ echo "File:     $selected_file" >&2
 # ---------------------------------------------------------------------------
 # Run the appropriate pipeline
 # ---------------------------------------------------------------------------
+converted=1
+
 case "$selected_system" in
     tinted8)
         echo "Running: t8yml.py ..." >&2
         "$T8YML" "$selected_file"
+        converted=$?
         ;;
     base16|base24)
         echo "Running: bxx2t8.py | t8yml.py ..." >&2
-        if ( "$BXX2T8" "$selected_file" | "$T8YML" /dev/stdin ); then
-            chezmoi init --apply
-            echo "If you terminal watches config, see your colors now:"
-            "$TSCOL"
-            if command -v swaymsg  &>/dev/null; then
-                swaymsg reload
-            fi
-        fi
+        "$BXX2T8" "$selected_file" | "$T8YML" /dev/stdin
+        converted=$?
         ;;
     *)
         echo "Error: unknown system '$selected_system'" >&2
         exit 1
         ;;
 esac
+
+# ---------------------------------------------------------------------------
+# Apply results if successful
+# ---------------------------------------------------------------------------
+if [[ "$converted" == "0" ]]; then
+    chezmoi init --apply
+    echo "If you terminal watches config, see your colors now:"
+    "$TSCOL"
+    if command -v swaymsg  &>/dev/null; then
+        swaymsg reload
+    fi
+else
+    echo "Conversion went wrong" >&2
+    exit 1
+fi
