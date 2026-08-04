@@ -12,6 +12,7 @@ CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/tinted-theming-schemes"
 SCRIPTS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/chezmoi/.chezmoitemplates/colors/tools"
 BXX2T8="$SCRIPTS_DIR/bxx2t8.py"
 T8YML="$SCRIPTS_DIR/t8yml.py"
+TSCOL="$SCRIPTS_DIR/test-colors.sh"
 
 # Field separator for fzf (unit separator, unlikely to appear in paths)
 SEP=$'\x1f'
@@ -115,9 +116,13 @@ case "$selected_system" in
         ;;
     base16|base24)
         echo "Running: bxx2t8.py | t8yml.py ..." >&2
-        "$BXX2T8" "$selected_file" | "$T8YML" /dev/stdin
-        if [[ $? == 0 ]]; then
+        if ( "$BXX2T8" "$selected_file" | "$T8YML" /dev/stdin ); then
             chezmoi init --apply
+            echo "If you terminal watches config, see your colors now:"
+            "$TSCOL"
+            if command -v swaymsg  &>/dev/null; then
+                swaymsg reload
+            fi
         fi
         ;;
     *)
