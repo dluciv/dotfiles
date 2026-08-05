@@ -5,7 +5,21 @@ description: Use when searching the web and the built-in `websearch` tool (Exa) 
 
 # Web search with fallback
 
-Try `websearch` first. If it is unavailable or results in errors (403 / transport / empty), don't give up — fall back to the engines below via `webfetch` (format `markdown`), in order, stopping at the first that returns results.
+Search order (prefer the first that works):
+
+1. `websearch` (Exa) if available.
+2. **web-search-mcp** (if connected) — local MCP server, engines Bing > Brave > DuckDuckGo, no API key. Three tools:
+   - `get-web-search-summaries` — lightweight: query + snippets only. **Best default**: full search strategy but minimal output, fewest tokens.
+   - `full-web-search` — also extracts full page content (masses of tokens); use only when summaries aren't enough and you actually need the body text.
+   - `get-single-web-page-content` — extract content from a known URL; faster than searching.
+   Advantage: higher-quality results via browser engines + relevance checking. Use it when it's available.
+3. `webfetch` fallback chain below.
+
+If some choice is unavailable or errors, move down the chain.
+
+## webfetch fallback chain
+
+If `websearch` is unavailable or results in errors (403 / transport / empty), don't give up — fall back to the engines below via `webfetch` (format `markdown`), in order, stopping at the first that returns results.
 
 Use `q=` as the query param (spaces are fine).
 
