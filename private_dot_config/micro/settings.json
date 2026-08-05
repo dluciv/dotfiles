@@ -1,3 +1,12 @@
 {
-  "colorscheme": "chezmoi-current"
+    "colorscheme": "chezmoi-current",
+
+    "hlsearch": true,
+    "hltaberrors": true,
+    "hltrailingws": true,
+    "indentchar": "⇥",
+    "rmtrailingws": true,
+    "tabstospaces": true,
+    "tabsize": 4,
+    "showchars": "ispace=·,space=·,itab=\u003c==\u003e",
 }
