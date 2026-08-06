@@ -13,6 +13,6 @@ Host sk.*
     # SSH multiplexing on
     ControlMaster auto
     # Where to store local sockets, unique socket for each server
-    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPath ~/.ssh/mux/%r@%h-%p
     # Keep master-connection open for 5 minutes
     ControlPersist 300
