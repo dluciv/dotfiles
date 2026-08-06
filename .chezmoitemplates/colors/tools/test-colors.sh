@@ -44,6 +44,7 @@ for entry in "${colors[@]}"; do
 done
 printf "\n"
 
-notify-send -u low      -i dialog-information "Normal" "This is a normal notification"
-notify-send -u normal   -i dialog-warning     "Warning" "This is a warning notification"
-notify-send -u critical -i dialog-error       "Error" "This is an error notification"
+
+notify-send -u low      -i dialog-information    "It's ok, it's test" "Low urgency notification example"
+notify-send -u normal   -i dialog-warning        "It's ok, it's test" "Normal urgency notification example"
+notify-send -u critical -i dialog-error -t 12000 "It's ok, it's test" "Urgent notification example"
