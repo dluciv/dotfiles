@@ -14,5 +14,5 @@ Host sk.*
     ControlMaster auto
     # Where to store local sockets, unique socket for each server
     ControlPath ~/.ssh/sockets/%r@%h-%p
-    # Keep master-connection open for 10 minutes
-    ControlPersist 600
+    # Keep master-connection open for 5 minutes
+    ControlPersist 300
