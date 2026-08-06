@@ -138,6 +138,9 @@ if [[ "$converted" == "0" ]]; then
     if command -v swaymsg  &>/dev/null; then
         swaymsg reload
     fi
+    if command -v termux-reload-settings &>/dev/null; then
+        termux-reload-settings
+    fi
 else
     echo "Conversion went wrong" >&2
     exit 1
