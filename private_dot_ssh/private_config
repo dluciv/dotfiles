@@ -9,3 +9,10 @@ Host *
 Host sk.*
     # https://www.reddit.com/r/yubikey/comments/17hd7gm/ssh_agent_refused_operation_with_nonresident/
     IdentityAgent   none
+
+    # SSH multiplexing on
+    ControlMaster auto
+    # Where to store local sockets, unique socket for each server
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    # Keep master-connection open for 10 minutes
+    ControlPersist 600
