@@ -98,6 +98,7 @@ fi
 source /usr/share/doc/git-extras/git-extras-completion.zsh
 {{-   end }}
 
+
 {{- if not .cygwin }}
 # ------ zoxide ------
 # after compinit!
@@ -124,6 +125,11 @@ if ! type omz 1>/dev/null 2>/dev/null; then
     RPROMPT=$'%{\e[2m%}%n@%m $(date +%T)%{\e[0m%}'
   fi
 fi
+
+{{-   if lookPath "wlsudo" }}
+# OMZ breaks it, so afterwards
+compdef _sudo wlsudo
+{{-   end }}
 
 # ============== Interactive aliases ===========
 
