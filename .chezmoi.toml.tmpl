@@ -23,6 +23,14 @@
 {{-   $abs_appdata_dir = env "XDG_DATA_HOME" -}}
 {{- end }}
 
+{{- $abs_cache_dir := "" -}}
+{{- if (ne (env "XDG_CACHE_HOME") "") -}}
+{{-   $abs_cache_dir = env "XDG_CACHE_HOME" -}}
+{{- else -}}
+{{-   $abs_cache_dir = (joinPath $abs_home_dir ".cache") -}}
+{{- end }}
+
+
 {{- "" -}}
 
 {{- if eq .chezmoi.os "linux" -}}
@@ -41,6 +49,7 @@
 {{-   $abs_local_cfg_dir = env "LOCALAPPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_roamg_cfg_dir = env "APPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_appdata_dir = $abs_local_cfg_dir -}}
+{{-   $abs_cache_dir = env "TEMP" -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{-   $darwin = true -}}
 {{- else if eq .chezmoi.os "android" -}}
@@ -70,6 +79,7 @@
     abs_roamg_cfg_dir = "{{ $abs_roamg_cfg_dir }}"
 
     abs_appdata_dir = "{{ $abs_appdata_dir }}"
+    abs_cache_dir = "{{ $abs_cache_dir }}"
 
     fav_term = "{{ if $windows }}wezterm{{ else }}kitty{{ end }}"
 
