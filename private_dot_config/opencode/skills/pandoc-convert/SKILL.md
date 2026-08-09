@@ -1,6 +1,6 @@
 ---
 name: pandoc-convert
-description: Конвертация документов между форматами (md, html, docx, pdf, epub, rst, latex, txt, ipynb, odt) через прямой вызов инструменат pandoc.
+description: Конвертация документов между форматами (md, html, asciidoc, docx, pdf, epub, rst, latex, txt, ipynb, odt) через прямой вызов инструменат pandoc.
 license: MIT
 compatibility: opencode
 metadata:
@@ -33,6 +33,7 @@ pandoc -f markdown -t html <<< "# Title\n\nContent"
 | Формат      | Флаг            | Примечание                          |
 |-------------|-----------------|-------------------------------------|
 | markdown    | markdown        |                                     |
+| asciidoc    | asciidoc        |                                     |
 | html        | html            |                                     |
 | plain text  | plain           |                                     |
 | docx        | docx            |                                     |
@@ -67,7 +68,7 @@ pandoc -f markdown -t docx -o "$output_file" <<< "$contents"
 ### 3. Конвертация файла в файл
 
 ```bash
-pandoc -f markdown -t pdf --pdf-engine=xelatex -o "$output_file" "$input_file"
+pandoc -f asciidoc -t pdf --pdf-engine=xelatex -o "$output_file" "$input_file"
 ```
 
 ### 4. DOCX со стилями (reference-doc)
@@ -104,7 +105,7 @@ pandoc --filter="$filter_path" -f markdown -t docx -o "$output_file" "$input_fil
 
 Несколько фильтров:
 ```bash
-pandoc --filter="filter1.py" --filter="filter2.py" -f markdown -t docx -o "$output_file" "$input_file"
+pandoc --filter="filter1.py" --filter="filter2.py" -f asciidoc -t docx -o "$output_file" "$input_file"
 ```
 
 ## Правила валидации (делай сам, MCP их больше не проверяет)
