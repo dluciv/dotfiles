@@ -7,7 +7,7 @@ bindsym --to-code {
 
   # XF86Macro1 exec 'wtype -k XF86AudioMicMute'
   # XF86Macro2 exec 'wtype -k XF86AudioMute'
-  XF86ScreenSaver exec '{{ .tools.wlr_lock }}'
+  XF86ScreenSaver exec '{{ .tools.wlr_lock_fast }}'
   XF86DOS exec dosbox-x
 
   $mod+grave        exec 'xdg-open ~'
@@ -22,7 +22,7 @@ bindsym --to-code {
 bindsym $mod+Tab exec 'rofi -show window'
 
 # Control keys
-bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock }}'
+bindsym --to-code $mod+ctrl+l exec '{{ .tools.wlr_lock_fast }}'
 
 bindsym --locked XF86MonBrightnessDown exec 'brightnessctl set 2%-'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'
 bindsym --locked XF86MonBrightnessUp   exec 'brightnessctl set 2%+'; exec 'notify-send --expire-time=200 -h int:value:$(( 100 * $(brightnessctl get) / $(brightnessctl max) )) "Brightness"'

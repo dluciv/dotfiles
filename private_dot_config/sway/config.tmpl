@@ -200,10 +200,10 @@ bindsym --to-code $mod+r mode "resize"
 # Idle lock
 
 exec swayidle \
-	timeout 300 '{{ .tools.wlr_lock }}' \
+	timeout 300 '{{ .tools.wlr_lock_grace }}' \
 	timeout 450 'swaymsg "output * dpms off"' \
 	resume 'swaymsg "output * dpms on"' \
-	before-sleep '{{ .tools.wlr_lock }}'
+	before-sleep '{{ .tools.wlr_lock_fast }}'
 
 # ## Window assignment
 

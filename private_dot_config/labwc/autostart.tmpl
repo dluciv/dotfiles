@@ -29,10 +29,10 @@ sfwbar >/dev/null 2>&1 &
 # (since a837fef). Instead use a wlr-output-power-management client such as
 # https://git.sr.ht/~leon_plickat/wlopm
 swayidle -w \
-	timeout 300 '{{ .tools.wlr_lock }}' \
+	timeout 300 '{{ .tools.wlr_lock_grace }}' \
 	timeout 600 'wlopm --off \*' \
 	resume 'wlopm --on \*' \
-	before-sleep '{{ .tools.wlr_lock }}' >/dev/null 2>&1 &
+	before-sleep '{{ .tools.wlr_lock_fast }}' >/dev/null 2>&1 &
 
 # Autoexecs
 
