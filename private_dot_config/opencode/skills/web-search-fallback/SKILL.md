@@ -1,9 +1,11 @@
 ---
 name: web-search-fallback
-description: Use when searching the web and the built-in `websearch` tool (Exa) is unavailable or fails or errors (e.g. 403 / transport error). Gives a fallback chain of HTML search engines to use via `webfetch`. Triggers on web searches, current/news/unknown-topic queries, any time web search is needed.
+description: Use when searching the web and the built-in `websearch` tool (Exa) is unavailable or fails or errors (e.g. 403 / transport error). Gives a fallback chain of HTML search engines to use via `webfetch`. Triggers on web searches, current/news/unknown-topic queries, any time web search is needed. Deep/multi-topic research is delegated to the `web-researcher` subagent.
 ---
 
 # Web search with fallback
+
+> Для глубокого или многотемного ресёрча делегируй задачу субагенту `web-researcher` (работает по правилам этого скилла и возвращает дистиллированный ответ с источниками).
 
 Search order (prefer the first that works):
 
