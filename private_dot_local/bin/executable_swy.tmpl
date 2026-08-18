@@ -4,10 +4,11 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 export MOZ_ENABLE_WAYLAND=1
 export XDG_CURRENT_DESKTOP=sway
+export TMPDIR="${XDG_RUNTIME_DIR:-${TMP:-/tmp}}"
 
 # systemctl --user import-environment XDG_CURRENT_DESKTOP QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND
 # dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND
-dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND
+dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP MOZ_ENABLE_WAYLAND TMPDIR
 
 {{/* Software -- WLR_RENDERER=pixman sway vulkan */ -}}
 
