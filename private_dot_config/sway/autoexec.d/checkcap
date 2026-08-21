@@ -1,1 +1,4 @@
+# Sway has CAP_SYS_NICE by default, which empties TMPDIR. Removing it helps.
+# https://github.com/swaywm/sway/issues/7555#issuecomment-1528980591
+
 exec_always sh -c 'if getcap /usr/bin/sway | grep cap_sys_nice; then notify-send -u critical "Sway capability" "You will probably have no \$TMPDIR unless \# setcap -r /usr/bin/sway"; fi'
