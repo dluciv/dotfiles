@@ -1,1 +1,1 @@
-execalways if getcap /usr/bin/sway | grep cap_sys_nice; then notify-send -u critical "Sway capability" "You probably have no \$TMPDIR unless `sudo setcap -r /usr/bin/sway`"; fi
+exec_always sh -c 'if getcap /usr/bin/sway | grep cap_sys_nice; then notify-send -u critical "Sway capability" "You will probably have no \$TMPDIR unless \# setcap -r /usr/bin/sway"; fi'
