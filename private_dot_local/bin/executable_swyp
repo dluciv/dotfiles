@@ -4,4 +4,5 @@ pushd ~/.config/sway/profiles &>/dev/null
 rm current.profile 2>/dev/null
 ln -s $1.profile current.profile
 popd &>/dev/null
+killall waybar # Workaround, reload launches another waybar
 swaymsg reload
