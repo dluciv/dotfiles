@@ -41,22 +41,22 @@
 (setq-default calendar-week-start-day 1)
 
 ;; === Это чтобы выглядывать из Чебурнета
-(defcustom cheburnet-proxy "PROXY 127.0.0.1:12334"
-  "Прокси из Чебурнета. HTTP — \"PROXY хоcт:порт\", SOCKS — \"SOCKS хоcт:порт\""
+(defcustom cheburnet-proxy ""
+  "Прокси из Чебурнета. Пустая строка — нет, HTTP — \"PROXY хоcт:порт\", SOCKS — \"SOCKS хоcт:порт\""
   :type 'string
   :group 'cheburnet)
 
 (setq-default
  url-proxy-locator
  (lambda (url host)
-   (cond ((string-match-p
+   (cond ((and (/= (length cheburnet-proxy) 0) (string-match-p
            (concat
             "\\("
             "melpa\\.org\\|"
             "elpa\\.gnu\\.org\\|"
             "elpa\\.nongnu\\.org"
             "\\)")
-           host)
+           host))
           cheburnet-proxy ; можно для отладки (progn (message "Ту-ту!") cheburnet-proxy)
           )
          t (url-default-find-proxy-for-url url host)
