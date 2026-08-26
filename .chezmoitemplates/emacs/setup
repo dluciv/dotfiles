@@ -25,11 +25,6 @@
 (setq-default file-name-coding-system 'utf-8)
 {{- end }}
 
-{{- if (lookPath "hunspell") }}
-;; === hunspell
-(setq ispell-program-name "hunspell")
-{{- end }}
-
 ;; === Это где лежат файлы для org-agenda
 (defcustom
   org-agenda-file-masks
@@ -62,14 +57,15 @@
             "elpa\\.nongnu\\.org"
             "\\)")
            host))
-          cheburnet-proxy ; можно для отладки (progn (message "Ту-ту!") cheburnet-proxy)
+           (progn (message "PXY") cheburnet-proxy)
           )
-         t (url-default-find-proxy-for-url url host)
+          t (progn (message "DRT") (url-default-find-proxy-for-url url host))
          )))
 
 ;; === Это чтобы работали пакеты
 (require 'package)
 (setq package-install-upgrade-built-in t)
+; (setq package-check-signature nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 {{- if not .android }}
 (add-to-list 'load-path "~/.emacs.d/site-lisp/" t)
@@ -251,6 +247,17 @@
       (activate-input-method current))))
 
 (reverse-input-method 'russian-computer)
+
+;; === Spell
+{{- if (lookPath "hunspell") }}
+(setq ispell-program-name "hunspell")
+{{- end }}
+
+(use-package guess-language
+  :ensure t
+  :init
+  (setq guess-language-languages '(ru en))
+  :hook (flyspell-mode . guess-language-mode))
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
 (message "Got to the end of .emacs.d/lisp/setup.el")
