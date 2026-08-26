@@ -49,7 +49,7 @@
 (setq-default
  url-proxy-locator
  (lambda (url host)
-   (cond ((and (/= (length cheburnet-proxy) 0) (string-match-p
+   (cond ((and (not (eq (length cheburnet-proxy) 0)) (string-match-p
            (concat
             "\\("
             "melpa\\.org\\|"
