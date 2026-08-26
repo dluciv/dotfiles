@@ -25,6 +25,11 @@
 (setq-default file-name-coding-system 'utf-8)
 {{- end }}
 
+{{- if (lookPath "hunspell") }}
+;; === hunspell
+(setq ispell-program-name "hunspell")
+{{- end }}
+
 ;; === Это где лежат файлы для org-agenda
 (defcustom
   org-agenda-file-masks

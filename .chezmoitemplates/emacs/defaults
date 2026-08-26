@@ -10,7 +10,7 @@
  '(tool-bar-mode {{ if .android }}t{{ else }}nil{{ end }})
  '(current-language-environment "Russian")
  '(default-input-method "russian-computer")
- '(ispell-dictionary "ru-yeyo")
+ '(ispell-dictionary "{{ if (lookPath "hunspell") }}ru_RU{{ else }}ru-yeyo{{ end }}")
  '(org-startup-truncated nil)
  '(org-startup-indented t)
  '(use-package-always-ensure t)
