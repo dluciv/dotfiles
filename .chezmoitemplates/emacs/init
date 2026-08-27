@@ -13,21 +13,26 @@
 (setq org-startup-truncated nil)
 (setq org-startup-indented t)
 (setq use-package-always-ensure t)
+(setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(when (fboundp 'indent-tabs-mode) (indent-tabs-mode -1))
-(when (fboundp 'global-display-line-numbers-mode) (global-display-line-numbers-mode 1))
-(when (fboundp 'column-number-mode) (column-number-mode 1))
-(when (fboundp 'menu-bar-mode) (menu-bar-mode {{ if (or .android .windows) }}1{{ else }}-1{{ end }}))
-(when (fboundp 'tool-bar-mode) (tool-bar-mode {{ if .android }}1{{ else }}-1{{ end }}))
-(when (fboundp 'size-indication-mode) (size-indication-mode 1))
+(defun my/toggle-mode (mode-symbol state)
+  "Включает (state=1) или выключает (state=-1) минорный режим, если он существует в текущей сессии Emacs."
+  (when (fboundp mode-symbol)
+    (funcall mode-symbol state)))
+
+(my/toggle-mode 'global-display-line-numbers-mode 1)
+(my/toggle-mode 'column-number-mode 1)
+(my/toggle-mode 'menu-bar-mode {{ if (or .android .windows) }}1{{ else }}-1{{ end }})
+(my/toggle-mode 'tool-bar-mode {{ if .android }}1{{ else }}-1{{ end }})
+(my/toggle-mode 'size-indication-mode 1)
 
 ;; --- Это любимый шрифт взамен шрифтов по умолчанию
 (set-face-attribute 'default nil
-					{{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN"{{ end }}
-					:height {{ if .android }}240{{ else if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}160{{ end }})
+                    {{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}" :foundry "UKWN"{{ end }}
+                    :height {{ if .android }}240{{ else if eq .dpi.level .dpi.normal }}140{{ else if eq .dpi.level .dpi.retina }}180{{else}}160{{ end }})
 (set-face-attribute 'mode-line nil
-					:background "gray30" {{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}"{{ end }})
+                    :background "gray30" {{ if not .android }}:family "{{ .style.fav_font_name_nf_mono }}"{{ end }})
 
 (when (file-exists-p custom-file)
   (load custom-file))
