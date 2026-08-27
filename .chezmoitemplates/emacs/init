@@ -5,7 +5,6 @@
 ;; === Настройки по умолчанию
 ;; --- Всякая кастомизация
 (load-theme 'misterioso t)
-(fringe-mode 0)
 (setq inhibit-startup-screen t)
 (setq current-language-environment "Russian")
 (setq default-input-method "russian-computer")
@@ -21,6 +20,7 @@
   (when (fboundp mode-symbol)
     (funcall mode-symbol state)))
 
+(my/toggle-mode 'fringe-mode 0)
 (my/toggle-mode 'global-display-line-numbers-mode 1)
 (my/toggle-mode 'column-number-mode 1)
 (my/toggle-mode 'menu-bar-mode {{ if (or .android .windows) }}1{{ else }}-1{{ end }})
