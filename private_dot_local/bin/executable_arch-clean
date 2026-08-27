@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+sudo echo 'Lets start from sudo...'
+selected=$(pacman -Qtdq | sort | fzf -m )
+echo "Removing:"
+echo "$selected"
+eval sudo pacman -Rns $selected
