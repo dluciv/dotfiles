@@ -49,7 +49,7 @@
 {{-   $abs_local_cfg_dir = env "LOCALAPPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_roamg_cfg_dir = env "APPDATA" | replaceAllRegex "\\\\" "/" -}}
 {{-   $abs_appdata_dir = $abs_local_cfg_dir -}}
-{{-   $abs_cache_dir = env "TEMP" -}}
+{{-   $abs_cache_dir = env "TEMP" | replaceAllRegex "\\\\" "/" -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{-   $darwin = true -}}
 {{- else if eq .chezmoi.os "android" -}}
