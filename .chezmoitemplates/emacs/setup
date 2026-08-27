@@ -68,7 +68,7 @@
 ; (setq package-check-signature nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 {{- if not .android }}
-(add-to-list 'load-path "{{ .abs_roamg_cfg_dir }}/emacs/local-packages/" t)
+(add-to-list 'load-path "{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/local-packages/" t)
 {{- end }}
 (package-initialize)
 

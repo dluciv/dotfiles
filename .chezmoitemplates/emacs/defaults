@@ -17,8 +17,8 @@
  )
 
 {{- if not .android }}
-(when (file-exists-p "{{ .abs_roamg_cfg_dir}}/emacs/setup.el")
-  (load "{{ .abs_roamg_cfg_dir}}/emacs/setup.el"))
+(when (file-exists-p "{{ .abs_roamg_cfg_dir}}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/setup.el")
+  (load "{{ .abs_roamg_cfg_dir}}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/setup.el"))
 {{- end }}
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
