@@ -1,7 +1,8 @@
 #!/bin/zsh
 
-sudo echo 'Lets start from sudo...'
+echo 'Lets start from sudo...'
+sudo true
 selected=$(pacman -Qtdq | sort | fzf --no-sort --tac --multi )
 echo "Removing:"
 echo "$selected"
-eval sudo pacman -Rns $selected
+sudo pacman -Rns ${(f)selected}
