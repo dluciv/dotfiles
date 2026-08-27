@@ -241,6 +241,18 @@
 
 (reverse-input-method 'russian-computer)
 
+;; === MD font settings
+(use-package markdown-mode
+  :ensure t
+  :custom-face
+  (markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
+  (markdown-code-face        ((t (:inherit font-lock-constant-face)))))
+
+;; === Whitespace
+(setq whitespace-style '(face trailing tabs))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'text-mode-hook 'whitespace-mode)
+
 ;; === Spell
 {{- if (lookPath "hunspell") }}
 (setq ispell-program-name "hunspell")
