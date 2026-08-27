@@ -1,5 +1,6 @@
 ;; === Это куда сохранять настройки
-(setq custom-file "{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/custom.el")
+(setq emacs_d_dir "{{ if .android }}{{ .home_dir }}/.emacs.d{{ else }}{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}{{ end }}")
+(setq custom-file (concat emacs_d_dir "/custom.el"))
 (if (file-exists-p custom-file)
     (load custom-file)
     (progn
@@ -33,8 +34,8 @@
 
 ;; === Ну и расширенные настройки, пакеты и т.д.
 {{- if not .android }}
-(when (file-exists-p "{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/setup.el")
-  (load "{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}/setup.el"))
+(when (file-exists-p (concat emacs_d_dir "/setup.el"))
+  (load (concat emacs_d_dir "/setup.el")))
 {{- end }}
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
