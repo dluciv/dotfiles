@@ -17,9 +17,9 @@
  )
 
 {{- if not .android }}
-(when (file-exists-p "~/.emacs.d/site-lisp/setup.el")
-  (load "~/.emacs.d/site-lisp/setup.el"))
+(when (file-exists-p "{{ .abs_roamg_cfg_dir}}/emacs/setup.el")
+  (load "{{ .abs_roamg_cfg_dir}}/emacs/setup.el"))
 {{- end }}
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
-(message "Got to the end of .emacs")
+(message "Got to the end of init.el (.emacs)")
