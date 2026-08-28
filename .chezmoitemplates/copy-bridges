@@ -1,0 +1,15 @@
+#!/bin/zsh -l
+# cumbersome to run under Termux too
+
+set -uex
+
+sub='https://gitlab.com/igareck/vpn-configs-for-russia/-/raw/main/TOR-BRIDGES/TOR_BRIDGES_TOP100.txt'
+bridges=$(curl -L "$sub" | grep -v '^\s*\(#\|$\)' )
+echo $bridges | bash $(which cccp) c
+sleep 2
+exit
+
+echo termux CB may broken again, bridges are following:
+echo '----------------------------------'
+echo $bridges
+read
