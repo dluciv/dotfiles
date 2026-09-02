@@ -9,4 +9,7 @@
     "tabstospaces": true,
     "tabsize": 4,
     "showchars": "ispace=·,space=·,itab=\u003c==\u003e",
+
+    "softwrap": true,
+    "wordwrap": true,
 }
