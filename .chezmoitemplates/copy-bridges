@@ -1,7 +1,7 @@
 #!/bin/zsh -l
 # cumbersome to run under Termux too
 
-set -uex
+set -ue
 
 sub='https://gitlab.com/igareck/vpn-configs-for-russia/-/raw/main/TOR-BRIDGES/TOR_BRIDGES_TOP100.txt'
 bridges=$(curl -L "$sub" | grep -v '^\s*\(#\|$\)' )
