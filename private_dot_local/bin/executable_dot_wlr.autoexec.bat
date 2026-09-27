@@ -9,8 +9,10 @@ echo `date`: $USER : $0 start >> /tmp/_.wlr.log
 
 if [[ "umbriel" == "$XDG_CURRENT_DESKTOP" ]]; then
   # no wpaperd...
-else
+elif [[ "sway" == "$XDG_CURRENT_DESKTOP" ]]; then
   wpaperd &|
+else
+  true
 fi
 
 
@@ -22,8 +24,10 @@ sleep $(( RANDOM % 5 + 1 ));
 
 if [[ "umbriel" == "$XDG_CURRENT_DESKTOP" ]]; then
   systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-umbriel.service
-else
+elif [[ "sway" == "$XDG_CURRENT_DESKTOP" ]]; then
   systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
+else
+  true
 fi
 # systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service
 
