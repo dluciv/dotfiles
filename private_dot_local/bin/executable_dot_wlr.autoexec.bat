@@ -7,7 +7,12 @@
 
 echo `date`: $USER : $0 start >> /tmp/_.wlr.log
 
-wpaperd &|
+if [[ "umbriel" == "$XDG_CURRENT_DESKTOP" ]]; then
+  # no wpaperd...
+else
+  wpaperd &|
+fi
+
 
 {
 
@@ -15,7 +20,11 @@ repipe
 
 sleep $(( RANDOM % 5 + 1 ));
 
-systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
+if [[ "umbriel" == "$XDG_CURRENT_DESKTOP" ]]; then
+  systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-umbriel.service
+else
+  systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
+fi
 # systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service
 
 } &|

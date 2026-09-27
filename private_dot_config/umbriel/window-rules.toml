@@ -36,4 +36,4 @@ default_workspace = 4
 
 [[window_rule]]
 match.app_id = "karing$"
-default_workspace = 10
+default_workspace = 9
