@@ -1,0 +1,39 @@
+[[window_rule]]
+match.app_id = "^io.github.tdesktop_x64.TDesktop$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "^telegramdesktop$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "^org.telegram.desktop$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "Ferdium$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "Gajim$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "brave-browser$"
+default_workspace = 2
+
+[[window_rule]]
+match.app_id = "brave-browser-beta$"
+default_workspace = 2
+
+[[window_rule]]
+match.app_id = "firefox$"
+default_workspace = 3
+
+[[window_rule]]
+match.app_id = "thunderbird$"
+default_workspace = 4
+
+[[window_rule]]
+match.app_id = "karing$"
+default_workspace = 10

@@ -14,7 +14,8 @@
 # https://docs.noctalia.dev/umbriel/configuration/#include
 [include]
 files = [
-  "output-profile.toml"
+  "output-profile.toml",
+  "window-rules.toml"
 ]
 
 [include.optional]
@@ -26,8 +27,13 @@ files = []
 # Optional session examples. XWayland support is enabled by default.
 # https://docs.noctalia.dev/umbriel/configuration/#general
 [general]
-autostart = ["noctalia", "kitty"]
-# xwayland = false
+autostart = [
+  "noctalia",
+  "kitty",
+  "~/.local/bin/.x.autoexec.bat",
+  "~/.local/bin/.wlr.autoexec.bat"
+]
+xwayland = true
 
 # ==============================================================================
 # Lid events
