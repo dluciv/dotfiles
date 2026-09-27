@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+pushd ~/.config/umbriel &>/dev/null
+rm output-profile.toml 2>/dev/null
+ln -s output-profiles/$1.toml output-profile.toml
+touch config.toml
+popd &>/dev/null
