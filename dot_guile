@@ -1,0 +1,4 @@
+;;; Guile Scheme Init File
+(use-modules (ice-9 readline))
+(activate-readline)
+(display "Hello, it is guile\n")
