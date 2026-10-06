@@ -17,6 +17,7 @@
 {{- /* https://stackoverflow.com/a/22575737 */}}
 {{- if .windows }}
 	longpaths = true
+	symlinks = true
 {{- end }}
 	editor = {{ if lookPath "mcedit" }}mcedit{{ else if lookPath "nvim" }}nvim{{ else }}vim{{ end }}
 	autocrlf = {{if .windows }}true{{else}}input{{end}}
