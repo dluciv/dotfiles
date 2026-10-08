@@ -1,0 +1,5 @@
+lat: 60.0
+lng: 30.0
+# "offset_sunrise": "01:00:00" # Run 1 hour later
+# "offset_sunset": "-0.5" # Run 30 minutes earlier
+update_days: 0
