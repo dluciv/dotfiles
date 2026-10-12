@@ -57,7 +57,7 @@ if [[ $HOST != "clover" ]]; then ionice -c 3 -- nice flameshot &|; fi
 
 command -v syncthingtray-qt6 &>/dev/null && SYNCTHINGTRAY=syncthingtray-qt6 || SYNCTHINGTRAY=syncthingtray
 { sleep $(( RANDOM % 10 + 5 )); ionice -c 3 -- nice $SYNCTHINGTRAY --wait } &|
-{ sleep $(( RANDOM % 5 + 2 ));  nice ~/_/safe_wf/tools/pytraycharmap/run.sh cccp-p &>/dev/null } &|
+# { sleep $(( RANDOM % 5 + 2 ));  nice ~/_/safe_wf/tools/pytraycharmap/run.sh cccp-p &>/dev/null } &|
 
 # .d
 stage_files=( $HOME/.local/bin/x.autoexec.d/*.d(N) )
