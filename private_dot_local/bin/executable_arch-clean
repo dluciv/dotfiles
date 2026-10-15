@@ -1,8 +1,72 @@
 #!/bin/zsh
 
+# Выбор осиротевших пакетов (pacman -Qtdq) с показом занимаемого места
+# на диске и сортировкой по размеру (от большего к меньшему).
+
 echo 'Lets start from sudo...'
 sudo true
-selected=$(pacman -Qtdq | sort | fzf --no-sort --tac --multi )
-echo "Removing:"
-echo "$selected"
-sudo pacman -Rns ${(f)selected}
+
+orphans=(${(f)"$(pacman -Qtdq 2>/dev/null)"})
+if (( ${#orphans} == 0 )); then
+  echo 'No orphaned packages found.'
+  exit 0
+fi
+
+# human <байты> -> "1.23 GiB" / "456.7 MiB" / "12.3 KiB"
+human() {
+  local b=$1
+  local LC_ALL=C
+  if   (( b >= 1073741824 )); then printf '%.2f GiB' $(( b / 1073741824.0 ))
+  elif (( b >= 1048576 ));    then printf '%.1f MiB' $(( b / 1048576.0 ))
+  elif (( b >= 1024 ));       then printf '%.1f KiB' $(( b / 1024.0 ))
+  else                             printf '%d B'   $b
+  fi
+}
+
+# Размер берём из поля "Installed Size" вывода pacman -Qi.
+# Строки: <байты>\t<размер>\t<имя>, сортируем по байтам по убыванию.
+rows=$(LC_ALL=C pacman -Qi "${orphans[@]}" | awk '
+  /^Name[ ]*:/           { name = $3 }
+  /^Installed Size[ ]*:/ { size = $4; unit = $5 }
+  /^$/                   { if (name != "") print name "\t" size "\t" unit; name = "" }
+  END                    { if (name != "") print name "\t" size "\t" unit }
+' | awk -F'\t' '
+  function tobytes(v, u) {
+    if (u == "B")   return v
+    if (u == "KiB") return v * 1024
+    if (u == "MiB") return v * 1048576
+    if (u == "GiB") return v * 1073741824
+    if (u == "TiB") return v * 1099511627776
+    return v
+  }
+  { printf "%d\t\033[90m%9s %-3s\033[0m\t%s\n", tobytes($2, $3), $2, $3, $1 }
+' | sort -t$'\t' -k1,1nr)
+
+# имя -> байты, чтобы посчитать суммарный размер выбранного
+typeset -A size_of
+while IFS=$'\t' read -r bytes _ name; do
+  [[ -n $name ]] && size_of[$name]=$bytes
+done <<< "$rows"
+
+total=0
+for b in ${(v)size_of}; do (( total += b )); done
+printf 'Orphaned packages: %d, total %s\n\n' ${#orphans} "$(human $total)"
+
+# fzf: показываем размер + имя, ищем только по имени (--nth=2),
+# порядок не пересортировываем (--no-sort), поэтому список остаётся по размеру.
+selected=$(print -r -- "$rows" | cut -f2,3 | fzf --no-sort --multi --ansi \
+  --delimiter=$'\t' --nth=2 --prompt='Remove > ')
+
+if [[ -z $selected ]]; then
+  echo 'Nothing selected.'
+  exit 0
+fi
+
+names=(${(f)"$(print -r -- "$selected" | cut -f2)"})
+sel=0
+for n in $names; do (( sel += ${size_of[$n]:-0} )); done
+
+echo "Removing ${#names} package(s), $(human $sel):"
+printf '  %s\n' "${names[@]}"
+echo
+sudo pacman -Rns "${names[@]}"
