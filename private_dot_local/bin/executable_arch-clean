@@ -1,7 +1,10 @@
 #!/bin/zsh
 
-# Выбор осиротевших пакетов (pacman -Qtdq) с показом занимаемого места
-# на диске и сортировкой по размеру (от большего к меньшему).
+# Осиротевшие пакеты (pacman -Qtdq): размер на диске и дата установки.
+# Спрашивает, как отсортировать список (по размеру / имени / времени установки),
+# показывает таблицу и даёт отметить лишнее в fzf для удаления.
+#
+# Способ сортировки можно задать и аргументом:  arch-clean size|name|date|date-asc
 
 echo 'Lets start from sudo...'
 sudo true
@@ -11,6 +14,23 @@ if (( ${#orphans} == 0 )); then
   echo 'No orphaned packages found.'
   exit 0
 fi
+
+# Метаданные из локальной базы pacman: %SIZE% (байты) и %INSTALLDATE% (эпоха).
+typeset -A is_orphan size_of date_of
+for p in $orphans; do is_orphan[$p]=1; done
+
+while IFS=$'\t' read -r n s d; do
+  if [[ -n ${is_orphan[$n]} ]]; then
+    size_of[$n]=${s:-0}
+    date_of[$n]=${d:-0}
+  fi
+done <<< "$(LC_ALL=C awk '
+  FNR == 1 { if (name != "") print name "\t" size "\t" date; name = ""; size = 0; date = 0 }
+  /^%NAME%$/        { getline; name = $0 }
+  /^%SIZE%$/        { getline; size = $0 + 0 }
+  /^%INSTALLDATE%$/ { getline; date = $0 + 0 }
+  END { if (name != "") print name "\t" size "\t" date }
+' /var/lib/pacman/local/*/desc)"
 
 # human <байты> -> "1.23 GiB" / "456.7 MiB" / "12.3 KiB"
 human() {
@@ -23,46 +43,74 @@ human() {
   fi
 }
 
-# Размер берём из поля "Installed Size" вывода pacman -Qi.
-# Строки: <байты>\t<размер>\t<имя>, сортируем по байтам по убыванию.
-rows=$(LC_ALL=C pacman -Qi "${orphans[@]}" | awk '
-  /^Name[ ]*:/           { name = $3 }
-  /^Installed Size[ ]*:/ { size = $4; unit = $5 }
-  /^$/                   { if (name != "") print name "\t" size "\t" unit; name = "" }
-  END                    { if (name != "") print name "\t" size "\t" unit }
-' | awk -F'\t' '
-  function tobytes(v, u) {
-    if (u == "B")   return v
-    if (u == "KiB") return v * 1024
-    if (u == "MiB") return v * 1048576
-    if (u == "GiB") return v * 1073741824
-    if (u == "TiB") return v * 1099511627776
-    return v
-  }
-  { printf "%d\t\033[90m%9s %-3s\033[0m\t%s\n", tobytes($2, $3), $2, $3, $1 }
-' | sort -t$'\t' -k1,1nr)
+# --- как сортировать
+sortmode=${1:-}
+if [[ -z $sortmode ]]; then
+  choice=$(printf '%s\n' \
+    'size      largest first' \
+    'name      alphabetical' \
+    'date      newest installs first' \
+    'date-asc  oldest installs first' |
+    fzf --no-sort --prompt='Sort by > ' --height=8 \
+        --header='How to sort the orphan list?')
+  [[ -z $choice ]] && { echo 'Cancelled.'; exit 0; }
+  sortmode=${choice%% *}
+fi
 
-# имя -> байты, чтобы посчитать суммарный размер выбранного
-typeset -A size_of
-while IFS=$'\t' read -r bytes _ name; do
-  [[ -n $name ]] && size_of[$name]=$bytes
-done <<< "$rows"
+# --- таблица: <байты> \t <эпоха> \t <размер> \t <дата установки> \t <имя>
+now=$(date +%s)
+rows=$(
+  for p in $orphans; do
+    printf '%s\t%s\t%s\n' "${size_of[$p]:-0}" "${date_of[$p]:-0}" "$p"
+  done | LC_ALL=C awk -F'\t' -v now="$now" '
+    function humsize(b, v, u) {
+      if      (b >= 1073741824) { v = b / 1073741824; u = "GiB" }
+      else if (b >= 1048576)    { v = b / 1048576;    u = "MiB" }
+      else if (b >= 1024)       { v = b / 1024;       u = "KiB" }
+      else                      { v = b;              u = "B"   }
+      return sprintf("%8.2f %-3s", v, u)
+    }
+    function relago(d) {
+      if (d < 0) d = 0
+      if (d < 60)       return d "s ago"
+      if (d < 3600)     return int(d / 60) "m ago"
+      if (d < 86400)    return int(d / 3600) "h ago"
+      if (d < 2592000)  return int(d / 86400) "d ago"
+      if (d < 31536000) return int(d / 2592000) "mo ago"
+      return int(d / 31536000) "y ago"
+    }
+    {
+      b = $1 + 0; e = $2 + 0; n = $3
+      when = (e > 0) ? strftime("%Y-%m-%d %H:%M", e) " (" relago(now - e) ")" : "unknown"
+      printf "%d\t%d\t\033[90m%s\033[0m\t%-26s\t%s\n", b, e, humsize(b), when, n
+    }
+  '
+)
+
+case $sortmode in
+  size)     sorted=$(print -r -- "$rows" | LC_ALL=C sort -t$'\t' -k1,1nr) ;;
+  name)     sorted=$(print -r -- "$rows" | LC_ALL=C sort -t$'\t' -k5,5)   ;;
+  date)     sorted=$(print -r -- "$rows" | LC_ALL=C sort -t$'\t' -k2,2nr) ;;
+  date-asc) sorted=$(print -r -- "$rows" | LC_ALL=C sort -t$'\t' -k2,2n)  ;;
+  *)        echo "Unknown sort mode: $sortmode (use size|name|date|date-asc)"; exit 1 ;;
+esac
 
 total=0
 for b in ${(v)size_of}; do (( total += b )); done
-printf 'Orphaned packages: %d, total %s\n\n' ${#orphans} "$(human $total)"
+printf 'Orphaned packages: %d, total %s (sorted by %s)\n\n' ${#orphans} "$(human $total)" "$sortmode"
 
-# fzf: показываем размер + имя, ищем только по имени (--nth=2),
-# порядок не пересортировываем (--no-sort), поэтому список остаётся по размеру.
-selected=$(print -r -- "$rows" | cut -f2,3 | fzf --no-sort --multi --ansi \
-  --delimiter=$'\t' --nth=2 --prompt='Remove > ')
+# fzf: показываем размер, дату установки и имя; ищем только по имени (--nth=3),
+# порядок не пересортировываем (--no-sort), поэтому список остаётся отсортированным.
+selected=$(print -r -- "$sorted" | cut -f3,4,5 | fzf --no-sort --multi --ansi \
+  --delimiter=$'\t' --nth=3 --prompt='Remove > ' \
+  --header='      SIZE         INSTALLED                  NAME')
 
 if [[ -z $selected ]]; then
   echo 'Nothing selected.'
   exit 0
 fi
 
-names=(${(f)"$(print -r -- "$selected" | cut -f2)"})
+names=(${(f)"$(print -r -- "$selected" | cut -f3)"})
 sel=0
 for n in $names; do (( sel += ${size_of[$n]:-0} )); done
 
