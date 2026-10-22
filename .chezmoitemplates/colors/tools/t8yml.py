@@ -266,6 +266,7 @@ DEFAULTS = {
     # UI
     "ui.accent.normal":                     "cyan_normal",
     "ui.border.normal":                     "gray_dim",
+    "ui.border.active":                     "white_normal",
     "ui.chrome.background.dark":            "black_dim",
     "ui.chrome.background.light":           "gray_dim",
     "ui.chrome.background.normal":          "black_bright",

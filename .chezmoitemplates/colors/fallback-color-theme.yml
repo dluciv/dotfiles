@@ -78,6 +78,7 @@ ui:
     normal: *cyan_normal
   border:
     normal: *gray_dim
+    active: *white_bright
   chrome:
     background:
       dark: *black_dim
