@@ -50,7 +50,7 @@ fi
 
 {{- if lookPath "emacsclient" }}
 ALTERNATE_EDITOR="$EDITOR"
-EDITOR=$(which emacsclient)
+EDITOR="$(which emacsclient) -c"
 {{- end }}
 
 VISUAL=$EDITOR
