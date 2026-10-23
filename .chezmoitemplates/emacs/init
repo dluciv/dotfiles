@@ -14,6 +14,7 @@
 (setq use-package-always-ensure t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(global-auto-revert-mode t)
 
 (defun my/toggle-mode (mode-symbol state)
   "Включает (state=1) или выключает (state=-1) минорный режим, если он существует в текущей сессии Emacs."

@@ -48,6 +48,11 @@ else
   EDITOR=$(which vim)
 fi
 
+{{- if lookPath "emacsclient" }}
+ALTERNATE_EDITOR="$EDITOR"
+EDITOR=$(which emacsclient)
+{{- end }}
+
 VISUAL=$EDITOR
 SUDO_EDITOR=$EDITOR
 
