@@ -18,16 +18,25 @@
 {{- end }}
 
 ;; === Это где лежат файлы для org-agenda
-(defcustom
-  org-agenda-file-masks
-  '("~/ORG/TODO/*.org" "~/ORG/TODO/**/*.org")
-  "Маски файлов для org-mode agendа"
-  :type '(repeat string)
-  :group 'orgmode)
+(defcustom org-directory-setting "~/ORG"
+  "Корневой каталог файлов org-mode"
+  :type 'directory
+  :group 'org)
+
+(setq org-directory (expand-file-name org-directory-setting))
+
+(defcustom org-agenda-subdir-setting (file-name-concat org-directory-setting "TODO")
+  "Корневой каталог файлов org-mode agenda"
+  :type 'directory
+  :group 'org-agenda)
 
 (setopt
   org-agenda-files
-  (mapcan #'file-expand-wildcards org-agenda-file-masks))
+  (mapcan #'file-expand-wildcards
+    (list
+      (file-name-concat org-agenda-subdir-setting "*.org")
+      (file-name-concat org-agenda-subdir-setting "**/*.org")
+    )))
 
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
