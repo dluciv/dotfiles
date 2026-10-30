@@ -6,4 +6,4 @@
 # [data.gopass]
 #    mounts = ["/../../.."]
 [data.torbridges]
-    url = "https://github.com/igareck/vpn-configs-for-russia/raw/refs/heads/main/TOR-BRIDGES/TOR_BRIDGES_TOP100.txt"
+    url = "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/TOR-BRIDGES/TOR_BRIDGES_TOP100.txt"
