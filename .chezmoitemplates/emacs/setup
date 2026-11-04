@@ -223,8 +223,32 @@
   )
 {{- end }}
 
+;; === MD font settings
+(use-package markdown-mode
+  :ensure t
+  :custom-face
+  (markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
+  (markdown-code-face        ((t (:inherit font-lock-constant-face)))))
+
+;; === Whitespace
+(setq whitespace-style '(face trailing tabs))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'text-mode-hook 'whitespace-mode)
+
+;; === Spell
+{{- if (lookPath "hunspell") }}
+(setq ispell-program-name "hunspell")
+{{- end }}
+
+(use-package guess-language
+  :ensure t
+  :init
+  (setq guess-language-languages '(ru en))
+  :hook (flyspell-mode . guess-language-mode))
+
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
 ;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
+;; === не работает с emacs-client и emacs-server
 (defun reverse-input-method (input-method)
   "Build the reverse mapping of single letters from INPUT-METHOD."
   (interactive
@@ -248,30 +272,9 @@
     (when input-method
       (activate-input-method current))))
 
+;; === не работает с emacs-client и emacs-server, но работает,
+;; === если это запустить позже в любом клиенте (и далее до перезапуска сервера)
 (reverse-input-method 'russian-computer)
-
-;; === MD font settings
-(use-package markdown-mode
-  :ensure t
-  :custom-face
-  (markdown-inline-code-face ((t (:inherit font-lock-constant-face))))
-  (markdown-code-face        ((t (:inherit font-lock-constant-face)))))
-
-;; === Whitespace
-(setq whitespace-style '(face trailing tabs))
-(add-hook 'prog-mode-hook 'whitespace-mode)
-(add-hook 'text-mode-hook 'whitespace-mode)
-
-;; === Spell
-{{- if (lookPath "hunspell") }}
-(setq ispell-program-name "hunspell")
-{{- end }}
-
-(use-package guess-language
-  :ensure t
-  :init
-  (setq guess-language-languages '(ru en))
-  :hook (flyspell-mode . guess-language-mode))
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
 (message "Got to the end of .emacs.d/lisp/setup.el")
