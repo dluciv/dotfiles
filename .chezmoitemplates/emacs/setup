@@ -248,7 +248,12 @@
 
 ;; === Это чтобы менять язык ввода в системе, а не в редакторе, но чтобы редактор
 ;; === продолжал работать: https://www.alexkorablev.ru/2017/06/10/emacs-got-keys/
-;; === не работает с emacs-client и emacs-server
+;; === Исправлено OpenCode:
+;; === Пишем в function-key-map, а не в local-function-key-map: последний свой у
+;; === каждого терминала, и при загрузке в демоне (emacs --daemon) правки уходили
+;; === в несуществующий терминал, а клиентские терминалы создавались уже позже.
+;; === function-key-map — общий родитель всех local-function-key-map, поэтому
+;; === настройка работает и в emacsclient без повторного вызова.
 (defun reverse-input-method (input-method)
   "Build the reverse mapping of single letters from INPUT-METHOD."
   (interactive
@@ -266,14 +271,14 @@
                       (cadr map) (char-to-string to) 1)))
           (when (and (characterp from) (characterp to))
             (dolist (mod modifiers)
-              (define-key local-function-key-map
+              (define-key function-key-map
                 (vector (append mod (list from)))
                 (vector (append mod (list to)))))))))
     (when input-method
       (activate-input-method current))))
 
-;; === не работает с emacs-client и emacs-server, но работает,
-;; === если это запустить позже в любом клиенте (и далее до перезапуска сервера)
+;; === Работает в emacs и emacsclient: mapping попадает в общий function-key-map,
+;; === поэтому не требует повторного вызова после появления окна.
 (reverse-input-method 'russian-computer)
 
 ;; === Это чтобы понять, что мы дошли таки до конца файла
