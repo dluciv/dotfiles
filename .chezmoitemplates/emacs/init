@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; === Это куда сохранять настройки
 (setq emacs_d_dir "{{ if .android }}{{ .home_dir }}/.emacs.d{{ else }}{{ .abs_roamg_cfg_dir }}/{{ if .windows }}.emacs.d{{ else }}emacs{{ end }}{{ end }}")
 (setq custom-file (concat emacs_d_dir "/custom.el"))
