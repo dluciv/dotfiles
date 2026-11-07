@@ -36,7 +36,8 @@ bindsym --locked XF86AudioMute    exec 'pactl set-sink-mute   @DEFAULT_SINK@   t
 bindsym --to-code XF86PowerOff     exec 'systemctl suspend'
 bindsym --to-code $mod+Shift+Pause exec 'systemctl suspend'
 
-bindsym --to-code $mod+ctrl+t exec cccp t
+bindsym --to-code $mod+alt+t exec cccp t
+bindsym --to-code $mod+alt+e exec cccp e
 
 # bindsym Print exec ksnip -t -c
 # bindsym Print exec 'flameshot gui'
