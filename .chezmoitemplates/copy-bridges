@@ -4,7 +4,11 @@
 set -ue
 
 sub='{{ .data.torbridges.url }}'
-bridges=$(curl -L "$sub" | grep -v '^\s*\(#\|$\)' )
+fixed_content='{{- range .data.torbridges.fixed }}
+{{ . }}
+{{- end }}'
+sub_content=$(curl -L "$sub")
+bridges=$({echo "$fixed_content"; echo $sub_content } | grep -v '^\s*\(#\|$\)' )
 echo $bridges | bash $(which cccp) c
 sleep 2
 exit
