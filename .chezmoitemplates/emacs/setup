@@ -39,6 +39,23 @@
       (file-name-concat org-agenda-subdir-setting "**/*.org")
     )))
 
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)
+                           (nil :maxlevel . 3)))
+
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps nil)
+
+
+(setq org-default-notes-file (file-name-concat org-directory "inbox.org"))
+
+(global-set-key (kbd "C-c o c") 'org-capture)
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "inbox.org" "Сделать")
+         "* TODO %?\n  %u\n  %a")
+        ("n" "Note" entry (file+olp+datetree "notes.org" "Зафиксировать")
+         "* %?\n  %i\n  %u")))
+
 ;; === Это чтобы как у нас, а не как где попало
 (setq-default calendar-week-start-day 1)
 
