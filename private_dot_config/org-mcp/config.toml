@@ -1,0 +1,16 @@
+[org]
+org_directory = "~/ORG/"
+org_default_notes_file = "notes.org"
+# org_agenda_files = ["agenda.org", "projects.org"]
+org_todo_keywords = ["TODO", "NEXT", "WAITING", "|", "DONE", "DELEGATED", "CANCELLED", "FAILED"]
+# Auto-prepend :CREATED: property on capture (default: true)
+org_auto_created_property = true
+# Auto-stamp CLOSED on done transitions (default: true)
+org_auto_closed_timestamp = true
+
+[logging]
+level = "info"
+file = "~/.local/share/org-mcp-server/logs/server.log"
+
+[cli]
+default_format = "plain"  # plain | json
