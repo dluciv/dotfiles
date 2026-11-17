@@ -66,6 +66,7 @@ AppData/
 {{- /* Windows fails to symlink .zshenv */ -}}
 .zshenv
 .config/lf/
+.local/bin/gsna
 {{- end }}
 
 {{ if or (not .windows) (not (lookPath "scoop")) -}}
